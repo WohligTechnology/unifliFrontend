@@ -1,0 +1,127 @@
+<div class="bg-mycart">
+    <div class="container mycart-container">
+        <div class="text-center">
+            <h1 class="mycart-heading">ADDRESS</h1>
+        </div>
+        <div class="mycart-content">
+            <div class="mycart-coupon-box">
+                 <form name="member">
+          <div class="row">
+              
+              <div class="col-md-3">
+                   <div class="member-col">
+                            <div class="form-group">
+                  <input type="text" placeholder="First Name" ng-model="formdata.firstName"  class="member-input" name="name"  required>
+                            </div>
+                   </div>
+              </div>
+              <div class="col-md-3">
+                   <div class="member-col">
+                         <div class="form-group">
+                     <input type="text" placeholder="Last Name" ng-model="formdata.lastName" class="member-input" name="name"  required>
+                   </div>
+                   </div>
+              </div>
+              <div class="col-md-3">
+                   <div class="member-col">
+                         <div class="form-group">
+                    <input type="text" placeholder="Moblie Number" ng-model="formdata.mobile" class="member-input" name="name"  required>
+              </div>
+                   </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="member-col">
+                      <div class="form-group">
+                     <input type="text" placeholder="Email-id" ng-model="formdata.email"  class="member-input">
+              </div>
+                  </div>
+              </div>
+          </div>
+                 </form>
+            <form  >
+
+                <div class="member-form mem-for">
+                    <div class="row">
+                        <div class="col-md-6">
+                           
+                            <div class="member-col">
+                                 <h4>Billing Address</h4>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Flat Number, Building Number"  class="member-input" ng-model="formdata.billingAddress.address" name="name"  >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Street Address" ng-model="formdata.billingAddress.streetAddress"  class="member-input" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Nearest Landmark" ng-model="formdata.billingAddress.landmark" class="member-input" name="Organization" >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" placeholder="Pin Code" ng-model="formdata.billingAddress.zip"  class="member-input
+               " name="Phone">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="City" ng-model="formdata.billingAddress.city"  class="member-input" name="Address">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="State" ng-model="formdata.billingAddress.state"  class="member-input" name="State"  >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Country" ng-model="formdata.billingAddress.country"  class="member-input" name="Website">
+                                 
+                                </div>
+             
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                         
+                            <div class="member-col">
+                                 <h4>Shipping Address</h4>
+                              
+                                  <div class="form-group checkbox">
+                                    <input type="checkbox" value="" id="agree" ng-click="sameAsBil(formdata.billingAddress)" ng-model="formData.agree" required/>
+                                    <label class="checkbox-inline" for="agree">Use same as Billing Address.
+                            </label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Flat Number, Building Number"  ng-model="formdata.shippingAddress.address" class="member-input
+               " name="name"  >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Street Address" ng-model="formdata.shippingAddress.streetAddress" class="member-input" name="name"  >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Nearest Landmark" ng-model="formdata.shippingAddress.landmark" class="member-input" name="Organization" >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="formdata.shippingAddress.zip" name="phone" placeholder="Pin Code
+               "  class="member-input" name="Phone"
+                                       >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="City" ng-model="formdata.shippingAddress.city" class="member-input" name="Address" >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="State" ng-model="formdata.shippingAddress.state"  class="member-input" name="State"  >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Country" ng-model="formdata.shippingAddress.country"  class="member-input" name="Website
+               " ng-model="formData.website">
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                             <div>
+      <button  class="btn btn-main" ng-click="saveOrder(formdata)">Continue</button>
+                    </div>
+                   </div>
+      
+            </form>
+      </div>
+  </div>
+  </div>
+    </div>
+
+</div>
+</div>

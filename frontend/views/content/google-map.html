@@ -1,0 +1,189 @@
+<div class="bg-calculator">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="text-center heading-calculator mtop-25">
+                    <h1>Mapbox CAD Request tool</h1>
+                    <div class="text-justify crossroad">
+                        <h3>At the crossroads of cutting edge technology.</h3>
+                        <p class="click-p">Send CAD request with a single click! UNIFLI's in build Google Map Area Calculator is a planimeter
+                            tool thet allows you to accurately define enclosed area between a define polyline.</p>
+                        <p class="click-p">its simple!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="map-content">
+            <div class="map-block-1">
+                <div class="row">
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                        <div>
+                            <!--<img src="frontend/img/maps.jpg" class="img-resposive img-map">-->
+                            <!--<div id="map"></div>-->
+                            <div class="img-map">
+								<div id='map' class="map-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="google-form">
+                            <form ng-if="!template.userProfile" class="form-horizontal map-form" ng-submit="login(mapData)">
+                                                                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                                                                         <div class="form-group">
+                                    <label class="control-label col-sm-4">Title:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control map-border" id="" ng-model="mapData.acreage">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Acreage:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control map-border" id="" ng-model="mapData.acreage">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Perimeter:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control  map-border" id="" ng-model="mapData.perimeter">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"> Sq.Feet:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control map-border" ng-model="mapData.sqft">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="proceed-button">
+                                        <button type="submit" class="btn btn-main btn-map">PROCEED</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form ng-if="template.userProfile" class="form-horizontal map-form" ng-submit="submitMapCalc(mapData)">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Property Address:</label>
+                                    <div class="col-sm-8">
+                                        <!--<input type="text" class="form-control map-border" id="" ng-model="mapData.address">-->
+                                        <!--<input id="address"  type="text" class="form-control map-border" ng-model="mapData.address" ng-change="codeAddress()">-->
+                                        <!--<input onclick="deleteMarkers();" type=button value="Remove">-->
+                                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">Acreage:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control  map-border" id="" ng-model="mapData.acreage">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"> Square feet:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control map-border" ng-model="mapData.sqft">
+                                    </div>
+                                </div>
+                                <div class="form-group radio">
+                                    <label class="control-label col-sm-4">Contours:</label>
+                                    <div class="col-sm-8">
+                                        <input type="radio" id="radio1" name="contours" value="yes" ng-model="mapData.contours" />
+                                        <label for="radio1">
+                              <span></span> Yes </label>
+                                        <input type="radio" id="radio2" name="contours" value="no" ng-model="mapData.contours" />
+                                        <label for="radio2">
+                              <span></span> No </label>
+                                    </div>
+                                </div>
+                                <div class="form-group radio">
+                                    <label class="control-label col-sm-4"> Contours Density:</label>
+                                    <div class="col-sm-8">
+                                        <input type="radio" id="radio3" name="contoursDensity" value="low" ng-model="mapData.contoursDensity" />
+                                        <label for="radio3">
+                              <span></span> Low </label>
+                                        <input type="radio" id="radio4" name="contoursDensity" value="medium" ng-model="mapData.contoursDensity" />
+                                        <label for="radio4">
+                              <span></span> Medium</label>
+                                        <input type="radio" id="radio5" name="contoursDensity" value="high" ng-model="mapData.contoursDensity" />
+                                        <label for="radio5">
+                              <span></span>High</label>
+                                    </div>
+                                </div>
+                                <div class="form-group radio">
+                                    <label class="control-label col-sm-4">Drafting Density:</label>
+                                    <div class="col-sm-8">
+                                        <input type="radio" id="radio6" name="draftingDensity" value="low" ng-model="mapData.draftingDensity" />
+                                        <label for="radio6">
+                              <span></span> Low </label>
+                                        <input type="radio" id="radio7" name="draftingDensity" value="medium" ng-model="mapData.draftingDensity" />
+                                        <label for="radio7">
+                              <span></span> Medium</label>
+                                        <input type="radio" id="radio8" name="draftingDensity" value="high" ng-model="mapData.draftingDensity" />
+                                        <label for="radio8">
+                              <span></span>High</label>
+                                    </div>
+                                </div>
+                                <div class="form-group data-padding">
+                                    <label class="control-label col-sm-4"> Payment Amount:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control map-border" ng-model="mapData.amount">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">INSTRUCTIONS:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control map-border" ng-model="mapData.instruction">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <button type="submit" class="btn btn-main btn-map">PROCEED TO PAY</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=map-block-2>
+                <div class="row">
+                    <div class="text-center">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="img-responsive">
+                                <img src="frontend/img/map1.png" class="img-drafting">
+                            </div>
+                            <p class="icon-details">Zoom in and Zoom out to find the exact area you're interesed in</p>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="img-responsive">
+                                <img src="frontend/img/map2.png" class="img-drafting">
+                            </div>
+                            <p class="icon-details">Click on map to defind boundaries of the area</p>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="img-responsive">
+                                <img src="frontend/img/map3.png" class="img-drafting">
+                            </div>
+                            <p class="icon-details">Drag and Drop the points for better accuracy</p>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="img-responsive">
+                                <img src="frontend/img/map4.png" class="img-drafting">
+                            </div>
+                            <p class="icon-details">Use the delete button to clear unnecessary points</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <p class="icon-details p-map-20">Once you've choosen the exact area, sending your CAD request is just a click away.its get better
+                            You'll receive your CAD file in less than 36 hours!</p>
+                        <p class="icon-details p-map-20">Use the tool below to get started.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
