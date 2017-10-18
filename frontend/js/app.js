@@ -14,7 +14,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibmFyZ2lzLXNoYWlraCIsImEiOiJjajVsMWdjbTgyN2t0M
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 
-    var templateURL = "frontend/views/template.html";
+    var templateURL = "views/template.html";
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
     $stateProvider
@@ -151,7 +151,7 @@ firstapp.directive('img', function ($compile, $parse) {
         link: function ($scope, element, attrs) {
             var $element = $(element);
             if (!attrs.noloading) {
-                $element.after("<img src='frontend/img/loading.gif' class='loading' />");
+                $element.after("<img src='img/loading.gif' class='loading' />");
                 var $loading = $element.next(".loading");
                 $element.load(function () {
                     $loading.remove();

@@ -32,12 +32,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         //     'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
         // ];
         $scope.section = {
-            one: "frontend/views/content/section/section1.html",
-            two: "frontend/views/content/section/section2.html",
-            three: "frontend/views/content/section/section3.html",
-            four: "frontend/views/content/section/section4.html",
-            five: "frontend/views/content/section/section5.html",
-            six: "frontend/views/content/section/section6.html"
+            one: "views/content/section/section1.html",
+            two: "views/content/section/section2.html",
+            three: "views/content/section/section3.html",
+            four: "views/content/section/section4.html",
+            five: "views/content/section/section5.html",
+            six: "views/content/section/section6.html"
         };
 
     })
@@ -63,7 +63,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.login = function () {
             $scope.loginModal = $uibModal.open({
                 animation: true,
-                templateUrl: 'frontend/views/content/Modal/login.html',
+                templateUrl: 'views/content/Modal/login.html',
                 scope: $scope,
                 windowClass: "login-modal"
 
@@ -397,7 +397,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.mapData = formData;
             $scope.loginModal = $uibModal.open({
                 animation: true,
-                templateUrl: 'frontend/views/content/Modal/login.html',
+                templateUrl: 'views/content/Modal/login.html',
                 scope: $scope,
                 windowClass: "login-modal"
 
@@ -602,7 +602,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.login = function () {
             $scope.loginModal = $uibModal.open({
                 animation: true,
-                templateUrl: 'frontend/views/content/Modal/login.html',
+                templateUrl: 'views/content/Modal/login.html',
                 scope: $scope,
                 windowClass: "login-modal"
 
@@ -879,7 +879,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
             $uibModal.open({
                 animation: true,
-                templateUrl: 'frontend/views/content/Modal/freetrial.html',
+                templateUrl: 'views/content/Modal/freetrial.html',
                 scope: $scope,
                 size: 'md'
                 // windowClass: "login-modal"
@@ -944,7 +944,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.formData = {};
                     $scope.testModal = $uibModal.open({
                         animation: true,
-                        templateUrl: 'frontend/views/content/Modal/modsub.html',
+                        templateUrl: 'views/content/Modal/modsub.html',
                         scope: $scope,
                         size: size,
                         windowClass: "test-modal"
@@ -1256,7 +1256,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.cad = function () {
                 $scope.cadModal = $uibModal.open({
                     animation: true,
-                    templateUrl: 'frontend/views/content/Modal/carddetail.html',
+                    templateUrl: 'views/content/Modal/carddetail.html',
                     scope: $scope,
                     size: 'lg'
                     // windowClass: "login-modal"
@@ -1403,7 +1403,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 case '1':
                     $scope.blogShow = false;
                     $scope.blogDetail = {
-                        "image": "frontend/img/new/7.jpg",
+                        "image": "img/new/7.jpg",
                         "title": "AN ASSORTMENT OF APPLICATION",
                         "date": " ",
                         "desc1": "Need an orthomosaic to be created from your high qulity dron images?",
@@ -1417,7 +1417,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.blogShow = false;
                     $scope.blogDetail = {
                         "id": '2',
-                        "image": "frontend/img/new/13.jpg",
+                        "image": "img/new/13.jpg",
                         "title": "COMPLETE THE CIRCLE WITH CAD LINEWORK",
 
                         // "desc4":"Need an orthomosaic to be created from your high qulity dron images?",
@@ -1433,7 +1433,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 case '3':
                     $scope.blogShow = false;
                     $scope.blogDetail = {
-                        "image": "frontend/img/new/58.jpg",
+                        "image": "img/new/58.jpg",
                         "title": "THIS ONE STOP SHOP IS THE SOLUTION<br> TO ALL YOUR DRONE SURVEYING PROBLEMS!",
 
                         "desc1": "The World of land surveying has changed, and how!",
@@ -1448,7 +1448,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 case '4':
                     $scope.blogShow = true;
                     $scope.blogDetail = [{
-                            "image": "frontend/img/new/copy.jpg",
+                            "image": "img/new/copy.jpg",
                             "title": "HOW PART 107 IS PAYING THE WAY<br>FOR COMMERCIAL DRONE OPERTORS",
                             "title2": "For Starters, What’s Part 107?",
                             "title3": "What Does Part 107 Cover?",
@@ -1465,7 +1465,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             "desc9": "Operators and drone pilots need to be at least 16 years of age, and should be proficient in English. They need to obtain a Remote Pilot Airman Certificate<br> (with sUAS rating) to validate that they’re mentally and physically capable of operating the drone. "
 
                         }, {
-                            "image": "frontend/img/new/10.jpg",
+                            "image": "img/new/10.jpg",
                             "title4": "All aircraft must be registered",
                             "title5": "There are defined operational guidelines (and limitations)",
                             "desc1": "Unlike the previous restrictions, operators just need to pass an FAA approved test on aeronautical knowledge to officially become drone pilots. This doesn’t apply to people who already hold a Part 61 certification. ",
@@ -1476,7 +1476,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             "desc6": "- All operators need to maintain their sUAS and UAVs within their visual line of sight- Aircraft should be operated only during daylight hours<br>- UAVs and sUAS should not be operated over people not involved in the exercise<br>- Operations should be held within a maximum allowed altitude of 400 feet<br>- Air speed should not exceed a maximum of 100mph<br>- All aircraft must yield right of way to other manned or unmanned vehicles<br>- Any activities in Class A airspace is strictly forbidden<br>- With prior approval from ATC, operations in Class B, C, D, E airspaces will be allowed<br>- Visual observers aren’t mandatorily required",
                             "desc7": "This officially paves the way for exciting applications across multiple industries, increasing the scope of drone usages in the coming future. ",
                         }, {
-                            "image": "frontend/img/new/img.jpg",
+                            "image": "img/new/img.jpg",
                             "title6": "Here's the good part.",
                             "desc1": "- Operators need not file a NOTAM(Notice to Aiemen)befire commencing work<br>- Liability insurance isn't mandatory for carrying out operations<br>- The extensive license process has been replaced with a simple FAA aeronautical test<br>- The regulations make crisis management and industrial inspection easier<br>- Part 107 allows drones to carry loads that don't cross 55 ibs overall (BIG NEWS!)<br>- The regulations make drone accessible to a bigger audience, for educational purpose   ",
                             "desc2": "This is the first step towards a new technological revolution, one that holds limitless scope for applications accorss different verticals and industries.",
@@ -1495,22 +1495,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
         $scope.alsodata = [{
                 "id": "4",
-                "image": "frontend/img/new/1.jpg",
+                "image": "img/new/1.jpg",
                 "title": "How Part 107 Is Paying The Way For Commercial Drone Operators",
                 // "date":"September 22,",
             }, {
                 "id": "1",
-                "image": "frontend/img/new/2.jpg",
+                "image": "img/new/2.jpg",
                 "title": "An Assortment Of Applications",
                 // "date":"September 22,",
             }, {
                 "id": "2",
-                "image": "frontend/img/new/ssss.jpg",
+                "image": "img/new/ssss.jpg",
                 "title": "Complete The Circle With CAD Linework",
                 // "date":"September 22,",
             }, {
                 "id": "3",
-                "image": "frontend/img/new/42.jpg",
+                "image": "img/new/42.jpg",
                 "title": "This One Stop Shop Is The Solution To All Your Drone Surveying Problems!",
                 // "date":"September 22,",
             }
