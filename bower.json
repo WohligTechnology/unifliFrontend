@@ -70,8 +70,5 @@
     "angular-flot": "^0.0.17",
     "Flot": "flot#^0.8.3",
     "angularjs-slider": "^6.4.0"
-  },
-  "resolutions": {
-    "angular": ">=1.3"
   }
 }
