@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" only-Digits ng-model="formData.phone" name="phone" placeholder="Phone" value="" class="member-input" name="Phone"
-                                        minlength="8" maxlength="15">
+                                        minlength="8" phone-input>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Address" value="" class="member-input" name="Address" ng-model="formData.address">
@@ -44,28 +44,28 @@
                                <option value="STANDARD">STANDARD</option>
                                <option value="PREMIUM">PREMIUM</option>
                            </select>-->
-                                    <select name="" ng-model="formData.plan.planType" id="menulist" class="dropdown-member" required>                  
-                                <option disabled value="" selected>plan</option>
-                               <option value="1">TRIAL </option>
-                               <option value="2">STANDARD</option>
-                               <option value="3">PREMIUM</option>
-                           </select>
+                                    <select name="" ng-model="formData.plan.planType" id="menulist" class="dropdown-member" required>
+                                        <option disabled value="" selected>plan</option>
+                                        <option value="1">TRIAL </option>
+                                        <option value="2">STANDARD</option>
+                                        <option value="3">PREMIUM</option>
+                                    </select>
                                 </div>
                                 <div class="form-group radio member-form-m30" ng-if="id==2">
                                     <h4 class="inline-block">Do You Have UNIFLI Drone?</h4>
                                     <input type="radio" id="radio1" value="yes" ng-model="formData.uniDrone" required>
                                     <label for="radio1" class="pl-10">
-                    <span></span> Yes </label>
+                                        <span></span> Yes </label>
                                     <input type="radio" id="radio2" value="no" ng-model="formData.uniDrone" required>
                                     <label for="radio2">
-                    <span></span> No </label>
+                                        <span></span> No </label>
                                 </div>
                                 <!--<option value="1" ng-repeat="option in dropdownList" >{{option.plan}} </option>-->
                                 <!--<select  id="menulist" class="dropdown-member" name="users" required ng-model="formData.userSelect">-->
                                 <div class="form-group checkbox">
                                     <input type="checkbox" value="" id="agree" ng-model="formData.agree" required/>
                                     <label class="checkbox-inline" for="agree">I agree with all terms and conditions and privacy policy
-                            </label>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" only-Digits ng-model="formData.mobile" name="mobile" placeholder="Mobile" value="" class="member-input"
-                                        name="Mobile" required minlength="10" maxlength="10" ng-model="formData.mobile">
+                                        name="Mobile" required minlength="10" phone-input ng-model="formData.mobile">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="City" id="locationCity" ng-change="getCity()" value="" class="member-input" name="City" ng-model="formData.city">

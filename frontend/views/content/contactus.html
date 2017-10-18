@@ -1,63 +1,65 @@
 <div class="bg-member">
     <div class="container">
         <div class="text-center member-heading  mtop-member2">
-                    <h1 class="m-0">contact us</h1>
+            <h1 class="m-0">contact us</h1>
         </div>
         <div class="signup-container">
-              <form ng-submit="saveContact(formData)"  name="form1">
+            <form ng-submit="saveContact(formData)" name="form1">
 
                 <div class="member-form">
                     <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="member-col">
-                       <div class="form-group">
-                      <input type="text" placeholder="Name" ng-model="formData.name" value="" class="member-input" required>
-                       </div>
-                       
-                        <div class="form-group">
-                             <input type="text" only-Digits ng-model="formData.phone" name="phone" placeholder="Phone"  class="member-input"  minlength="8" maxlength="15" > 
-                        </div>
-                        <div class="form-group">
-                             <input type="text" placeholder="Company" value="" class="member-input" >
-                        </div>
-                        
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="member-col">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Name" ng-model="formData.name" value="" class="member-input" required>
+                                </div>
 
+                                <div class="form-group">
+                                    <input type="text" only-Digits ng-model="formData.phone" name="phone" placeholder="Phone" class="member-input" phone-input
+                                        minlength="8">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Company" value="" class="member-input">
+                                </div>
+
+
+                            </div>
                         </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12 ipad-top">
-                <div class="member-col">
-                    <div class="form-group">
-                      <input type="email" ng-model="formData.email" name="email"  placeholder="Email" value="" class="member-input" required>
-                       <!--<span style="color:red" ng-show="form1.mail.$error.email">
+                        <div class="col-md-6 col-sm-12 col-xs-12 ipad-top">
+                            <div class="member-col">
+                                <div class="form-group">
+                                    <input type="email" ng-model="formData.email" name="email" placeholder="Email" value="" class="member-input" required>
+                                    <!--<span style="color:red" ng-show="form1.mail.$error.email">
         Sorry Not a Valid Email, Don't Forget to .com</span>-->
-                       </div>
-                        <div class="form-group">
-                             <input type="text" only-Digits ng-model="formData.mobile" placeholder="Mobile" name="mobile" class="member-input" required minlength="10" maxlength="10" >
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Designation" value="" ng-model="formData.designation" class="member-input" >
-                        </div>
-                       
-                      
-                </div>
-                </div>
-               <div class="col-md-12 col-sm-12 col-xs-12 mb-top">
-                 <div class=" member-col contact-top">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" only-Digits ng-model="formData.mobile" placeholder="Mobile" name="mobile" phone-input class="member-input"
+                                        required minlength="10">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Designation" value="" ng-model="formData.designation" class="member-input">
+                                </div>
 
-                     <div class="form-group">
-                         <label class="desc">Description</label>
-                            <textarea ng-model="formData.description"  class="member-input2" >
-                            </textarea>
+
+                            </div>
                         </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 mb-top">
+                            <div class=" member-col contact-top">
+
+                                <div class="form-group">
+                                    <label class="desc">Description</label>
+                                    <textarea ng-model="formData.description" class="member-input2">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-main">SUBMIT</button>
+                    </div>
                 </div>
-                 </div>
-                 </div>
-                   <div>
-                 <button type="submit" class="btn btn-main">SUBMIT</button>
-                 </div>
-                  </div>
 
             </form>
         </div>
-    <div>
-</div>
+        <div>
+        </div>
