@@ -888,7 +888,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
         $scope.saveStandard = function () {
             if ($.jStorage.get("user")) {
-                $state.go('checkout', {
+                $state.go('checkout1', {
                     'id': $scope.dfmData[1].id
                 });
 
@@ -899,7 +899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
         $scope.savepremimum = function () {
             if ($.jStorage.get("user")) {
-                $state.go('checkout', {
+                $state.go('checkout1', {
                     'id': $scope.dfmData[2].id
                 });
             } else {
@@ -1033,7 +1033,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.submitForm = function (data) {
             $scope.formSubmitted = true;
         };
-
+        if($stateParams.userId){
+            $scope.userID._id = $stateParams.userId;
+            console.log("userId", $scope.userID._id)
+            NavigationService.apiCallWithData("User/getOne", userID, function (data1) {
+                if (data1.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                }
+            });
+        }
+     
 
         $scope.dt = new Date();
         $scope.dt.setDate($scope.dt.getDate() + 30);
