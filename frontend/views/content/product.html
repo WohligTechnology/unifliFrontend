@@ -144,7 +144,7 @@
                                         <li>C4 Vibration Isolation Deck</li>
                                         <li>Gyrox-5R Brushless Gimbal for Sony A6000</li>
                                         <li>Foldable Arms with Convert-able Sport Mounting Position</li>
-                                        <li>Foldable & Adjustable Landing Skids</li>
+                                        <li>Foldable &amp; Adjustable Landing Skids</li>
                                         <li>Pixhawk 2 Flight Controller + GPS System </li>
                                         <li>GPS-Lock, Return-to-Home, Course-Lock, Home-Lock</li>
                                         <li>4x Dynamically Balanced Brushless Motors</li>
@@ -153,7 +153,7 @@
                                         <li>B601 Professional Programmable Wall Charger</li>
                                         <li>User Instruction Manual in Flash Drive</li>
                                         <li>FPV Live Feed Video available</li>
-                                        <li>Typical Operating Weight with Sony A6000: Matrix+Gyrox Gimbal&Power (5.5LB) + A6000+Lense
+                                        <li>Typical Operating Weight with Sony A6000: Matrix+Gyrox Gimbal&amp;Power (5.5LB) + A6000+Lense
                                             (1LB), 16,000mah Battery (5.0LB) = Total: 12LB</li>
                                         <li>Optional emergency parachute available</li>
                                     </ul>
@@ -172,7 +172,7 @@
                                         <li>Pre-installed Septentrio GEOTagz post processing GUI with security FOB</li>
                                         <li>Ideal unobstructed auto-stabilized camera/gimbal location</li>
                                         <li>Folds and fits neatly into a carry-on sized waterproof hardshell plastic case</li>
-                                        <li>Ultra durable & maintenance friendly</li>
+                                        <li>Ultra durable &amp; maintenance friendly</li>
                                     </ul>
                                 </div>
                             </div>
@@ -226,34 +226,35 @@
         <div class="package product-margin">
             <h2 class="text-center">Choose Your Package</h2>
             <div class="tab makeActive-service">
-                <ul class="list-inline row-flex" ng-repeat="prod in productData">
+                <!-- ngRepeat: prod in productData --><ul class="list-inline row-flex ng-scope" ng-repeat="prod in productData">
                     <li class="package-bg col-flex text-center view-data" ng-click="showDetails(viewDetail=1)">
                         <div class="support-icon w0">
-                            <h3 class="text-uppercase white">{{prod[0].name}}</h3>
-                            <h4 class="white bordernone">{{prod[0].description}}</h4>
+                            <h3 class="text-uppercase white ng-binding">drone1</h3>
+                            <h4 class="white bordernone ng-binding"></h4>
                         </div>
                     </li>
                     <li class="package-bg col-flex  text-center  view-data" ng-click="showDetails(viewDetail=2)">
                         <div class="support-icon w0">
-                            <h3 class="text-uppercase white">{{prod[1].name}}</h3>
-                            <h4 class="white bordernone">{{prod[1].description}}</h4>
+                            <h3 class="text-uppercase white ng-binding">drone2</h3>
+                            <h4 class="white bordernone ng-binding"></h4>
                         </div>
                     </li>
                     <li class="package-bg col-flex text-center view-data" ng-click="showDetails(viewDetail=3)">
                         <div class="support-icon w0">
-                            <h3 class="text-uppercase white">{{prod[2].name}}</h3>
-                            <h4 class="white bordernone">{{prod[2].description}}</h4>
+                            <h3 class="text-uppercase white ng-binding">drone3</h3>
+                            <h4 class="white bordernone ng-binding"></h4>
                         </div>
                     </li>
-                </ul>
+                </ul><!-- end ngRepeat: prod in productData -->
             </div>
-            <div class="design" ng-if="viewDetail==1">
-                <div class="pack-one text-center">
+            <!-- ngIf: viewDetail==1 -->
+            <div class="design ng-scope" ng-if="viewDetail==1">
+                <!-- <div class="pack-one text-center">
                     <div class="image-one inline-block">
-                        <img src="img/product/drones.png" class="img-responsive" alt="">
+                        <img src="img/product/drones.png" class="img-responsive doneLoading" alt="">
                     </div>
                     <div class="image-one inline-block">
-                        <img src="img/product/image9.png" class="img-responsive" alt="">
+                        <img src="img/product/image9.png" class="img-responsive doneLoading" alt="">
                     </div>
                 </div>
                 <div class="uav-inner">
@@ -268,10 +269,19 @@
                 <div class="pad-overall">
                     <h2 class="text-center text-uppercase">uav only</h2>
                     <button class="button text-uppercase" ng-click="addToCartProduct1(viewDetail)">buy now</button>
-                </div>
+                </div> -->
+            <div><p><b>GIMBAL &amp;amp; VIBRATION ISOLATION OPTIONS:</b> .Gyrox-5R Brushless Gimbal for Sony A6000 (Ultra Fast Auto-Stabilized Tilt &amp; Roll-Axises, Pilot Controlled Tilt-Axis) + CNC Bracket + Installation (Gyrox5R+balance)<br><br>
+                <b>CAMERA OPTIONS:</b> SONY A6000 with 20mm Sony lens
+                LIVE VIDEO FEED, MONITOR &amp; GOGGLES OPTIONS: .Live Video Feed for FatShark 700TVL CCD Camera NTSC + 8" FPV Monitor &amp; Sunshield + Battery + Cables + Monitor Bracket + Installation (VTX+8"M+Batt+Cable+Bracket+Installation)<br><br>
+                <b>ON SCREEN DISPLAY OPTIONS:</b> .None <br><br>
+                <b>BATTERY OPTIONS:</b> .(1x) Premium LiPo Battery 16,000mAh 6S (22.2V) 15C LiPo with XT90 Plug (TA-16000M-6S-15C-XT90)<br><br>
+                <b>CARRYING CASE OPTIONS:</b> .SKB Industrial Grade Case: Fits Matrix Quadcopter + Gimbal + Transmitter + Batteries + Spare Parts + Tools, for FC-250
+                TRAINING PACKAGE: .None</p></div>
             </div>
-            <div class="design" ng-if="viewDetail==2">
-                <h3>UAV With Single Rovers</h3>
+            <!-- end ngIf: viewDetail==1 -->
+            <!-- ngIf: viewDetail==2 -->
+            <div class="design ng-scope" ng-if="viewDetail==2">
+                <!-- <h3>UAV With Single Rovers</h3>
                 <div class="uav-inner">
                     <div class="row">
                         <div class="col-md-4">
@@ -285,13 +295,13 @@
                         <div class="col-md-8">
                             <ul class="list-inline uav-images m-0">
                                 <li class="drone-width">
-                                    <img src="img/product/drones.png" class="img-responsive" alt="">
+                                    <img src="img/product/drones.png" class="img-responsive doneLoading" alt="">
                                 </li>
                                 <li class="remote-width">
-                                    <img src="img/product/image9.png" class="img-responsive" alt="">
+                                    <img src="img/product/image9.png" class="img-responsive doneLoading" alt="">
                                 </li>
                                 <li class="remote-width">
-                                    <img src="img/product/box.png" class="img-responsive" alt="">
+                                    <img src="img/product/box.png" class="img-responsive doneLoading" alt="">
                                 </li>
                             </ul>
                         </div>
@@ -314,10 +324,19 @@
                         globally.
                     </p>
                 </div>
-                <button class="button text-uppercase" ng-click="addToCartProduct2(viewDetail)">buy now</button>
+                <button class="button text-uppercase" ng-click="addToCartProduct2(viewDetail)">buy now</button> -->
+                <div><p><b>GIMBAL &amp;amp; VIBRATION ISOLATION OPTIONS:</b> .Gyrox-5R Brushless Gimbal for Sony A6000 (Ultra Fast Auto-Stabilized Tilt &amp; Roll-Axises, Pilot Controlled Tilt-Axis) + CNC Bracket + Installation (Gyrox5R+balance)<br><br>
+                    <b>CAMERA OPTIONS:</b> SONY A6000 with 20mm Sony lens
+                    LIVE VIDEO FEED, MONITOR &amp; GOGGLES OPTIONS: .Live Video Feed for FatShark 700TVL CCD Camera NTSC + 8" FPV Monitor &amp; Sunshield + Battery + Cables + Monitor Bracket + Installation (VTX+8"M+Batt+Cable+Bracket+Installation)<br><br>
+                    <b>ON SCREEN DISPLAY OPTIONS:</b> .None <br><br>
+                    <b>BATTERY OPTIONS:</b> .(1x) Premium LiPo Battery 16,000mAh 6S (22.2V) 15C LiPo with XT90 Plug (TA-16000M-6S-15C-XT90)<br><br>
+                    <b>CARRYING CASE OPTIONS:</b> .SKB Industrial Grade Case: Fits Matrix Quadcopter + Gimbal + Transmitter + Batteries + Spare Parts + Tools, for FC-250
+                    TRAINING PACKAGE: .None</p></div>
             </div>
-            <div class="design" ng-if="viewDetail==3">
-                <h3>UAV With Dual Rovers</h3>
+            <!-- end ngIf: viewDetail==2 -->
+            <!-- ngIf: viewDetail==3 -->
+            <div class="design ng-scope" ng-if="viewDetail==3">
+                <!-- <h3>UAV With Dual Rovers</h3>
                 <div class="uav-inner">
                     <div class="row">
                         <div class="col-md-4">
@@ -331,13 +350,13 @@
                         <div class="col-md-8">
                             <ul class="list-inline uav-images m-0">
                                 <li class="drone-width">
-                                    <img src="img/product/drones.png" class="img-responsive" alt="">
+                                    <img src="img/product/drones.png" class="img-responsive doneLoading" alt="">
                                 </li>
                                 <li class="remote-width">
-                                    <img src="img/product/image9.png" class="img-responsive" alt="">
+                                    <img src="img/product/image9.png" class="img-responsive doneLoading" alt="">
                                 </li>
                                 <li class="remote-width">
-                                    <img src="img/product/imagess.png" class="img-responsive" alt="">
+                                    <img src="img/product/imagess.png" class="img-responsive doneLoading" alt="">
                                 </li>
                             </ul>
                         </div>
@@ -360,7 +379,16 @@
                         globally.
                     </p>
                 </div>
-                <button class="button text-uppercase" ng-click="addToCartProduct3(viewDetail)">buy now</button>
+                <button class="button text-uppercase" ng-click="addToCartProduct3(viewDetail)">buy now</button> -->
+                <div><p><b>GIMBAL &amp;amp; VIBRATION ISOLATION OPTIONS:</b> .Gyrox-5R Brushless Gimbal for Sony A6000 (Ultra Fast Auto-Stabilized Tilt &amp; Roll-Axises, Pilot Controlled Tilt-Axis) + CNC Bracket + Installation (Gyrox5R+balance)<br><br>
+                    <b>CAMERA OPTIONS:</b> SONY A6000 with 20mm Sony lens
+                    LIVE VIDEO FEED, MONITOR &amp; GOGGLES OPTIONS: .Live Video Feed for FatShark 700TVL CCD Camera NTSC + 8" FPV Monitor &amp; Sunshield + Battery + Cables + Monitor Bracket + Installation (VTX+8"M+Batt+Cable+Bracket+Installation)<br><br>
+                    <b>ON SCREEN DISPLAY OPTIONS:</b> .None <br><br>
+                    <b>BATTERY OPTIONS:</b> .(1x) Premium LiPo Battery 16,000mAh 6S (22.2V) 15C LiPo with XT90 Plug (TA-16000M-6S-15C-XT90)<br><br>
+                    <b>CARRYING CASE OPTIONS:</b> .SKB Industrial Grade Case: Fits Matrix Quadcopter + Gimbal + Transmitter + Batteries + Spare Parts + Tools, for FC-250
+                    TRAINING PACKAGE: .None</p></div>
             </div>
+            </div>
+            <!-- end ngIf: viewDetail==3 -->
         </div>
     </div>
