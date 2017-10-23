@@ -1034,8 +1034,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
         if($stateParams.userId){
-            $scope.userID._id = $stateParams.userId;
-            console.log("userId", $scope.userID._id)
+            $scope.userID={
+                _id : $stateParams.userId
+            };
+            console.log("userId", $scope.userID)
             NavigationService.apiCallWithData("User/getOne", userID, function (data1) {
                 if (data1.value == true) {
                     $scope.user = data;
