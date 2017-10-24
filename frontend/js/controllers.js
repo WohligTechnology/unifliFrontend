@@ -1030,7 +1030,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // else
         // $scope.msg = 'Please Select Dropdown Value';
         // }
+        $scope.thankOpen = function(){
+            $uibModal.open({
+            animation: true,
+            templateUrl: 'views/content/Modal/thankyou.html',
+            scope: $scope,
+            size: 'lg'
+            // windowClass: "login-modal"
 
+        });
+    }
     })
 
     .controller('ShippingCtrl', function ($scope, $stateParams, TemplateService, NavigationService, $timeout, $uibModal, $window, toastr) {
@@ -1054,9 +1063,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (data.value == true) {
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
-                    $.jStorage.set("user", data.data.results);
-                    // $.jStorage.set("user", data.data);
-                    
+                    $.jStorage.set("user", data.data);
+                                       
                     checkUser();
                 }
             });
@@ -1134,6 +1142,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.amount = data1.data.cart.totalAmount;
                     }
                 });
+
+                formdata = {};
+                formdata._id = $.jStorage.get("user")._id;
+                NavigationService.apiCallWithData("User/getOne", $.jStorage.get("user"), function (data) {
+                    if (data.value === true) {
+                        $scope.userData = data.data;
+                        $scope.formData.address = {};
+                        $scope.formData.address.name = data.data.name;
+                        $scope.formData.address.city = data.data.city;
+                        $scope.formData.address.address1 = data.data.address;
+                        $scope.formData.address.state = data.data.state;
+                        $scope.formData.address.phonenumber = data.data.mobile;
+                        $scope.formData.address.oraganization = data.data.oraganization;
+                        $scope.formData.address.country = data.data.country;
+                    } else {
+                        //  toastr.warning('Error submitting the form', 'Please try again');
+                    }
+                });
+
             }
         }
 
