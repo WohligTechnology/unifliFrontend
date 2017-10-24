@@ -813,10 +813,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.dfmData = [{
                 name: "TRIAL",
                 invitations: "0",
-                missions: "20",
-                UploadPhoto: "500",
-                UploadSize: "4.9GB",
-                Mosaic: " 5",
+                missions: "3",
+                UploadPhoto: "200",
+                UploadSize: "1GB",
+                Mosaic: "12",
                 exportKMZ: " 15",
                 exportOrthophoto: "USAGE LIMIT",
                 exportDEM: "USAGE LIMIT",
@@ -829,10 +829,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 user: $.jStorage.get("user")._id,
                 name: "STANDARD",
                 invitations: "15",
-                missions: "50",
+                missions: "Unlimited",
                 UploadPhoto: " 500",
-                UploadSize: "5GB ",
-                Mosaic: " 10",
+                UploadSize: "2.5GB ",
+                Mosaic: "2",
                 exportKMZ: "15",
                 exportOrthophoto: "USAGE LIMIT",
                 exportDEM: "USAGE LIMIT",
@@ -846,16 +846,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 user: $.jStorage.get("user")._id,
                 name: "PREMIUM",
                 invitations: "25",
-                missions: "100",
-                UploadPhoto: "500",
-                UploadSize: " 10GB",
-                Mosaic: " 15",
+                missions: "Unlimited",
+                UploadPhoto: "1000",
+                UploadSize: " 5GB",
+                Mosaic: "2",
                 exportKMZ: " 25",
                 exportOrthophoto: "USAGE LIMIT",
                 exportDEM: "USAGE LIMIT",
                 exportPointCloud: "USAGE LIMIT",
                 status: "Active",
-                amount: "199",
+                amount: "299",
                 expiryDate: $scope.dt,
             }]
         } else {
@@ -928,7 +928,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
-    .controller('MemberCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, $stateParams, $uibModal) {
+    .controller('MemberCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, $stateParams, $uibModal, toastr) {
         $scope.template = TemplateService.changecontent("member"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Member"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -955,6 +955,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             })
         };
+        // $scope.confirm = function(){
+        //     var password = document.getElementById('pass');
+        //     var confirmpass = document.getElementById('cpass');
+        //     if(password!=confirmpass){
+        //         alert("Passwords did not match");
+        //         // toastr.error('Password did not match');
+        //     }
+        //     else{
+        //         alert("Passwords match");
+        //         // toastr.success('Success');
+        //     }
+        // }
         $scope.getCity = function () {
             var input = document.getElementById('locationCity');
             var autocomplete = new google.maps.places.Autocomplete(input);

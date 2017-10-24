@@ -129,7 +129,14 @@ p {
         background: $brand-primary
     }
 }
-
+.login{
+    text-decoration: none;
+    color: white;
+}
+.login:hover{
+    color: #76D7C4;
+    text-decoration: none;
+}
 .ext-spec {
     padding-top: 40px;
 }
@@ -432,11 +439,8 @@ a,
 }
 
 .login-modal {
-    padding: 5px 75px; // .modal-content {
-    //     margin: 35% auto;
-    //     width: 80%;
-    //     border: none;
-    // }
+    padding: 5px;
+    text-align: center;
 }
 
 .login-modal .form-group {
@@ -928,7 +932,10 @@ h2.step.step-2-top:before {
     color: white;
     padding-bottom: 10px;
 }
-
+.cpass{
+    position: absolute;
+    bottom: -20px;
+}
 .available-font {
     color: white;
     font-weight: 700;
