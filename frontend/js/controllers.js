@@ -1033,91 +1033,97 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.submitForm = function (data) {
             $scope.formSubmitted = true;
         };
-        if($stateParams.userId){
-            $scope.userID={
-                _id : $stateParams.userId
+        if ($stateParams.userId) {
+            var userID = {
+                _id: $stateParams.userId
             };
-            console.log("userId", $scope.userID)
-            NavigationService.apiCallWithData("User/getOne", userID, function (data1) {
-                if (data1.value == true) {
+            console.log("userId", userID)
+            NavigationService.apiCallWithData("User/getOne", userID, function (data) {
+                if (data.value == true) {
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
                     $.jStorage.set("user", data.data);
+                    checkUser();
                 }
             });
         }
-     
 
-        $scope.dt = new Date();
-        $scope.dt.setDate($scope.dt.getDate() + 30);
-        $scope.formData = {};
-        if ($.jStorage.get("user")) {
-            $scope.dfmData = [{
-                name: "TRIAL",
-                invitations: "0",
-                missions: "20",
-                UploadPhoto: "500",
-                UploadSize: "4.9GB",
-                Mosaic: " 5",
-                exportKMZ: " 15",
-                exportOrthophoto: "USAGE LIMIT",
-                exportDEM: "USAGE LIMIT",
-                exportPointCloud: "false",
-                status: "Active",
-                amount: "0",
-                expiryDate: $scope.dt,
-            }, {
-                id: 1,
-                user: $.jStorage.get("user")._id,
-                name: "STANDARD",
-                invitations: "15",
-                missions: "50",
-                UploadPhoto: " 500",
-                UploadSize: "5GB ",
-                Mosaic: " 10",
-                exportKMZ: "15",
-                exportOrthophoto: "USAGE LIMIT",
-                exportDEM: "USAGE LIMIT",
-                exportPointCloud: "USAGE LIMIT",
-                status: "Active",
-                amount: "149",
-                expiryDate: $scope.dt,
-            }, {
 
-                id: 2,
-                user: $.jStorage.get("user")._id,
-                name: "PREMIUM",
-                invitations: "25",
-                missions: "100",
-                UploadPhoto: "500",
-                UploadSize: " 10GB",
-                Mosaic: " 15",
-                exportKMZ: " 25",
-                exportOrthophoto: "USAGE LIMIT",
-                exportDEM: "USAGE LIMIT",
-                exportPointCloud: "USAGE LIMIT",
-                status: "Active",
-                amount: "199",
-                expiryDate: $scope.dt,
-            }]
 
-        } else {
-            var dfmData = [];
+        function checkUser() {
+            $scope.dt = new Date();
+            $scope.dt.setDate($scope.dt.getDate() + 30);
+            $scope.formData = {};
+            if ($.jStorage.get("user")) {
+                $scope.dfmData = [{
+                    name: "TRIAL",
+                    invitations: "0",
+                    missions: "20",
+                    UploadPhoto: "500",
+                    UploadSize: "4.9GB",
+                    Mosaic: " 5",
+                    exportKMZ: " 15",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "false",
+                    status: "Active",
+                    amount: "0",
+                    expiryDate: $scope.dt,
+                }, {
+                    id: 1,
+                    user: $.jStorage.get("user")._id,
+                    name: "STANDARD",
+                    invitations: "15",
+                    missions: "50",
+                    UploadPhoto: " 500",
+                    UploadSize: "5GB ",
+                    Mosaic: " 10",
+                    exportKMZ: "15",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "USAGE LIMIT",
+                    status: "Active",
+                    amount: "149",
+                    expiryDate: $scope.dt,
+                }, {
+
+                    id: 2,
+                    user: $.jStorage.get("user")._id,
+                    name: "PREMIUM",
+                    invitations: "25",
+                    missions: "100",
+                    UploadPhoto: "500",
+                    UploadSize: " 10GB",
+                    Mosaic: " 15",
+                    exportKMZ: " 25",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "USAGE LIMIT",
+                    status: "Active",
+                    amount: "199",
+                    expiryDate: $scope.dt,
+                }]
+
+            } else {
+                var dfmData = [];
+            }
+
+
+            $scope.id = $stateParams.id;
+            if ($stateParams.id) {
+                $scope.amount = $scope.dfmData[$scope.id].amount;
+            } else {
+                forProduct = {};
+                forProduct._id = $.jStorage.get("user")._id;
+                NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
+                    if (data1.value == true) {
+                        $scope.amount = data1.data.cart.totalAmount;
+                    }
+                });
+            }
         }
 
 
-        $scope.id = $stateParams.id;
-        if ($stateParams.id) {
-            $scope.amount = $scope.dfmData[$scope.id].amount;
-        } else {
-            forProduct = {};
-            forProduct._id = $.jStorage.get("user")._id;
-            NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
-                if (data1.value == true) {
-                    $scope.amount = data1.data.cart.totalAmount;
-                }
-            });
-        }
 
         $scope.saveData = function (data) {
             $scope.deliveryAddress = {
