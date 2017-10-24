@@ -1046,15 +1046,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
         if ($stateParams.userId) {
-            var userID = {
+            $scope.userID = {
                 _id: $stateParams.userId
             };
-            console.log("userId", userID)
-            NavigationService.apiCallWithData("User/getOne", userID, function (data) {
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
                 if (data.value == true) {
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
-                    $.jStorage.set("user", data.data);
+                    $.jStorage.set("user", data.data.results);
+                    // $.jStorage.set("user", data.data);
+                    
                     checkUser();
                 }
             });
