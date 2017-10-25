@@ -938,7 +938,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.test = function (size, formData) {
             $scope.formData.lisence = "NDB"
             $scope.formData.status = "Active"
-            NavigationService.apiCallWithData("User/registerUser", formData, function (data) {
+            NavigationService.apiCallWithData("User/createUser", formData, function (data) {
                 if (data.value === true) {
                     // console.log("data saved successfully", data)
                     $scope.formData = {};
@@ -1015,21 +1015,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-
-
-        //         $scope.dropdownList=[{
-        //             plan:'Trial'
-        //         },{
-        //             plan:'premium'
-        //         }, {
-        //             plan:'standard'
-        //         }]
-        //         $scope.checkselection = function () {
-        // if ($scope.userSelect != "" && $scope.userSelect != undefined)
-        // $scope.msg = 'Selected Value: '+$scope.userSelect;
-        // else
-        // $scope.msg = 'Please Select Dropdown Value';
-        // }
         $scope.thankOpen = function(){
             $uibModal.open({
             animation: true,
