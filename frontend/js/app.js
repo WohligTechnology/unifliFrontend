@@ -100,12 +100,13 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'MycartCtrl'
         })
         .state('member-page', {
-            url: "/member-page",
+            url: "/member-page/:userId",
             templateUrl: templateURL,
             controller: 'MemberPageCtrl'
         })
+
         .state('member', {
-            url: "/member/:id",
+            url: "/member",
             templateUrl: templateURL,
             controller: 'MemberCtrl'
         })

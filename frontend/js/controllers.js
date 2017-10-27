@@ -802,108 +802,131 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     })
 
-    .controller('MemberPageCtrl', function ($scope, $state, TemplateService, NavigationService, $uibModal, $timeout) {
+    .controller('MemberPageCtrl', function ($scope, $state, TemplateService, $stateParams, NavigationService, $uibModal, $timeout) {
         $scope.template = TemplateService.changecontent("member-page"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("MemberPage"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
-        $scope.dt = new Date();
-        $scope.dt.setDate($scope.dt.getDate() + 30);
-        if ($.jStorage.get("user")) {
-            $scope.dfmData = [{
-                name: "TRIAL",
-                invitations: "0",
-                missions: "3",
-                UploadPhoto: "200",
-                UploadSize: "1GB",
-                Mosaic: "12cm",
-                exportKMZ: " 15",
-                exportOrthophoto: "USAGE LIMIT",
-                exportDEM: "USAGE LIMIT",
-                exportPointCloud: "false",
-                status: "Active",
-                amount: "0",
-                expiryDate: $scope.dt,
-            }, {
-                id: 1,
-                user: $.jStorage.get("user")._id,
-                name: "STANDARD",
-                invitations: "15",
-                missions: "Unlimited",
-                UploadPhoto: " 500",
-                UploadSize: "2.5GB ",
-                Mosaic: "2cm",
-                exportKMZ: "15",
-                exportOrthophoto: "USAGE LIMIT",
-                exportDEM: "USAGE LIMIT",
-                exportPointCloud: "USAGE LIMIT",
-                status: "Active",
-                amount: "149",
-                expiryDate: $scope.dt,
-            }, {
-
-                id: 2,
-                user: $.jStorage.get("user")._id,
-                name: "PREMIUM",
-                invitations: "25",
-                missions: "Unlimited",
-                UploadPhoto: "1000",
-                UploadSize: " 5GB",
-                Mosaic: "2cm",
-                exportKMZ: " 25",
-                exportOrthophoto: "USAGE LIMIT",
-                exportDEM: "USAGE LIMIT",
-                exportPointCloud: "USAGE LIMIT",
-                status: "Active",
-                amount: "299",
-                expiryDate: $scope.dt,
-            }]
-        } else {
-            var dfmData = [];
-        }
-        $scope.saveFreeTrial = function () {
-            if ($.jStorage.get("user")) {
-                NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[0], function (dfm) {
-                    $scope.dfmId = dfm.data._id;
-                    if (dfm.data._id) {
-                        var formdata = {};
-                        formdata._id = $.jStorage.get("user")._id;
-                        formdata.currentSubscription = $scope.dfmId;
-                        NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
-                    }
-                });
-
-            } else {
-                $state.go("member")
-            }
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'views/content/Modal/freetrial.html',
-                scope: $scope,
-                size: 'md'
-                // windowClass: "login-modal"
-
+        if ($stateParams.userId) {
+            console.log("inside if")
+            $scope.userID = {
+                _id: $stateParams.userId
+            };
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                if (data.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                    checkUser1();
+                }
             });
+        } else {
+            console.log("inside else")
+            checkUser1();
         }
-        $scope.saveStandard = function () {
-            if ($.jStorage.get("user")) {
-                $state.go('checkout1', {
-                    'id': $scope.dfmData[1].id
-                });
 
-            } else {
-                $state.go("member")
-            }
+        function checkUser1() {
 
-        }
-        $scope.savepremimum = function () {
+            $scope.dt = new Date();
+            $scope.dt.setDate($scope.dt.getDate() + 30);
             if ($.jStorage.get("user")) {
-                $state.go('checkout1', {
-                    'id': $scope.dfmData[2].id
-                });
+                $scope.dfmData = [{
+                    name: "TRIAL",
+                    invitations: "0",
+                    missions: "3",
+                    UploadPhoto: "200",
+                    UploadSize: "1GB",
+                    Mosaic: "12cm",
+                    exportKMZ: " 15",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "false",
+                    status: "Active",
+                    amount: "0",
+                    expiryDate: $scope.dt,
+                }, {
+                    id: 1,
+                    user: $.jStorage.get("user")._id,
+                    name: "STANDARD",
+                    invitations: "15",
+                    missions: "Unlimited",
+                    UploadPhoto: " 500",
+                    UploadSize: "2.5GB ",
+                    Mosaic: "2cm",
+                    exportKMZ: "15",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "USAGE LIMIT",
+                    status: "Active",
+                    amount: "149",
+                    expiryDate: $scope.dt,
+                }, {
+
+                    id: 2,
+                    user: $.jStorage.get("user")._id,
+                    name: "PREMIUM",
+                    invitations: "25",
+                    missions: "Unlimited",
+                    UploadPhoto: "1000",
+                    UploadSize: " 5GB",
+                    Mosaic: "2cm",
+                    exportKMZ: " 25",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "USAGE LIMIT",
+                    status: "Active",
+                    amount: "299",
+                    expiryDate: $scope.dt,
+                }]
             } else {
-                $state.go("member")
+                var dfmData = [];
             }
+            $scope.saveFreeTrial = function () {
+                if ($.jStorage.get("user")) {
+                    NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[0], function (dfm) {
+                        $scope.dfmId = dfm.data._id;
+                        if (dfm.data._id) {
+                            var formdata = {};
+                            formdata._id = $.jStorage.get("user")._id;
+                            formdata.currentSubscription = $scope.dfmId;
+                            NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
+                        }
+                    });
+
+                } else {
+                    $state.go("member")
+                }
+                $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/content/Modal/freetrial.html',
+                    scope: $scope,
+                    size: 'md'
+                    // windowClass: "login-modal"
+
+                });
+            };
+
+            $scope.saveStandard = function () {
+                if ($.jStorage.get("user")) {
+                    $state.go('checkout1', {
+                        'id': $scope.dfmData[1].id
+                    });
+
+                } else {
+                    $state.go("member")
+                }
+
+            };
+            $scope.savepremimum = function () {
+                if ($.jStorage.get("user")) {
+                    $state.go('checkout1', {
+                        'id': $scope.dfmData[2].id
+                    });
+                } else {
+                    $state.go("member")
+                }
+            };
         }
     })
 
