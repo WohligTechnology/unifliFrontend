@@ -818,7 +818,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
     })
 
-    .controller('MemberPageCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout) {
+    .controller('MemberPageCtrl', function ($scope, $state, TemplateService, NavigationService, $uibModal, $timeout) {
         $scope.template = TemplateService.changecontent("member-page"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("MemberPage"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -832,7 +832,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 missions: "3",
                 UploadPhoto: "200",
                 UploadSize: "1GB",
-                Mosaic: "12",
+                Mosaic: "12cm",
                 exportKMZ: " 15",
                 exportOrthophoto: "USAGE LIMIT",
                 exportDEM: "USAGE LIMIT",
@@ -848,7 +848,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 missions: "Unlimited",
                 UploadPhoto: " 500",
                 UploadSize: "2.5GB ",
-                Mosaic: "2",
+                Mosaic: "2cm",
                 exportKMZ: "15",
                 exportOrthophoto: "USAGE LIMIT",
                 exportDEM: "USAGE LIMIT",
@@ -865,7 +865,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 missions: "Unlimited",
                 UploadPhoto: "1000",
                 UploadSize: " 5GB",
-                Mosaic: "2",
+                Mosaic: "2cm",
                 exportKMZ: " 25",
                 exportOrthophoto: "USAGE LIMIT",
                 exportDEM: "USAGE LIMIT",
@@ -877,7 +877,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         } else {
             var dfmData = [];
         }
-
         $scope.saveFreeTrial = function () {
             if ($.jStorage.get("user")) {
                 NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[0], function (dfm) {
@@ -1031,19 +1030,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-        $scope.thankOpen = function(){
+        $scope.thankOpen = function () {
             $uibModal.open({
-            animation: true,
-            templateUrl: 'views/content/Modal/thankyou.html',
-            scope: $scope,
-            size: 'lg'
-            // windowClass: "login-modal"
+                animation: true,
+                templateUrl: 'views/content/Modal/thankyou.html',
+                scope: $scope,
+                size: 'lg'
+                // windowClass: "login-modal"
 
-        });
-    }
+            });
+        }
     })
 
-    .controller('ShippingCtrl', function ($scope, $stateParams, TemplateService, NavigationService, $timeout, $uibModal, $window, toastr) {
+    .controller('ShippingCtrl', function ($scope, $stateParams, $state, TemplateService, NavigationService, $timeout, $uibModal, $window, toastr) {
         $scope.template = TemplateService.changecontent("shipping"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Shipping"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1065,7 +1064,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
                     $.jStorage.set("user", data.data);
-                                       
+
                     checkUser();
                 }
             });
@@ -1081,10 +1080,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.dfmData = [{
                     name: "TRIAL",
                     invitations: "0",
-                    missions: "20",
-                    UploadPhoto: "500",
-                    UploadSize: "4.9GB",
-                    Mosaic: " 5",
+                    missions: "3",
+                    UploadPhoto: "200",
+                    UploadSize: "1GB",
+                    Mosaic: "12cm",
                     exportKMZ: " 15",
                     exportOrthophoto: "USAGE LIMIT",
                     exportDEM: "USAGE LIMIT",
@@ -1097,10 +1096,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     user: $.jStorage.get("user")._id,
                     name: "STANDARD",
                     invitations: "15",
-                    missions: "50",
+                    missions: "Unlimited",
                     UploadPhoto: " 500",
-                    UploadSize: "5GB ",
-                    Mosaic: " 10",
+                    UploadSize: "2.5GB ",
+                    Mosaic: "2cm",
                     exportKMZ: "15",
                     exportOrthophoto: "USAGE LIMIT",
                     exportDEM: "USAGE LIMIT",
@@ -1114,23 +1113,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     user: $.jStorage.get("user")._id,
                     name: "PREMIUM",
                     invitations: "25",
-                    missions: "100",
-                    UploadPhoto: "500",
-                    UploadSize: " 10GB",
-                    Mosaic: " 15",
+                    missions: "Unlimited",
+                    UploadPhoto: "1000",
+                    UploadSize: " 5GB",
+                    Mosaic: "2cm",
                     exportKMZ: " 25",
                     exportOrthophoto: "USAGE LIMIT",
                     exportDEM: "USAGE LIMIT",
                     exportPointCloud: "USAGE LIMIT",
                     status: "Active",
-                    amount: "199",
+                    amount: "299",
                     expiryDate: $scope.dt,
                 }]
-
             } else {
                 var dfmData = [];
             }
-
 
             $scope.id = $stateParams.id;
             if ($stateParams.id) {
@@ -1165,7 +1162,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-
+        checkUser();
 
         $scope.saveData = function (data) {
             $scope.deliveryAddress = {
@@ -1183,6 +1180,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.id = $stateParams.id;
                 $scope.amount = $scope.dfmData[$scope.id].amount;
                 NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[$scope.id], function (dfm) {
+                    console.log("dfm is", dfm)
                     $scope.id = {
                         id: dfm.data._id
                     }
