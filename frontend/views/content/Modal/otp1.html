@@ -1,0 +1,70 @@
+<div class="modal-content">
+    
+     <div class="modal-header" style="background-color:#36918b">
+          <div class="pull-right">
+         <a href="" class="closes" ng-click="$dismiss();">
+                 <!--<img src="img/home/33.png" class="img-responsive" alt="cross">-->
+                 <i class="fa fa-2x fa-times-circle-o" aria-hidden="true"></i>
+             </a>
+     </div>
+     </div>
+     <div class="modal-body">
+         <div class="otp-one login-head text-center" ng-if="forgotPwd">
+                <h3>OTP</h3>
+             <p>Enter your email Id below and <br>you’ll receive a 4 Digit Verification Code.</p>
+             <form name="otpForm" class="form-otp" novalidate ng-submit="forgotPasswordOtp(emailId)">
+                 <div class="form-group">
+                     <input type="email" class="form-control" name="email" ng-model="emailId" placeholder="Enter your email Id. " required uib-popover="{{otpForm.email.$touched && otpForm.email.$invalid ||otpForm.email.$error.email && otpForm.email.$error.required }}"
+                         popover-title="Please enter a valid email address" popover-placement="bottom" popover-class="login-popover"
+                         popover-is-open="otpForm.email.$touched && otpForm.email.$invalid ||otpForm.email.$error.email && otpForm.email.$error.required"
+                         popover-trigger="'none'">
+                 </div>
+                 <button class="btn btn-default btn--brown text-uppercase" type="submit" ng-disabled="otpForm.email.$invalid" uib-popover="{{message}}"
+                     popover-title="Please sign up first" popover-placement="bottom" popover-class="login-popover" popover-is-open="{{message}}"
+                     popover-trigger="'click'">go</button>
+                 <!-- <span>{{message}}</span> -->
+             </form>
+         </div>
+         <div class="otp-one login-head otp-two text-center" ng-if="otpPwd">
+                <h3>OTP</h3>
+             <p>Enter your 4 Digit Verification Code</p>
+             <form name="forms-otp1" class="form-otp" novalidate>
+                 <div class="form-group customized-form fourdgt-otpbox">
+                     <input class=" form-control text-center otpInput " type="number" ng-model="userOtp">
+                     <!--<span></span>
+                 <span></span>
+                 <span></span>
+                 <span></span>-->
+                 </div>
+                 <p>
+                     <button class="btn btn--brown" ng-click="confirmForgotPasswordOtp(userOtp)" uib-popover="{{errorOtpMessage}}" popover-title="{{errorOtpMessage}}"
+                         popover-placement="bottom" popover-class="login-popover" popover-is-open="{{errorOtpMessage}}" popover-trigger="'click'">Verify OTP</button>
+                     <button class="btn btn--brown" ng-click="$dismiss()">Cancel</button>
+                 </p>
+                 <!-- <span class="text-center text-danger" ng-if="resendOtpBut">{{errorMessage}}</span> -->
+                 <a ng-click="resendOtp()" class="resend">Resend Code</a>
+             </form>
+         </div>
+         <div class="change-password login-head text-center" ng-if="resetPwd">
+                <h3>RESET PASSWORD</h3>
+             <div class="form">
+                 <form name="resetForm" class="forms" nonvalidate ng-submit="savePassword(formData)">
+                     <div class="form-group">
+                         <input type="password" class="form-control" name="newPassword" ng-model="formData.newPassword" placeholder="New Password"
+                             required uib-popover="{{resetForm.newPassword.$touched && resetForm.newPassword.$invalid}}" popover-title="Please enter your password"
+                             popover-placement="bottom" popover-class="login-popover" popover-is-open="resetForm.newPassword.$touched && resetForm.newPassword.$invalid"
+                             popover-trigger="'none'">
+                     </div>
+                     <div class="form-group">
+                         <input type="password" class="form-control" ng-model="formData.confirmPassword" placeholder="Confirm Password" name="confirmPassword"
+                             required uib-popover="{{resetForm.confirmPassword.$touched && resetForm.confirmPassword.$invalid}}"
+                             popover-title="Please enter your password" popover-placement="bottom" popover-class="login-popover"
+                             popover-is-open="resetForm.confirmPassword.$touched && resetForm.confirmPassword.$invalid" popover-trigger="'none'">
+                     </div>
+                     <button class="btn btn-default btn--brown text-uppercase" type="submit" ng-disabled="resetForm.newPassword.$invalid || resetForm.confirmPassword.$invalid"
+                         uib-popover="{{invalidConfPwd}}" popover-title="{{invalidConfPwd}}" popover-placement="bottom" popover-class="login-popover"
+                         popover-is-open="message" popover-trigger="'click'">Save</button>
+                 </form>
+             </div>
+         </div>
+     </div>
