@@ -109,7 +109,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         });
 
-
+        $scope.forgotPassword = function () {
+            $scope.forgotPwd = true;
+            $scope.otpPwd = false;
+            $scope.resetPwd = false;
+            $scope.forgotPasswordModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'frontend/views/content/Modal/otp1.html',
+            scope: $scope,
+            // windowClass: 'loginModalSize',
+            // windowClass: 'modal-content-radi0'
+            });
+            // $scope.loginModal.close({
+            // $value: $scope.loginModal
+            // });
+            // $rootScope.loginModal.close();
+            }
+            
     })
     .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
