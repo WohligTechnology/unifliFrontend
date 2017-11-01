@@ -117,40 +117,41 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="text">First Name*</label>
-                      <input type="text" class="form-control" ng-model="formData.deliveryAddress.name">
+                      <input type="text" class="form-control" ng-model="formData.deliveryAddress.name" required>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="text">Last Name*</label>
-                      <input type="text" class="form-control" ng-model="formData.deliveryAddress.lname">
+                      <input type="text" class="form-control" ng-model="formData.deliveryAddress.lname" required>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="company">Company</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.oraganization" placeholder="Company name">
+                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.oraganization" placeholder="Company name" required>
                 </div>
                 <div class="form-group">
                   <label for="address">Street Address*</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.address" placeholder="Street Address c/o">
+                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.address" placeholder="Street Address c/o" required>
                 </div>
                 <div class="form-group">
                   <label>Apartment/suite</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.apartment" placeholder=" Apt, suit, (optional) ">
+                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.apartment" placeholder=" Apt, suit, (optional) "
+                    required>
                   <label>Please note that we cannot ship to a PO Box</label>
                 </div>
                 <div class="row ">
                   <div class="col-md-6 ">
                     <div class="form-group ">
                       <label for="city ">City*</label>
-                      <input type="text " class="form-control " ng-model="formData.deliveryAddress.city">
+                      <input type="text " class="form-control " ng-model="formData.deliveryAddress.city" required>
                     </div>
                   </div>
                   <div class="col-md-6 ">
                     <div class="form-group ">
                       <label for="zip ">Zip Code*</label>
-                      <input type="text " only-Digits class="form-control " ng-model="formData.deliveryAddress.zip">
+                      <input type="text " only-Digits class="form-control " ng-model="formData.deliveryAddress.zip" required>
                     </div>
                   </div>
 
@@ -165,7 +166,7 @@
                   <div class="col-md-6 ">
                     <div class="form-group ">
                       <label for="state ">State</label>
-                      <input type="tel " class="form-control " ng-model="formData.deliveryAddress.state">
+                      <input type="tel " class="form-control " ng-model="formData.deliveryAddress.state" required>
                     </div>
                   </div>
 
@@ -181,7 +182,7 @@
             </div>
             <div class="text-center ">
               <button class="btn btn-default btn-gray btn-size" ng-click="goBack()">Back</button>
-              <button type="button " class="btn btn-primary btn-size " ng-click="saveData(formData.deliveryAddress);cad()">Save & Continue</button>
+              <button type="button " class="btn btn-primary btn-size " ng-click="saveData(formData.deliveryAddress);">Save & Continue</button>
               <!--ng-click="saveData(formData.deliveryAddress)" -->
             </div>
 

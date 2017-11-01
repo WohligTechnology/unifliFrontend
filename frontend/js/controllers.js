@@ -42,7 +42,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('headerCtrl', function ($scope, $uibModal, $state, $window, TemplateService, NavigationService) {
+    .controller('headerCtrl', function ($scope, toastr, $uibModal, $state, $window, TemplateService, NavigationService) {
         $scope.template = TemplateService;
         $scope.profile = {};
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -74,16 +74,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.loginclose = function (formData) {
+            console.log("inside login close data is", formData);
+
             if (formData) {
                 NavigationService.profile("User/login", formData, function (data) {
+
                     if (data.value === true) {
-                        $scope.loginModal.close();
+                        console.log("after login data is", data)
+                        var userId = data.data._id;
+                        // window.location = "http://localhost:1337/#/login1/" + userId;
+                        window.location = "http://cloud.unifli.aero//#/login1/" + userId;
+
                         $.jStorage.set("user", data.data);
                         $scope.template.userProfile = data.data;
-                        // toastr.success('You have been successfully logged in', 'Login Success';
+                        // toastr.success('You have been successfully logged in', 'Login Success');
 
                     } else if (data.value === false) {
-                        // toastr.warning(data.error.message, 'Login Failure');
+                        toastr.warning(data.error.message, 'Login Failure');
                     } else {
                         // toastr.warning('Something went wrong', 'Please try again');
                     }
@@ -113,19 +120,84 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.forgotPwd = true;
             $scope.otpPwd = false;
             $scope.resetPwd = false;
+            $scope.displayThanksBox = false;
             $scope.forgotPasswordModal = $uibModal.open({
-            animation: true,
-            templateUrl: 'frontend/views/content/Modal/otp1.html',
-            scope: $scope,
-            // windowClass: 'loginModalSize',
-            // windowClass: 'modal-content-radi0'
+                animation: true,
+                templateUrl: 'frontend/views/content/Modal/otp1.html',
+                scope: $scope
             });
-            // $scope.loginModal.close({
-            // $value: $scope.loginModal
-            // });
-            // $rootScope.loginModal.close();
+
+        }
+        $scope.verifyAndSendEmail = function (formdata) {
+            console.log("dataForsendOtp", formdata);
+            $scope.data = {
+                email: formdata
             }
-            
+            console.log(" $scope.data", $scope.data);
+
+            NavigationService.apiCallWithData("User/sendOtp", $scope.data, function (data) {
+                console.log("after sendotp excution", data)
+                if (data.value == true) {
+                    console.log("data.data._id****", data.data._id);
+                    $scope.id = "59eee664317a857ff90bc862";
+                    console.log("data.data._id", $scope.id);
+
+                    $scope.forgotPwd = false;
+                    $scope.otpPwd = true
+                    $scope.resetPwd = false;
+                    $scope.displayThanksBox = false;
+
+                } else {
+                    toastr.error('Incorrect email!');
+
+                }
+            });
+        };
+        $scope.checkOTP = function (data1) {
+            // console.log("inside check $scope.data", $scope.data1);
+            // $scope.data = {
+            //     otp: data1
+            // }
+            console.log("inside check otp", data1);
+
+            NavigationService.apiCallWithData("User/verifyOTPForResetPass", data1, function (data) {
+                console.log("data is after verifyOTPForResetPass called", data);
+                if (data.value == true) {
+                    $scope.forgotPwd = false;
+                    $scope.otpPwd = false;
+                    $scope.resetPwd = true;
+                    $scope.displayThanksBox = false;
+
+                } else {
+                    toastr.error('Incorrect OTP!');
+                }
+            });
+        }
+        $scope.resetPass = function (formdata) {
+            console.log("inside restePassword", formdata);
+            if (_.isEqual(formdata.password, formdata.forgotPassword)) {
+                // $scope.id = $.jStorage.get("user")._id;
+                console.log("inside restePassword user id is*******", $scope.id);
+                $scope.data = {
+                    _id: $scope.id,
+                    password: formdata.password
+                }
+                NavigationService.apiCallWithData("User/Updatepassword", $scope.data, function (data) {
+                    console.log("doneFormDatadata", data);
+                    if (data.value) {
+                        $scope.forgotPwd = false;
+                        $scope.otpPwd = false;
+                        $scope.resetPwd = false;
+                        $scope.displayThanksBox = true;
+
+                    }
+                });
+            } else {
+                toastr.error('Check password');
+            }
+        }
+
+
     })
     .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
@@ -843,6 +915,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         function checkUser1() {
+            console.log("inside check user function");
 
             $scope.dt = new Date();
             $scope.dt.setDate($scope.dt.getDate() + 30);
@@ -854,7 +927,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     UploadPhoto: "200",
                     UploadSize: "1GB",
                     Mosaic: "12cm",
-                    exportKMZ: " 15",
+                    exportKMZ: "15",
                     exportOrthophoto: "USAGE LIMIT",
                     exportDEM: "USAGE LIMIT",
                     exportPointCloud: "false",
@@ -867,8 +940,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     name: "STANDARD",
                     invitations: "15",
                     missions: "Unlimited",
-                    UploadPhoto: " 500",
-                    UploadSize: "2.5GB ",
+                    UploadPhoto: "500",
+                    UploadSize: "2.5GB",
                     Mosaic: "2cm",
                     exportKMZ: "15",
                     exportOrthophoto: "USAGE LIMIT",
@@ -885,7 +958,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     invitations: "25",
                     missions: "Unlimited",
                     UploadPhoto: "1000",
-                    UploadSize: " 5GB",
+                    UploadSize: "5GB",
                     Mosaic: "2cm",
                     exportKMZ: " 25",
                     exportOrthophoto: "USAGE LIMIT",
@@ -898,52 +971,72 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 var dfmData = [];
             }
-            $scope.saveFreeTrial = function () {
-                if ($.jStorage.get("user")) {
-                    NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[0], function (dfm) {
-                        $scope.dfmId = dfm.data._id;
-                        if (dfm.data._id) {
-                            var formdata = {};
-                            formdata._id = $.jStorage.get("user")._id;
-                            formdata.currentSubscription = $scope.dfmId;
-                            NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
-                        }
-                    });
-
-                } else {
-                    $state.go("member")
-                }
-                $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/content/Modal/freetrial.html',
-                    scope: $scope,
-                    size: 'md'
-                    // windowClass: "login-modal"
-
-                });
-            };
-
-            $scope.saveStandard = function () {
-                if ($.jStorage.get("user")) {
-                    $state.go('checkout1', {
-                        'id': $scope.dfmData[1].id
-                    });
-
-                } else {
-                    $state.go("member")
-                }
-
-            };
-            $scope.savepremimum = function () {
-                if ($.jStorage.get("user")) {
-                    $state.go('checkout1', {
-                        'id': $scope.dfmData[2].id
-                    });
-                } else {
-                    $state.go("member")
-                }
-            };
         }
+        $scope.saveFreeTrial = function () {
+            checkUser1();
+            console.log("inside saveFreeTrialr function");
+            console.log("inside saveFreeTrialr function  dfmData valuse is", $scope.dfmData);
+
+
+            if ($.jStorage.get("user")) {
+                NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[0], function (dfm) {
+
+                    $scope.dfmId = dfm.data._id;
+                    if (dfm.data._id) {
+                        console.log("inside if member page dfm is save")
+                        var formdata = {};
+                        formdata._id = $.jStorage.get("user")._id;
+                        formdata.currentSubscription = $scope.dfmId;
+                        NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {
+                            console.log("dfmDAta is", dfmData);
+                            if (dfmData.value == true) {
+                                $uibModal.open({
+                                    animation: true,
+                                    templateUrl: 'views/content/Modal/freetrial.html',
+                                    scope: $scope,
+                                    size: 'md'
+                                    // windowClass: "login-modal"
+
+                                });
+                            }
+                        });
+
+
+                    } else {
+                        console.log("inside else member page dfm ");
+                        toastr.warning('Error submitting the DFMSubscription', 'Please try again');
+                    }
+                });
+
+            } else {
+                $state.go("member")
+            }
+
+        };
+
+        $scope.saveStandard = function () {
+            checkUser1();
+            if ($.jStorage.get("user")) {
+                $state.go('checkout1', {
+                    'id': $scope.dfmData[1].id
+                });
+
+            } else {
+                $state.go("member")
+            }
+
+        };
+        $scope.savepremimum = function () {
+            checkUser1();
+            if ($.jStorage.get("user")) {
+                $state.go('checkout1', {
+                    'id': $scope.dfmData[2].id
+                });
+            } else {
+                $state.go("member")
+            }
+        };
+
     })
 
     .controller('ContactUsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout) {
@@ -954,7 +1047,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.formSubmitted = false;
         $scope.saveContact = function (formData) {
-            NavigationService.apiCallWithData("ContactUs/save", formData, function (data) {
+            NavigationService.apiCallWithData("ContactUs/sendEnquiry", formData, function (data) {
                 if (data.value === true) {
                     // console.log("data saved successfully", data)
                     $state.go('home');
@@ -974,39 +1067,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.navigation = NavigationService.getnav();
         $scope.formData = {};
         $scope.test = function (size, formData) {
-            $scope.formData.lisence = "NDB"
-            $scope.formData.status = "Active"
-            NavigationService.apiCallWithData("User/createUser", formData, function (data) {
-                if (data.value === true) {
-                    // console.log("data saved successfully", data)
-                    $scope.formData = {};
-                    $scope.testModal = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'views/content/Modal/modsub.html',
-                        scope: $scope,
-                        size: size,
-                        windowClass: "test-modal"
 
-                    });
-                } else {
-                    //  toastr.warning('Error submitting the form', 'Please try again');
+            console.log("inside test function data is", formData);
+            if (formData.password == formData.confirmPassword) {
+                $scope.dmfData = {
+                    name: "TRIAL",
+                    invitations: "0",
+                    missions: "3",
+                    UploadPhoto: "200",
+                    UploadSize: "1GB",
+                    Mosaic: "12cm",
+                    exportKMZ: "15",
+                    exportOrthophoto: "USAGE LIMIT",
+                    exportDEM: "USAGE LIMIT",
+                    exportPointCloud: "false",
+                    status: "Active",
+                    amount: "0",
+                    expiryDate: $scope.dt,
                 }
-            })
+                console.log("inside test unction dfm data is", $scope.dmfData);
+                NavigationService.apiCallWithData("DFMSubscription/save", $scope.dmfData, function (dfm) {
+                    console.log("after dfm data is called", dfm);
+                    $scope.dfmId = dfm.data._id;
+                    console.log("after dfm data is called $scope.dfmId", $scope.dfmId);
+                    if (dfm.data._id) {
+                        $scope.formData.lisence = "NDB"
+                        $scope.formData.status = "Active"
+                        console.log("for saving user current sub is", $scope.dfmId);
+                        console.log("for saving user current sub is", $scope.dfmId);
+
+                        $scope.formData.currentSubscription = $scope.dfmId;
+                        console.log(" $scope.currentSubscription", $scope.formData);
+
+                        NavigationService.apiCallWithData("User/createUser", formData, function (data) {
+                            if (data.value === true) {
+                                // console.log("data saved successfully", data)
+                                $scope.formData = {};
+
+                                $uibModal.open({
+                                    animation: true,
+                                    templateUrl: 'views/content/Modal/thankyou.html',
+                                    scope: $scope,
+                                    size: 'lg'
+                                    // windowClass: "login-modal"
+
+                                });
+
+                            } else {
+                                $scope.showerr = "";
+                                $scope.showerr = true;
+                                console.log("true value is", $scope.showerr);
+                                console.log("inside else part of createUser");
+                                //  toastr.warning('Error submitting the form', 'Please try again');
+                            }
+                        })
+                    }
+
+                })
+
+
+
+            } else {
+                toastr.warning('Check your Password');
+
+            }
         };
-        // $scope.confirm = function(){
-        //     var password = document.getElementById('pass');
-        //     var confirmpass = document.getElementById('cpass');
-        //     if(password!=confirmpass){
-        //         alert("Passwords did not match");
-        //         // toastr.error('Password did not match');
-        //     }
-        //     else{
-        //         alert("Passwords match");
-        //         // toastr.success('Success');
-        //     }
-        // }
         $scope.getCity = function () {
+            console.log("inside getCity functiion");
             var input = document.getElementById('locationCity');
+            console.log("inside getCity functiion1 input", input);
+
             var autocomplete = new google.maps.places.Autocomplete(input);
             // google.maps.event.addListener(autocomplete, 'click', function () {
             //     alert('CLicked');
@@ -1053,16 +1183,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-        $scope.thankOpen = function () {
-            $uibModal.open({
-                animation: true,
-                templateUrl: 'views/content/Modal/thankyou.html',
-                scope: $scope,
-                size: 'lg'
-                // windowClass: "login-modal"
-
-            });
-        }
     })
 
     .controller('ShippingCtrl', function ($scope, $stateParams, $state, TemplateService, NavigationService, $timeout, $uibModal, $window, toastr) {
@@ -1077,6 +1197,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.submitForm = function (data) {
             $scope.formSubmitted = true;
         };
+        var flag = "";
         if ($stateParams.userId) {
             $scope.userID = {
                 _id: $stateParams.userId
@@ -1107,7 +1228,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     UploadPhoto: "200",
                     UploadSize: "1GB",
                     Mosaic: "12cm",
-                    exportKMZ: " 15",
+                    exportKMZ: "15",
                     exportOrthophoto: "USAGE LIMIT",
                     exportDEM: "USAGE LIMIT",
                     exportPointCloud: "false",
@@ -1120,7 +1241,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     name: "STANDARD",
                     invitations: "15",
                     missions: "Unlimited",
-                    UploadPhoto: " 500",
+                    UploadPhoto: "500",
                     UploadSize: "2.5GB ",
                     Mosaic: "2cm",
                     exportKMZ: "15",
@@ -1140,7 +1261,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     UploadPhoto: "1000",
                     UploadSize: " 5GB",
                     Mosaic: "2cm",
-                    exportKMZ: " 25",
+                    exportKMZ: "25",
                     exportOrthophoto: "USAGE LIMIT",
                     exportDEM: "USAGE LIMIT",
                     exportPointCloud: "USAGE LIMIT",
@@ -1168,6 +1289,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 formdata._id = $.jStorage.get("user")._id;
                 NavigationService.apiCallWithData("User/getOne", $.jStorage.get("user"), function (data) {
                     if (data.value === true) {
+                        console.log("data is", data);
                         $scope.userData = data.data;
                         $scope.formData.address = {};
                         $scope.formData.address.name = data.data.name;
@@ -1175,7 +1297,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.formData.address.address1 = data.data.address;
                         $scope.formData.address.state = data.data.state;
                         $scope.formData.address.phonenumber = data.data.mobile;
-                        $scope.formData.address.oraganization = data.data.oraganization;
+                        $scope.formData.address.oraganization = data.data.organization;
                         $scope.formData.address.country = data.data.country;
                     } else {
                         //  toastr.warning('Error submitting the form', 'Please try again');
@@ -1188,54 +1310,69 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         checkUser();
 
         $scope.saveData = function (data) {
-            $scope.deliveryAddress = {
-                city: data.city,
-                country: data.country,
-                state: data.state,
-                zip: data.zip
-            }
-            data.shippingAddress = $scope.deliveryAddress
-            formdata = {};
-            formdata.user = $.jStorage.get("user")._id;
-            data.user = formdata.user
+            if (data == undefined || data.name == "" && data.state == "") {
+                toastr.warning("Enter Shipping Details");
+            } else {
+                console.log("inside else  condition")
+                $scope.cadModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/content/Modal/carddetail.html',
+                    scope: $scope,
+                    size: 'lg'
+                    // windowClass: "login-modal"
 
-            if ($stateParams.id) { //for package
-                $scope.id = $stateParams.id;
-                $scope.amount = $scope.dfmData[$scope.id].amount;
-                NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[$scope.id], function (dfm) {
-                    console.log("dfm is", dfm)
-                    $scope.id = {
-                        id: dfm.data._id
-                    }
-                    if (dfm.data._id) {
-                        data.dfmSubscription = dfm.data._id;
-                        var dfmId = dfm.data._id;
-                        NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
-                            $scope.Id = data1.data._id;
-                            invoiceNumber = data1.data.invoiceNo;
-                            if (data1.data._id) {
-                                var formdata = {};
-                                formdata._id = $.jStorage.get("user")._id;
-                                formdata.currentSubscription = dfmId;
-                                NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
-                            }
-                        });
-                    }
                 });
-            } else { //for product
-                forProduct = {};
-                forProduct._id = $.jStorage.get("user")._id;
-                NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
-                    data.products = data1.data.cartProducts;
-                    if (data1.data.cartProducts) {
-                        NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
-                            if (data1.value == true) {
+                console.log("inside savedata is", data);
+                $scope.deliveryAddress = {
+                    city: data.city,
+                    country: data.country,
+                    state: data.state,
+                    zip: data.zip
+                }
+                data.shippingAddress = $scope.deliveryAddress
+                formdata = {};
+                formdata.user = $.jStorage.get("user")._id;
+                data.user = formdata.user
+
+                if ($stateParams.id) { //for package
+                    $scope.id = $stateParams.id;
+                    $scope.amount = $scope.dfmData[$scope.id].amount;
+                    NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[$scope.id], function (dfm) {
+                        console.log("dfm is", dfm)
+                        $scope.id = {
+                            id: dfm.data._id
+                        }
+                        if (dfm.data._id) {
+                            data.dfmSubscription = dfm.data._id;
+                            var dfmId = dfm.data._id;
+                            NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
+                                $scope.Id = data1.data._id;
                                 invoiceNumber = data1.data.invoiceNo;
-                            }
-                        });
-                    }
-                });
+                                if (data1.data._id) {
+                                    var formdata = {};
+                                    formdata._id = $.jStorage.get("user")._id;
+                                    formdata.currentSubscription = dfmId;
+                                    NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
+                                }
+                            });
+                        }
+                    });
+                } else { //for product
+                    forProduct = {};
+                    forProduct._id = $.jStorage.get("user")._id;
+                    NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
+                        data.products = data1.data.cartProducts;
+                        if (data1.data.cartProducts) {
+                            NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
+                                if (data1.value == true) {
+                                    invoiceNumber = data1.data.invoiceNo;
+                                }
+                            });
+                        }
+                    });
+                }
             }
+
         }
 
         $scope.setShippingAddress = function (data) {
@@ -1247,7 +1384,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.formData.deliveryAddress.name = $scope.formData.address.name;
                 $scope.formData.deliveryAddress.lname = $scope.formData.address.lname;
                 $scope.formData.deliveryAddress.oraganization = $scope.formData.address.oraganization;
-                $scope.formData.deliveryAddress.address1 = $scope.formData.address.address1;
+                $scope.formData.deliveryAddress.address = $scope.formData.address.address1;
                 $scope.formData.deliveryAddress.apartment = $scope.formData.address.apartment;
                 $scope.formData.deliveryAddress.city = $scope.formData.address.city;
                 $scope.formData.deliveryAddress.state = $scope.formData.address.state;
@@ -1285,6 +1422,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.formData.address.phonenumber = data.data.mobile;
                     $scope.formData.address.oraganization = data.data.oraganization;
                     $scope.formData.address.country = data.data.country;
+                    $scope.formData.address.zip = data.data.zip;
+
                 } else {
                     //  toastr.warning('Error submitting the form', 'Please try again');
                 }
@@ -1335,16 +1474,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             },
 
-            $scope.cad = function () {
-                $scope.cadModal = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/content/Modal/carddetail.html',
-                    scope: $scope,
-                    size: 'lg'
-                    // windowClass: "login-modal"
-
-                });
-            },
             // ***FOR DATEPICKER****
             $scope.popup1 = {
                 opened: false

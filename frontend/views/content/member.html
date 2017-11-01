@@ -11,15 +11,21 @@
                         <div class="col-md-6">
                             <div class="member-col">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Name" value="" class="member-input" name="name" ng-model="formData.name" required>
+                                    <input type="text" placeholder="Name" value="" class="member-input" name="name1" ng-model="formData.name" required>
+                                    <span class="errormsg" ng-show="member.name1.$touched && member.name1.$invalid">The name is required.</span>
+
                                 </div>
                                 <div class="form-group">
-                                    <input id="pass" type="password" placeholder="Password" value="" class="member-input" name="name" ng-model="formData.password" required>
-                                </div>
-                                <div class="form-group">
-                                    <input id="cpass" type="password" placeholder="confirm Password" value="" class="member-input" name="name" ng-model="formData.confirmPassword"
+                                    <input id="pass" type="password" placeholder="Password" value="" class="member-input" name="pass" ng-model="formData.password"
                                         required>
-                                        <span class="cpass" ng-show="formData.password!=formData.confirmPassword">Passwords did not match</span>
+                                    <span class="errormsg" ng-show="member.pass.$touched && member.pass.$invalid">The password is required.</span>
+
+                                </div>
+                                <div class="form-group">
+                                    <input id="cpass" type="password" placeholder="confirm Password" value="" class="member-input" name="confpass" ng-model="formData.confirmPassword"
+                                        required>
+                                    <span class="errormsg" ng-show="formData.password!=formData.confirmPassword && member.confpass.$touched ">Passwords did not match.</span>
+
                                 </div>
                                 <div class="form-group">
                                     <input type="text" only-Digits ng-model="formData.phone" name="phone" placeholder="Phone" value="" class="member-input" name="Phone"
@@ -29,7 +35,8 @@
                                     <input type="text" placeholder="Address" value="" class="member-input" name="Address" ng-model="formData.address">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="State" value="" class="member-input" name="State" required ng-model="formData.state">
+                                    <input type="text" placeholder="State" value="" class="member-input" name="State1" required ng-model="formData.state">
+                                    <span class="errormsg" ng-show="member.State1.$touched && member.State1.$invalid">The state is required.</span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Website" class="member-input" name="Website" ng-model="formData.website">
@@ -74,19 +81,26 @@
                         <div class="col-md-6">
                             <div class="member-col">
                                 <div class="form-group">
-                                    <input type="email" placeholder="Email" class="member-input" name="email" required ng-model="formData.email">
-                                    <!--<span style="color:red" ng-show="form1.mail.$error.email">
-        Sorry Not a Valid Email, Don't Forget to .com</span>-->
+                                    <input type="email" placeholder="Email" class="member-input" name="email1" required ng-model="formData.email">
+                                    <span class="errormsg" ng-show="member.email1.$touched && member.email1.$invalid">The email is required.</span>
+                                    <span class="errormsg" ng-show="showerr==true">email already exist<span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Organization" value="" class="member-input" name="Organization" ng-model="formData.organization">
+                                    <span class="errormsg" ng-show="member.Organization.$touched && member.Organization.$invalid">The Organization is required.</span>
+
+
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Designation" value="" class="member-input" name="Designation" required ng-model="formData.designation">
+                                    <span class="errormsg" ng-show="member.Designation.$touched && member.Designation.$invalid">The Designation is required.</span>
+
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" only-Digits ng-model="formData.mobile" name="mobile" placeholder="Mobile" value="" class="member-input"
+                                    <input type="text" only-Digits ng-model="formData.mobile" name="mobile1" placeholder="Mobile" value="" class="member-input"
                                         name="Mobile" required minlength="10" phone-input ng-model="formData.mobile">
+                                    <span class="errormsg" ng-show="member.mobile1.$touched && member.mobile1.$invalid">The mobile is required.</span>
+
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="City" id="locationCity" ng-change="getCity()" value="" class="member-input" name="City" ng-model="formData.city">
@@ -96,6 +110,8 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" placeholder="Drone Use" value="" class="member-input" name="drone" required ng-model="formData.drone">
+                                    <span class="errormsg" ng-show="member.drone.$touched && member.drone.$invalid">The mobile is required.</span>
+
                                 </div>
                                 <!--<div class="form-group member-form-m30" ng-if="id==2">
                                     <h4 class="inline-block member-right">Do You Have coupon?</h4>
