@@ -83,7 +83,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         console.log("after login data is", data)
                         var userId = data.data._id;
                         // window.location = "http://localhost:1337/#/login1/" + userId;
-                        window.location = "http://cloud.unifli.aero//#/login1/" + userId;
+                        window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
 
                         $.jStorage.set("user", data.data);
                         $scope.template.userProfile = data.data;
