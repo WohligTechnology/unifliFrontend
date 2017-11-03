@@ -139,7 +139,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log("after sendotp excution", data)
                 if (data.value == true) {
                     console.log("data.data._id****", data.data._id);
-                    $scope.id = "59eee664317a857ff90bc862";
+                    $scope.id = data.data._id;
                     console.log("data.data._id", $scope.id);
 
                     $scope.forgotPwd = false;
