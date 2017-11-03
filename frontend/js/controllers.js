@@ -121,6 +121,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.otpPwd = false;
             $scope.resetPwd = false;
             $scope.displayThanksBox = false;
+            $scope.loginModal.close();
             $scope.forgotPasswordModal = $uibModal.open({
                 animation: true,
                 templateUrl: 'frontend/views/content/Modal/otp1.html',
@@ -1309,7 +1310,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         checkUser();
 
-        $scope.acceptPaymentPage = function(data) {
+        $scope.acceptPaymentPage = function (data) {
 
         }
 
@@ -1359,8 +1360,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
                                 }
 
-                                window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount="+$scope.amount+"&invoiceNumber="+invoiceNumber;
-                                
+                                window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
+
                             });
                         }
                     });
@@ -1374,8 +1375,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                 if (data1.value == true) {
                                     invoiceNumber = data1.data.invoiceNo;
 
-                                    window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount="+$scope.amount+"&invoiceNumber="+invoiceNumber;
-                                    
+                                    window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
+
                                 }
                             });
                         }
