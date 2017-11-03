@@ -124,7 +124,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.loginModal.close();
             $scope.forgotPasswordModal = $uibModal.open({
                 animation: true,
-                templateUrl: 'frontend/views/content/Modal/otp1.html',
+                templateUrl: 'views/content/Modal/otp1.html',
                 scope: $scope
             });
 
@@ -144,7 +144,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     console.log("data.data._id", $scope.id);
 
                     $scope.forgotPwd = false;
-                    $scope.otpPwd = true
+                    $scope.otpPwd = true;
                     $scope.resetPwd = false;
                     $scope.displayThanksBox = false;
 
