@@ -1309,19 +1309,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         checkUser();
 
+        $scope.acceptPaymentPage = function(data) {
+
+        }
+
         $scope.saveData = function (data) {
             if (data == undefined || data.name == "" && data.state == "") {
                 toastr.warning("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
-                $scope.cadModal = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/content/Modal/carddetail.html',
-                    scope: $scope,
-                    size: 'lg'
-                    // windowClass: "login-modal"
+                // $scope.cadModal = $uibModal.open({
+                //     animation: true,
+                //     templateUrl: 'views/content/Modal/carddetail.html',
+                //     scope: $scope,
+                //     size: 'lg'
+                //     // windowClass: "login-modal"
 
-                });
+                // });
                 console.log("inside savedata is", data);
                 $scope.deliveryAddress = {
                     city: data.city,
@@ -1354,6 +1358,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     formdata.currentSubscription = dfmId;
                                     NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
                                 }
+
+                                window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount="+$scope.amount+"&invoiceNumber="+invoiceNumber;
+                                
                             });
                         }
                     });
@@ -1366,6 +1373,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 if (data1.value == true) {
                                     invoiceNumber = data1.data.invoiceNo;
+
+                                    window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount="+$scope.amount+"&invoiceNumber="+invoiceNumber;
+                                    
                                 }
                             });
                         }
@@ -1488,20 +1498,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             },
 
             $scope.cardDetailsPayment = function (data) {
+                console.log(data);
                 var invoiceUserId = {};
                 invoiceUserId.invoiceNo = invoiceNumber;
                 data.amount = $scope.amount;
-                NavigationService.apiCallWithData("ProductOrders/chargeCreditCard", data, function (data1) {
-                    if (data1.value == true) {
-                        NavigationService.apiCallWithData("ProductOrders/invoiceGenerate", invoiceUserId, function (data1) {
-                            if (data1.value == true) {
-                                $state.go("thankyou");
-                            }
-                        });
-                    } else {
-                        $state.go("sorry");
-                    }
-                });
+
+                window.location.href = adminurl + "ProductOrders/acceptPaymentPage";
+
+                // NavigationService.apiCallWithData("ProductOrders/acceptPaymentPage", data, function (data1) {
+                //     if (data1.value == true) {
+                //         NavigationService.apiCallWithData("ProductOrders/invoiceGenerate", invoiceUserId, function (data1) {
+                //             if (data1.value == true) {
+                //                 $state.go("thankyou");
+                //             }
+                //         });
+                //     } else {
+                //         $state.go("sorry");
+                //     }
+                // });
             }
 
         // 88888888888888********************************************

@@ -9408,6 +9408,9 @@ a,
   -webkit-transition: all ease 300ms;
   transition: all ease 300ms; }
 
+.cursor-point {
+  cursor: pointer; }
+
 .input-lg, .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn,
