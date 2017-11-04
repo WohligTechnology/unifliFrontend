@@ -154,6 +154,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             });
         };
+        $scope.resendOtp = function () {
+            console.log(" $scope.data", $scope.data);
+            NavigationService.apiCallWithData("User/sendOtp", $scope.data, function (data) {
+                console.log("after sendotp excution", data)
+                if (data.value == true) {
+                    console.log("data.data._id****", data.data._id);
+                    $scope.id = data.data._id;
+                    console.log("data.data._id", $scope.id);
+
+                    $scope.forgotPwd = false;
+                    $scope.otpPwd = true
+                    $scope.resetPwd = false;
+                    $scope.displayThanksBox = false;
+
+                } else {
+                    toastr.error('Incorrect email!');
+
+                }
+            });
+        }
         $scope.checkOTP = function (data1) {
             // console.log("inside check $scope.data", $scope.data1);
             // $scope.data = {
