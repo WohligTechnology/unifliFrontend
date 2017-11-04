@@ -1357,7 +1357,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     var formdata = {};
                                     formdata._id = $.jStorage.get("user")._id;
                                     formdata.currentSubscription = dfmId;
-                                    NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
+                                    // NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});//to be written in backend
                                 }
 
                                 window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
