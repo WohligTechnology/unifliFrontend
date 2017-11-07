@@ -71,6 +71,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
 
+        if ($.jStorage.get('user')) {
+            $scope.showcart = false;
+        } else {
+            $scope.showcart = true;
+        }
+        $scope.productCart = function () {
+            console.log("inside productCart");
+            $state.go('mycart');
+
+        }
+
 
 
         $scope.loginclose = function (formData) {
@@ -90,7 +101,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // toastr.success('You have been successfully logged in', 'Login Success');
 
                     } else if (data.value === false) {
-                        toastr.warning(data.error.message, 'Login Failure');
+                        toastr.warning('Login Failure');
                     } else {
                         // toastr.warning('Something went wrong', 'Please try again');
                     }
@@ -102,6 +113,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.template.userProfile = $.jStorage.get('user');
         }
         $scope.logout = function () {
+            $scope.showcart = true;
             $.jStorage.flush();
             $scope.template.userProfile = null;
         };
@@ -147,6 +159,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.otpPwd = true;
                     $scope.resetPwd = false;
                     $scope.displayThanksBox = false;
+                    $scope.showotp = true;
 
                 } else {
                     toastr.error('Incorrect email!');
@@ -167,7 +180,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.otpPwd = true
                     $scope.resetPwd = false;
                     $scope.displayThanksBox = false;
-
+                    $scope.showotp = false;
                 } else {
                     toastr.error('Incorrect email!');
 
@@ -280,7 +293,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 $scope.productData = data.data.results;
                 $scope.productData = _.chunk($scope.productData, 3)
-                // console.log("data found successfully")
+                console.log("data found successfully", $scope.productData);
             } else {
                 toastr.warning('Error submitting the form', 'Please try again');
             }
@@ -293,12 +306,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         $scope.addToCartProduct1 = function (data) {
+            console.log("viewDetail", data);
             var formdata = {};
             formdata = $.jStorage.get('user')
+            console.log("formdata", formdata);
             _.forEach(formdata.cartProducts, function (n) {
+                console.log("$scope.productData[0][0]._id", $scope.productData[0][0]._id)
                 if (n._id == $scope.productData[0][0]._id) {
+                    console.log("inside if")
                     isExist = true;
                 } else {
+                    console.log("inside else")
                     isExist = false;
                 }
             })
@@ -916,6 +934,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("MemberPage"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        if ($.jStorage.get("user")) {
+            $scope.showbtn = true;
+
+        } else {
+            $scope.showbtn = false;
+
+        }
+
         if ($stateParams.userId) {
             console.log("inside if")
             $scope.userID = {
@@ -1091,6 +1117,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             console.log("inside test function data is", formData);
             if (formData.password == formData.confirmPassword) {
+                $scope.dt = new Date();
+                $scope.dt.setDate($scope.dt.getDate() + 30);
                 $scope.dmfData = {
                     name: "TRIAL",
                     invitations: "0",
@@ -1106,48 +1134,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     amount: "0",
                     expiryDate: $scope.dt,
                 }
-                console.log("inside test unction dfm data is", $scope.dmfData);
-                NavigationService.apiCallWithData("DFMSubscription/save", $scope.dmfData, function (dfm) {
-                    console.log("after dfm data is called", dfm);
-                    $scope.dfmId = dfm.data._id;
-                    console.log("after dfm data is called $scope.dfmId", $scope.dfmId);
-                    if (dfm.data._id) {
-                        $scope.formData.lisence = "NDB"
-                        $scope.formData.status = "Active"
-                        console.log("for saving user current sub is", $scope.dfmId);
-                        console.log("for saving user current sub is", $scope.dfmId);
+                formData.status = 'Active';
+                console.log(" $scope.dmfData", $scope.dmfData)
+                NavigationService.apiCallWithData("User/createUser", formData, function (data) {
+                    if (data.value == true) {
+                        $scope.user = {}
+                        $scope.user._id = data.data._id;
+                        $scope.product = data;
+                        $scope.dmfData.user = data.data._id;;
+                        NavigationService.apiCallWithData("DFMSubscription/save", $scope.dmfData, function (dfm) {
+                            $scope.dfmId = dfm.data._id;
+                            if (dfm.value == true) {
+                                $scope.user.currentSubscription = $scope.dfmId;
+                                NavigationService.apiCallWithData("User/save", $scope.user, function (data) {
+                                    $uibModal.open({
+                                        animation: true,
+                                        templateUrl: 'views/content/Modal/thankyou.html',
+                                        scope: $scope,
+                                        size: 'lg'
+                                        // windowClass: "login-modal"
 
-                        $scope.formData.currentSubscription = $scope.dfmId;
-                        console.log(" $scope.currentSubscription", $scope.formData);
+                                    });
+                                })
 
-                        NavigationService.apiCallWithData("User/createUser", formData, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $scope.formData = {};
-
-                                $uibModal.open({
-                                    animation: true,
-                                    templateUrl: 'views/content/Modal/thankyou.html',
-                                    scope: $scope,
-                                    size: 'lg'
-                                    // windowClass: "login-modal"
-
-                                });
-
-                            } else {
-                                $scope.showerr = "";
-                                $scope.showerr = true;
-                                console.log("true value is", $scope.showerr);
-                                console.log("inside else part of createUser");
-                                //  toastr.warning('Error submitting the form', 'Please try again');
                             }
                         })
+
+
+                    } else {
+                        $scope.showerr = "";
+                        $scope.showerr = true;
+                        // toastr.warning('Error submitting the form', 'Please try again');
+
                     }
-
-                })
-
-
-
+                });
             } else {
                 toastr.warning('Check your Password');
 
@@ -1362,6 +1382,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if ($stateParams.id) { //for package
                     $scope.id = $stateParams.id;
                     $scope.amount = $scope.dfmData[$scope.id].amount;
+                    $scope.dfmData[$scope.id].user = $.jStorage.get("user")._id;
                     NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[$scope.id], function (dfm) {
                         console.log("dfm is", dfm)
                         $scope.id = {
