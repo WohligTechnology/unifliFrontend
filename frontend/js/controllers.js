@@ -305,32 +305,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.viewDetail = data;
         }
 
-
-
-        $scope.addToCartProduct1 = function (data) {
-            console.log("viewDetail", data);
+        $scope.productList = [{
+            id: '59edd82aedee870474bb23e7',
+            price: '14998'
+        }, {
+            id: '5a02a7b29c689410d0290e6b',
+            price: '31299'
+        }, {
+            id: '5a02a7da9c689410d0290e6c',
+            price: '39498'
+        }];
+        $scope.addToCartProduct = function (data) {
             var formdata = {};
             formdata = $.jStorage.get('user')
-            console.log("formdata", formdata.cartProducts);
             _.forEach(formdata.cartProducts, function (n) {
-                console.log("$scope.productData[0][0]._id****8", $scope.productData[0][0]._id)
-                console.log("n._id*****", n)
-
-                if (n == $scope.productData[0][0]._id) {
-                    console.log("inside if")
+                if (n == $scope.productList[data].id) {
                     isExist = true;
                 } else {
-                    console.log("inside else")
                     isExist = false;
                 }
             })
             if (!isExist) {
-                formdata.cartProducts.push($scope.productData[0][0]._id);
+                formdata.cartProducts.push($scope.productList[data].id);
                 if (formdata.cart) {
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productData[0][0].price);
+                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data].price);
                 } else {
                     formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productData[0][0].price);
+                    formdata.cart.totalAmount = Number($scope.productList[data].price);
                 }
                 NavigationService.apiCallWithData("User/save", formdata, function (data) {
                     if (data.value === true) {
@@ -352,94 +353,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             } else {
                 toastr.error('Product already exist');
-            }
-        }
-
-        $scope.addToCartProduct2 = function (data) {
-            var formdata = {};
-            formdata = $.jStorage.get('user')
-            _.forEach(formdata.cartProducts, function (n) {
-                if (n == $scope.productData[0][1]._id) {
-                    isExist = true;
-                } else {
-                    isExist = false;
-                }
-            })
-
-            if (!isExist) {
-                formdata.cartProducts.push($scope.productData[0][1]._id);
-                if (formdata.cart) {
-                    // console.log("formdata.cart", formdata.cart);
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productData[0][1].price);
-
-                } else {
-                    formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productData[0][1].price);
-                }
-                NavigationService.apiCallWithData("User/save", formdata, function (data) {
-                    if (data.value === true) {
-                        NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $.jStorage.set("user", data.data);
-                                $scope.template.userProfile = data.data;
-                                var products = data.data.cartProducts;
-                                //  $state.go('mycart');
-                            }
-                        });
-                        $state.go('mycart', {
-                            product: 'product'
-                        });
-                    } else {
-                        //  toastr.warning('Error submitting the form', 'Please try again');
-                    }
-                });
-            } else {
-                toastr.error('Product already exist');
-            }
-        }
-
-        $scope.addToCartProduct3 = function (data) {
-            var formdata = {};
-            formdata = $.jStorage.get('user')
-            _.forEach(formdata.cartProducts, function (n) {
-                if (n == $scope.productData[0][2]._id) {
-                    isExist = true;
-                } else {
-                    isExist = false;
-                }
-            })
-            if (!isExist) {
-                formdata.cartProducts.push($scope.productData[0][2]._id);
-                if (formdata.cart) {
-                    // console.log("formdata.cart", formdata.cart);
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productData[0][2].price);
-
-                } else {
-                    formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productData[0][2].price);
-                }
-                NavigationService.apiCallWithData("User/save", formdata, function (data) {
-                    if (data.value === true) {
-                        NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $.jStorage.set("user", data.data);
-                                $scope.template.userProfile = data.data;
-                                var products = data.data.cartProducts;
-                                //  $state.go('mycart');
-                            }
-                        });
-                        $state.go('mycart', {
-                            product: 'product'
-                        });
-                    } else {
-                        //  toastr.warning('Error submitting the form', 'Please try again');
-                    }
-                });
-            } else {
-                toastr.error('Product already exist');
-
             }
         }
 
