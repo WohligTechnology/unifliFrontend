@@ -78,7 +78,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
         $scope.productCart = function () {
             console.log("inside productCart");
-            $state.go('mycart');
+            $state.go('mycart', {
+                product: 'product'
+            });
 
         }
 
@@ -309,10 +311,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             console.log("viewDetail", data);
             var formdata = {};
             formdata = $.jStorage.get('user')
-            console.log("formdata", formdata);
+            console.log("formdata", formdata.cartProducts);
             _.forEach(formdata.cartProducts, function (n) {
-                console.log("$scope.productData[0][0]._id", $scope.productData[0][0]._id)
-                if (n._id == $scope.productData[0][0]._id) {
+                console.log("$scope.productData[0][0]._id****8", $scope.productData[0][0]._id)
+                console.log("n._id*****", n)
+
+                if (n == $scope.productData[0][0]._id) {
                     console.log("inside if")
                     isExist = true;
                 } else {
@@ -355,7 +359,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var formdata = {};
             formdata = $.jStorage.get('user')
             _.forEach(formdata.cartProducts, function (n) {
-                if (n._id == $scope.productData[0][1]._id) {
+                if (n == $scope.productData[0][1]._id) {
                     isExist = true;
                 } else {
                     isExist = false;
@@ -399,7 +403,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var formdata = {};
             formdata = $.jStorage.get('user')
             _.forEach(formdata.cartProducts, function (n) {
-                if (n._id == $scope.productData[0][2]._id) {
+                if (n == $scope.productData[0][2]._id) {
                     isExist = true;
                 } else {
                     isExist = false;
@@ -833,7 +837,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var cartDetails = {};
             cartDetails = $.jStorage.get("user");
             var removedProduct = _.remove(cartDetails.cartProducts, function (n) {
-                return n._id == data;
+                return n == data;
             });
             var cardDetailsData = {};
             cardDetailsData.cartProducts = cartDetails.cartProducts;
