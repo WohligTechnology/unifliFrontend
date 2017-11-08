@@ -319,19 +319,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var formdata = {};
             formdata = $.jStorage.get('user')
             _.forEach(formdata.cartProducts, function (n) {
-                if (n == $scope.productList[data].id) {
+                if (n == $scope.productList[data - 1].id) {
                     isExist = true;
                 } else {
                     isExist = false;
                 }
             })
             if (!isExist) {
-                formdata.cartProducts.push($scope.productList[data].id);
+                formdata.cartProducts.push($scope.productList[data - 1].id);
                 if (formdata.cart) {
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data].price);
+                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data - 1].price);
                 } else {
                     formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productList[data].price);
+                    formdata.cart.totalAmount = Number($scope.productList[data - 1].price);
                 }
                 NavigationService.apiCallWithData("User/save", formdata, function (data) {
                     if (data.value === true) {
