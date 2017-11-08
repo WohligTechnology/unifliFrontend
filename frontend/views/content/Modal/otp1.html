@@ -31,7 +31,7 @@
             <p>Enter your 4 Digit Verification Code</p>
             <form name="forms-otp1" class="form-otp">
                 <div class="form-group customized-form fourdgt-otpbox">
-                    <input class=" form-control text-center otpInput " type="number" ng-model="formdata.otp">
+                    <input class=" form-control text-center otpInput " type="text" ng-model="formdata.otp">
                     <!--<span></span>
                 <span></span>
                 <span></span>
@@ -44,6 +44,7 @@
                 </p>
                 <!-- <span class="text-center text-danger" ng-if="resendOtpBut">{{errorMessage}}</span> -->
                 <a ng-click="resendOtp()" class="resend">Resend Code</a>
+                <div ng-hide=showotp>Your OTP has been Resent Successfully </div>
             </form>
         </div>
         <div class="change-password login-head text-center" ng-if="resetPwd">

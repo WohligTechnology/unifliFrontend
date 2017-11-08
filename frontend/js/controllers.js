@@ -71,6 +71,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         };
 
 
+        if ($.jStorage.get('user')) {
+            $scope.showcart = false;
+        } else {
+            $scope.showcart = true;
+        }
+        $scope.productCart = function () {
+            console.log("inside productCart");
+            $state.go('mycart', {
+                product: 'product'
+            });
+
+        }
+
 
 
         $scope.loginclose = function (formData) {
@@ -90,7 +103,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         // toastr.success('You have been successfully logged in', 'Login Success');
 
                     } else if (data.value === false) {
-                        toastr.warning(data.error.message, 'Login Failure');
+                        toastr.warning('Login Failure');
                     } else {
                         // toastr.warning('Something went wrong', 'Please try again');
                     }
@@ -102,6 +115,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.template.userProfile = $.jStorage.get('user');
         }
         $scope.logout = function () {
+            $scope.showcart = true;
             $.jStorage.flush();
             $scope.template.userProfile = null;
         };
@@ -121,9 +135,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.otpPwd = false;
             $scope.resetPwd = false;
             $scope.displayThanksBox = false;
+            $scope.loginModal.close();
             $scope.forgotPasswordModal = $uibModal.open({
                 animation: true,
-                templateUrl: 'frontend/views/content/Modal/otp1.html',
+                templateUrl: 'views/content/Modal/otp1.html',
                 scope: $scope
             });
 
@@ -139,13 +154,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 console.log("after sendotp excution", data)
                 if (data.value == true) {
                     console.log("data.data._id****", data.data._id);
-                    $scope.id = "59eee664317a857ff90bc862";
+                    $scope.id = data.data._id;
                     console.log("data.data._id", $scope.id);
 
                     $scope.forgotPwd = false;
-                    $scope.otpPwd = true
+                    $scope.otpPwd = true;
                     $scope.resetPwd = false;
                     $scope.displayThanksBox = false;
+                    $scope.showotp = true;
 
                 } else {
                     toastr.error('Incorrect email!');
@@ -153,6 +169,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 }
             });
         };
+        $scope.resendOtp = function () {
+            console.log(" $scope.data", $scope.data);
+            NavigationService.apiCallWithData("User/sendOtp", $scope.data, function (data) {
+                console.log("after sendotp excution", data)
+                if (data.value == true) {
+                    console.log("data.data._id****", data.data._id);
+                    $scope.id = data.data._id;
+                    console.log("data.data._id", $scope.id);
+
+                    $scope.forgotPwd = false;
+                    $scope.otpPwd = true
+                    $scope.resetPwd = false;
+                    $scope.displayThanksBox = false;
+                    $scope.showotp = false;
+                } else {
+                    toastr.error('Incorrect email!');
+
+                }
+            });
+        }
         $scope.checkOTP = function (data1) {
             // console.log("inside check $scope.data", $scope.data1);
             // $scope.data = {
@@ -259,7 +295,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 $scope.productData = data.data.results;
                 $scope.productData = _.chunk($scope.productData, 3)
-                // console.log("data found successfully")
+                console.log("data found successfully", $scope.productData);
             } else {
                 toastr.warning('Error submitting the form', 'Please try again');
             }
@@ -269,25 +305,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.viewDetail = data;
         }
 
-
-
-        $scope.addToCartProduct1 = function (data) {
+        $scope.productList = [{
+            id: '59edd82aedee870474bb23e7',
+            price: '14998'
+        }, {
+            id: '5a02a7b29c689410d0290e6b',
+            price: '31299'
+        }, {
+            id: '5a02a7da9c689410d0290e6c',
+            price: '39498'
+        }];
+        $scope.addToCartProduct = function (data) {
             var formdata = {};
             formdata = $.jStorage.get('user')
             _.forEach(formdata.cartProducts, function (n) {
-                if (n._id == $scope.productData[0][0]._id) {
+                if (n == $scope.productList[data - 1].id) {
                     isExist = true;
                 } else {
                     isExist = false;
                 }
             })
             if (!isExist) {
-                formdata.cartProducts.push($scope.productData[0][0]._id);
+                formdata.cartProducts.push($scope.productList[data - 1].id);
                 if (formdata.cart) {
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productData[0][0].price);
+                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data - 1].price);
                 } else {
                     formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productData[0][0].price);
+                    formdata.cart.totalAmount = Number($scope.productList[data - 1].price);
                 }
                 NavigationService.apiCallWithData("User/save", formdata, function (data) {
                     if (data.value === true) {
@@ -309,94 +353,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
             } else {
                 toastr.error('Product already exist');
-            }
-        }
-
-        $scope.addToCartProduct2 = function (data) {
-            var formdata = {};
-            formdata = $.jStorage.get('user')
-            _.forEach(formdata.cartProducts, function (n) {
-                if (n._id == $scope.productData[0][1]._id) {
-                    isExist = true;
-                } else {
-                    isExist = false;
-                }
-            })
-
-            if (!isExist) {
-                formdata.cartProducts.push($scope.productData[0][1]._id);
-                if (formdata.cart) {
-                    // console.log("formdata.cart", formdata.cart);
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productData[0][1].price);
-
-                } else {
-                    formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productData[0][1].price);
-                }
-                NavigationService.apiCallWithData("User/save", formdata, function (data) {
-                    if (data.value === true) {
-                        NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $.jStorage.set("user", data.data);
-                                $scope.template.userProfile = data.data;
-                                var products = data.data.cartProducts;
-                                //  $state.go('mycart');
-                            }
-                        });
-                        $state.go('mycart', {
-                            product: 'product'
-                        });
-                    } else {
-                        //  toastr.warning('Error submitting the form', 'Please try again');
-                    }
-                });
-            } else {
-                toastr.error('Product already exist');
-            }
-        }
-
-        $scope.addToCartProduct3 = function (data) {
-            var formdata = {};
-            formdata = $.jStorage.get('user')
-            _.forEach(formdata.cartProducts, function (n) {
-                if (n._id == $scope.productData[0][2]._id) {
-                    isExist = true;
-                } else {
-                    isExist = false;
-                }
-            })
-            if (!isExist) {
-                formdata.cartProducts.push($scope.productData[0][2]._id);
-                if (formdata.cart) {
-                    // console.log("formdata.cart", formdata.cart);
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productData[0][2].price);
-
-                } else {
-                    formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productData[0][2].price);
-                }
-                NavigationService.apiCallWithData("User/save", formdata, function (data) {
-                    if (data.value === true) {
-                        NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $.jStorage.set("user", data.data);
-                                $scope.template.userProfile = data.data;
-                                var products = data.data.cartProducts;
-                                //  $state.go('mycart');
-                            }
-                        });
-                        $state.go('mycart', {
-                            product: 'product'
-                        });
-                    } else {
-                        //  toastr.warning('Error submitting the form', 'Please try again');
-                    }
-                });
-            } else {
-                toastr.error('Product already exist');
-
             }
         }
 
@@ -794,7 +750,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             var cartDetails = {};
             cartDetails = $.jStorage.get("user");
             var removedProduct = _.remove(cartDetails.cartProducts, function (n) {
-                return n._id == data;
+                return n == data;
             });
             var cardDetailsData = {};
             cardDetailsData.cartProducts = cartDetails.cartProducts;
@@ -895,6 +851,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.menutitle = NavigationService.makeactive("MemberPage"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
+        if ($.jStorage.get("user")) {
+            $scope.showbtn = true;
+
+        } else {
+            $scope.showbtn = false;
+
+        }
+
         if ($stateParams.userId) {
             console.log("inside if")
             $scope.userID = {
@@ -1070,6 +1034,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             console.log("inside test function data is", formData);
             if (formData.password == formData.confirmPassword) {
+                $scope.dt = new Date();
+                $scope.dt.setDate($scope.dt.getDate() + 30);
                 $scope.dmfData = {
                     name: "TRIAL",
                     invitations: "0",
@@ -1085,48 +1051,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     amount: "0",
                     expiryDate: $scope.dt,
                 }
-                console.log("inside test unction dfm data is", $scope.dmfData);
-                NavigationService.apiCallWithData("DFMSubscription/save", $scope.dmfData, function (dfm) {
-                    console.log("after dfm data is called", dfm);
-                    $scope.dfmId = dfm.data._id;
-                    console.log("after dfm data is called $scope.dfmId", $scope.dfmId);
-                    if (dfm.data._id) {
-                        $scope.formData.lisence = "NDB"
-                        $scope.formData.status = "Active"
-                        console.log("for saving user current sub is", $scope.dfmId);
-                        console.log("for saving user current sub is", $scope.dfmId);
+                formData.status = 'Active';
+                console.log(" $scope.dmfData", $scope.dmfData)
+                NavigationService.apiCallWithData("User/createUser", formData, function (data) {
+                    if (data.value == true) {
+                        $scope.user = {}
+                        $scope.user._id = data.data._id;
+                        $scope.product = data;
+                        $scope.dmfData.user = data.data._id;;
+                        NavigationService.apiCallWithData("DFMSubscription/save", $scope.dmfData, function (dfm) {
+                            $scope.dfmId = dfm.data._id;
+                            if (dfm.value == true) {
+                                $scope.user.currentSubscription = $scope.dfmId;
+                                NavigationService.apiCallWithData("User/save", $scope.user, function (data) {
+                                    $uibModal.open({
+                                        animation: true,
+                                        templateUrl: 'views/content/Modal/thankyou.html',
+                                        scope: $scope,
+                                        size: 'lg'
+                                        // windowClass: "login-modal"
 
-                        $scope.formData.currentSubscription = $scope.dfmId;
-                        console.log(" $scope.currentSubscription", $scope.formData);
+                                    });
+                                })
 
-                        NavigationService.apiCallWithData("User/createUser", formData, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $scope.formData = {};
-
-                                $uibModal.open({
-                                    animation: true,
-                                    templateUrl: 'views/content/Modal/thankyou.html',
-                                    scope: $scope,
-                                    size: 'lg'
-                                    // windowClass: "login-modal"
-
-                                });
-
-                            } else {
-                                $scope.showerr = "";
-                                $scope.showerr = true;
-                                console.log("true value is", $scope.showerr);
-                                console.log("inside else part of createUser");
-                                //  toastr.warning('Error submitting the form', 'Please try again');
                             }
                         })
+
+
+                    } else {
+                        $scope.showerr = "";
+                        $scope.showerr = true;
+                        // toastr.warning('Error submitting the form', 'Please try again');
+
                     }
-
-                })
-
-
-
+                });
             } else {
                 toastr.warning('Check your Password');
 
@@ -1309,19 +1267,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         checkUser();
 
+        $scope.acceptPaymentPage = function (data) {
+
+        }
+
         $scope.saveData = function (data) {
             if (data == undefined || data.name == "" && data.state == "") {
                 toastr.warning("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
-                $scope.cadModal = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/content/Modal/carddetail.html',
-                    scope: $scope,
-                    size: 'lg'
-                    // windowClass: "login-modal"
+                // $scope.cadModal = $uibModal.open({
+                //     animation: true,
+                //     templateUrl: 'views/content/Modal/carddetail.html',
+                //     scope: $scope,
+                //     size: 'lg'
+                //     // windowClass: "login-modal"
 
-                });
+                // });
                 console.log("inside savedata is", data);
                 $scope.deliveryAddress = {
                     city: data.city,
@@ -1337,6 +1299,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if ($stateParams.id) { //for package
                     $scope.id = $stateParams.id;
                     $scope.amount = $scope.dfmData[$scope.id].amount;
+                    $scope.dfmData[$scope.id].user = $.jStorage.get("user")._id;
                     NavigationService.apiCallWithData("DFMSubscription/save", $scope.dfmData[$scope.id], function (dfm) {
                         console.log("dfm is", dfm)
                         $scope.id = {
@@ -1352,8 +1315,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     var formdata = {};
                                     formdata._id = $.jStorage.get("user")._id;
                                     formdata.currentSubscription = dfmId;
-                                    NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});
+                                    // NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});//to be written in backend
                                 }
+
+                                window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
+
                             });
                         }
                     });
@@ -1366,6 +1332,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 if (data1.value == true) {
                                     invoiceNumber = data1.data.invoiceNo;
+
+                                    window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
+
                                 }
                             });
                         }
@@ -1488,20 +1457,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             },
 
             $scope.cardDetailsPayment = function (data) {
+                console.log(data);
                 var invoiceUserId = {};
                 invoiceUserId.invoiceNo = invoiceNumber;
                 data.amount = $scope.amount;
-                NavigationService.apiCallWithData("ProductOrders/chargeCreditCard", data, function (data1) {
-                    if (data1.value == true) {
-                        NavigationService.apiCallWithData("ProductOrders/invoiceGenerate", invoiceUserId, function (data1) {
-                            if (data1.value == true) {
-                                $state.go("thankyou");
-                            }
-                        });
-                    } else {
-                        $state.go("sorry");
-                    }
-                });
+
+                window.location.href = adminurl + "ProductOrders/acceptPaymentPage";
+
+                // NavigationService.apiCallWithData("ProductOrders/acceptPaymentPage", data, function (data1) {
+                //     if (data1.value == true) {
+                //         NavigationService.apiCallWithData("ProductOrders/invoiceGenerate", invoiceUserId, function (data1) {
+                //             if (data1.value == true) {
+                //                 $state.go("thankyou");
+                //             }
+                //         });
+                //     } else {
+                //         $state.go("sorry");
+                //     }
+                // });
             }
 
         // 88888888888888********************************************

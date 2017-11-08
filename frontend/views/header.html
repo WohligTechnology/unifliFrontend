@@ -25,6 +25,7 @@
                     <img ui-sref="home" class="img-responsive img-logo" src="img/123.png" alt="">
                 </div>
                 <ul class="list-inline pull-right header-list">
+                    <li ng-hide="showcart" class=" cart-icon" ng-click="productCart();"><i class="fa fa-shopping-cart" aria-hidden="true"></i></li>
                     <li ng-if="!template.userProfile" ng-click="login();" class="btn btn-white">Log in</li>
                     <li ng-if="template.userProfile" ng-click="logout();" class="btn btn-white">Log Out</li>
                     <li ng-if="!template.userProfile" class="btn btn-join list-padding" ui-sref="member({id:1})">Join</li>
