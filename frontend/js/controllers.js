@@ -1166,10 +1166,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
                     $.jStorage.set("user", data.data);
-
                     checkUser();
                 }
             });
+        } else {
+            checkUser();
+
         }
 
 
@@ -1264,9 +1266,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
             }
         }
-
-        checkUser();
-
         $scope.acceptPaymentPage = function (data) {
 
         }
