@@ -1852,16 +1852,17 @@ footer {
     margin: 0;
     cursor: ew-resize;
 }
-.ship-det{
-    p{
+
+.ship-det {
+    p {
         text-decoration: underline;
     }
-    ul{
-        li{
+    ul {
+        li {
             color: gray;
         }
         list-style-type: none;
-         margin-left:-40px;
+        margin-left:-40px;
         font-size: 20px;
         color: black;
     }
@@ -1905,7 +1906,7 @@ footer {
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
-    background-position: -31px -3px;
+    background-position: -47px -3px;
 }
 
 .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
@@ -1920,11 +1921,11 @@ footer {
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
-    background-position: -211px -1px;
+    background-position: -197px -1px;
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
-    background-position: -240px -2px;
+    background-position: -226px -2px;
 }
 
 .leaflet-bar .leaflet-control-zoom-in {
