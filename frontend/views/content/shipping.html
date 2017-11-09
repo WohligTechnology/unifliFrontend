@@ -1,195 +1,204 @@
 <div class="container" style="background: url(../img/member.jpg);
-    background-repeat: no-repeat; 
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 shipping">
-      <div>
-        <div class="outerborder mar-t mar-b" style="background:white">
-          <div class="shipping-pay">
-            <h3>Shipping and Payment </h3>
-            <h3>Information</h3>
-          </div>
-          <div class="text-center">
-            <h3>Cart Total:{{amount}}</h3>
-          </div>
+background-repeat: no-repeat; 
+width: 100%;
+background-repeat: no-repeat;
+background-size: cover;">
+<div class="row">
+<div class="col-md-10 col-md-offset-1 shipping">
+  <div>
+    <div class="outerborder mar-t mar-b" style="background:white">
+      <div class="shipping-pay">
+        <h3>Shipping and Payment </h3>
+        <h3>Information</h3>
+      </div>
+      <div class="text-center">
+        <h3>Cart Total:{{amount}}</h3>
+      </div>
+      <div class="text-center">
+        <p style="color:#1ab394; font-size:18px">Plan Details:</p>
+        <ul style="list-style-type: none;">
+          <li> Total Missions:{{mission}}</li>
+          <li>Photo Uploads (Max Count): {{image}}</li>
+          <li>Upload (Max Size): {{upload}}</li>
+          <li>Mosaic (resolution cm/pixel): {{Mosaic1}}</li>
+        </ul>
+      </div>
 
-          <form name="formName">
+      <form name="formName">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="border-bottom">
+              <p class="pull-right">*Fields are required</p>
+              <h3>Address on File</h3>
+
+            </div>
+            <div class="padd30">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'form-invalid': formName.name.$invalid && formName.name.$touched}">
+                    <label>First Name* </label>
+                    <input type="text" name="name" class="form-control" ng-model="formData.address.name" required>
+                    <span class="errormsg" ng-show="formName.name.$touched && formName.name.$invalid">The name is required.</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" ng-class="{'form-invalid': formName.lname.$invalid && formName.lname.$touched}">
+                    <label>Last Name* </label>
+                    <input type="text" name="lname" class="form-control" ng-model="formData.address.lname" required>
+                    <span class="errormsg" ng-show="formName.lname.$touched && formName.lname.$invalid">The last name is required.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" class="form-control" ng-model="formData.address.oraganization" placeholder="Company name">
+              </div>
+              <div class="form-group" ng-class="{'form-invalid': formName.address1.$invalid && formName.address.$touched}">
+                <label>Street Address* </label>
+                <input type="text" name="address1" class="form-control" ng-model="formData.address.address1" placeholder="Street Address c/o"
+                  required>
+                <span class="errormsg" ng-show="formName.address1.$touched && formName.address1.$invalid">The Street Address* name is required.</span>
+              </div>
+              <div class="form-group">
+                <label>Apartment/suite</label>
+                <input type="text" class="form-control" ng-model="formData.address.apartment" placeholder="Apt, suit, (optional)">
+                <label>Please note that we cannot ship to a PO Box</label>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="city ">City*</label>
+                  <div class="form-group ">
+                    <input type="text" ng-change="autoLocation()" class="form-control" id="locationCity" ng-model="formData.address.city">
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group ">
+                    <label for="zip ">Zip Code</label>
+                    <input type="text " class="form-control " ng-model="formData.address.zip">
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group ">
+                    <label for="country ">Country</label>
+                    <input type="text " class="form-control " ng-model="formData.address.country">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group ">
+                    <label for="state ">State</label>
+                    <input type="text " class="form-control " ng-model="formData.address.state">
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="form-group" ng-class="{'form-invalid': formName.phonenumber.$invalid && formName.phonenumber.$touched}">
+                <label>Phone Number* </label>
+                <input type="text" name="phonenumber" class="form-control" ng-model="formData.address.phonenumber" required>
+                <span class="errormsg" ng-show="formName.phonenumber.$touched && formName.phonenumber.$invalid">This Phone Number is required.</span>
+              </div>
+            </div>
+
+
+            <div class="shipping-checkbox checkbox-font">
+              <label>Shippings Address Same as Billing?</label>
+              <input type="checkbox" id="agree" ng-click="setShippingAddress(formData.address)">
+            </div>
+          </div>
+      </form>
+      <form>
+        <div class="col-md-6">
+
+
+          <div class="border-bottom">
+            <p class="pull-right">*Fields are required</p>
+            <h3>Shipping Address </h3>
+
+          </div>
+          <div class="padd30">
             <div class="row">
               <div class="col-md-6">
-
-                <div class="border-bottom">
-                  <p class="pull-right">*Fields are required</p>
-                  <h3>Address on File</h3>
-
-                </div>
-                <div class="padd30">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group" ng-class="{'form-invalid': formName.name.$invalid && formName.name.$touched}">
-                        <label>First Name* </label>
-                        <input type="text" name="name" class="form-control" ng-model="formData.address.name" required>
-                        <span class="errormsg" ng-show="formName.name.$touched && formName.name.$invalid">The name is required.</span>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group" ng-class="{'form-invalid': formName.lname.$invalid && formName.lname.$touched}">
-                        <label>Last Name* </label>
-                        <input type="text" name="lname" class="form-control" ng-model="formData.address.lname" required>
-                        <span class="errormsg" ng-show="formName.lname.$touched && formName.lname.$invalid">The last name is required.</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="company">Company</label>
-                    <input type="text" class="form-control" ng-model="formData.address.oraganization" placeholder="Company name">
-                  </div>
-                  <div class="form-group" ng-class="{'form-invalid': formName.address1.$invalid && formName.address.$touched}">
-                    <label>Street Address* </label>
-                    <input type="text" name="address1" class="form-control" ng-model="formData.address.address1" placeholder="Street Address c/o"
-                      required>
-                    <span class="errormsg" ng-show="formName.address1.$touched && formName.address1.$invalid">The Street Address* name is required.</span>
-                  </div>
-                  <div class="form-group">
-                    <label>Apartment/suite</label>
-                    <input type="text" class="form-control" ng-model="formData.address.apartment" placeholder="Apt, suit, (optional)">
-                    <label>Please note that we cannot ship to a PO Box</label>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label for="city ">City*</label>
-                      <div class="form-group ">
-                        <input type="text" ng-change="autoLocation()" class="form-control" id="locationCity" ng-model="formData.address.city">
-
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label for="zip ">Zip Code</label>
-                        <input type="text " class="form-control " ng-model="formData.address.zip">
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label for="country ">Country</label>
-                        <input type="text " class="form-control " ng-model="formData.address.country">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label for="state ">State</label>
-                        <input type="text " class="form-control " ng-model="formData.address.state">
-                      </div>
-                    </div>
-
-                  </div>
-
-
-                  <div class="form-group" ng-class="{'form-invalid': formName.phonenumber.$invalid && formName.phonenumber.$touched}">
-                    <label>Phone Number* </label>
-                    <input type="text" name="phonenumber" class="form-control" ng-model="formData.address.phonenumber" required>
-                    <span class="errormsg" ng-show="formName.phonenumber.$touched && formName.phonenumber.$invalid">This Phone Number is required.</span>
-                  </div>
-                </div>
-
-
-                <div class="shipping-checkbox checkbox-font">
-                  <label>Shippings Address Same as Billing?</label>
-                  <input type="checkbox" id="agree" ng-click="setShippingAddress(formData.address)">
+                <div class="form-group">
+                  <label for="text">First Name*</label>
+                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.name" required>
                 </div>
               </div>
-          </form>
-          <form>
-            <div class="col-md-6">
-
-
-              <div class="border-bottom">
-                <p class="pull-right">*Fields are required</p>
-                <h3>Shipping Address </h3>
-
-              </div>
-              <div class="padd30">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="text">First Name*</label>
-                      <input type="text" class="form-control" ng-model="formData.deliveryAddress.name" required>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="text">Last Name*</label>
-                      <input type="text" class="form-control" ng-model="formData.deliveryAddress.lname" required>
-                    </div>
-                  </div>
-                </div>
+              <div class="col-md-6">
                 <div class="form-group">
-                  <label for="company">Company</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.oraganization" placeholder="Company name" required>
-                </div>
-                <div class="form-group">
-                  <label for="address">Street Address*</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.address" placeholder="Street Address c/o" required>
-                </div>
-                <div class="form-group">
-                  <label>Apartment/suite</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.apartment" placeholder=" Apt, suit, (optional) "
-                    required>
-                  <label>Please note that we cannot ship to a PO Box</label>
-                </div>
-                <div class="row ">
-                  <div class="col-md-6 ">
-                    <div class="form-group ">
-                      <label for="city ">City*</label>
-                      <input type="text " class="form-control " ng-model="formData.deliveryAddress.city" required>
-                    </div>
-                  </div>
-                  <div class="col-md-6 ">
-                    <div class="form-group ">
-                      <label for="zip ">Zip Code*</label>
-                      <input type="text " only-Digits class="form-control " ng-model="formData.deliveryAddress.zip" required>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="row ">
-                  <div class="col-md-6 ">
-                    <div class="form-group ">
-                      <label for="country ">Country</label>
-                      <input type="text " class="form-control " ng-model="formData.deliveryAddress.country">
-                    </div>
-                  </div>
-                  <div class="col-md-6 ">
-                    <div class="form-group ">
-                      <label for="state ">State</label>
-                      <input type="tel " class="form-control " ng-model="formData.deliveryAddress.state" required>
-                    </div>
-                  </div>
-
-                </div>
-
-
-                <div class="form-group">
-                  <label>Phone Number* </label>
-                  <input type="text" name="phonenumber" class="form-control" ng-model="formData.deliveryAddress.phonenumber">
+                  <label for="text">Last Name*</label>
+                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.lname" required>
                 </div>
               </div>
             </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" class="form-control" ng-model="formData.deliveryAddress.oraganization" placeholder="Company name" required>
             </div>
-            <div class="text-center ">
-              <button class="btn btn-default btn-gray btn-size" ng-click="goBack()">Back</button>
-              <button type="button " class="btn btn-primary btn-size " ng-click="saveData(formData.deliveryAddress);">Save & Continue</button>
-              <!--ng-click="saveData(formData.deliveryAddress)" -->
+            <div class="form-group">
+              <label for="address">Street Address*</label>
+              <input type="text" class="form-control" ng-model="formData.deliveryAddress.address" placeholder="Street Address c/o" required>
+            </div>
+            <div class="form-group">
+              <label>Apartment/suite</label>
+              <input type="text" class="form-control" ng-model="formData.deliveryAddress.apartment" placeholder=" Apt, suit, (optional) "
+                required>
+              <label>Please note that we cannot ship to a PO Box</label>
+            </div>
+            <div class="row ">
+              <div class="col-md-6 ">
+                <div class="form-group ">
+                  <label for="city ">City*</label>
+                  <input type="text " class="form-control " ng-model="formData.deliveryAddress.city" required>
+                </div>
+              </div>
+              <div class="col-md-6 ">
+                <div class="form-group ">
+                  <label for="zip ">Zip Code*</label>
+                  <input type="text " only-Digits class="form-control " ng-model="formData.deliveryAddress.zip" required>
+                </div>
+              </div>
+
+            </div>
+            <div class="row ">
+              <div class="col-md-6 ">
+                <div class="form-group ">
+                  <label for="country ">Country</label>
+                  <input type="text " class="form-control " ng-model="formData.deliveryAddress.country">
+                </div>
+              </div>
+              <div class="col-md-6 ">
+                <div class="form-group ">
+                  <label for="state ">State</label>
+                  <input type="tel " class="form-control " ng-model="formData.deliveryAddress.state" required>
+                </div>
+              </div>
+
             </div>
 
-          </form>
+
+            <div class="form-group">
+              <label>Phone Number* </label>
+              <input type="text" name="phonenumber" class="form-control" ng-model="formData.deliveryAddress.phonenumber">
+            </div>
+          </div>
         </div>
-      </div>
+        </div>
+        <div class="text-center ">
+          <button class="btn btn-default btn-gray btn-size" ng-click="goBack()">Back</button>
+          <button type="button " class="btn btn-primary btn-size " ng-click="saveData(formData.deliveryAddress);">Save & Continue</button>
+          <!--ng-click="saveData(formData.deliveryAddress)" -->
+        </div>
+
+      </form>
     </div>
   </div>
+</div>
+</div>
 </div>
 </div>

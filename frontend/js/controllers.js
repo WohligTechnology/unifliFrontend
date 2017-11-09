@@ -1240,7 +1240,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
              $scope.id = $stateParams.id;
         if ($stateParams.id) {
             $scope.amount = $scope.dfmData[$scope.id].amount;
-        } else {
+            $scope.mission = $scope.dfmData[$scope.id].missions;
+            $scope.image = $scope.dfmData[$scope.id].UploadPhoto;
+            $scope.upload = $scope.dfmData[$scope.id].UploadSize;
+            $scope.Mosaic1 = $scope.dfmData[$scope.id].Mosaic;
+         } else {
             forProduct = {};
             forProduct._id = $.jStorage.get("user")._id;
             NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
