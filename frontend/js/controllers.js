@@ -1166,12 +1166,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
                     $.jStorage.set("user", data.data);
-
                     checkUser();
                 }
             });
-        }else{
+        } else {
             checkUser();
+
         }
 
 
@@ -1232,43 +1232,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             } else {
                 var dfmData = [];
             }
-
-            $scope.id = $stateParams.id;
-            if ($stateParams.id) {
-                $scope.amount = $scope.dfmData[$scope.id].amount;
-            } else {
-                forProduct = {};
-                forProduct._id = $.jStorage.get("user")._id;
-                NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
-                    if (data1.value == true) {
-                        $scope.amount = data1.data.cart.totalAmount;
-                    }
-                });
-
-                formdata = {};
-                formdata._id = $.jStorage.get("user")._id;
-                NavigationService.apiCallWithData("User/getOne", $.jStorage.get("user"), function (data) {
-                    if (data.value === true) {
-                        console.log("data is", data);
-                        $scope.userData = data.data;
-                        $scope.formData.address = {};
-                        $scope.formData.address.name = data.data.name;
-                        $scope.formData.address.city = data.data.city;
-                        $scope.formData.address.address1 = data.data.address;
-                        $scope.formData.address.state = data.data.state;
-                        $scope.formData.address.phonenumber = data.data.mobile;
-                        $scope.formData.address.oraganization = data.data.organization;
-                        $scope.formData.address.country = data.data.country;
-                    } else {
-                        //  toastr.warning('Error submitting the form', 'Please try again');
-                    }
-                });
-
-            }
+             $scope.id = $stateParams.id;
+        if ($stateParams.id) {
+            $scope.amount = $scope.dfmData[$scope.id].amount;
+        } else {
+            forProduct = {};
+            forProduct._id = $.jStorage.get("user")._id;
+            NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
+                if (data1.value == true) {
+                    $scope.amount = data1.data.cart.totalAmount;
+                }
+            });
         }
 
-     
 
+
+       
+
+            formdata = {};
+            formdata._id = $.jStorage.get("user")._id;
+            NavigationService.apiCallWithData("User/getOne", $.jStorage.get("user"), function (data) {
+                if (data.value === true) {
+                    console.log("data is", data);
+                    $scope.userData = data.data;
+                    $scope.formData.address = {};
+                    $scope.formData.address.name = data.data.name;
+                    $scope.formData.address.city = data.data.city;
+                    $scope.formData.address.address1 = data.data.address;
+                    $scope.formData.address.state = data.data.state;
+                    $scope.formData.address.phonenumber = data.data.mobile;
+                    $scope.formData.address.oraganization = data.data.organization;
+                    $scope.formData.address.country = data.data.country;
+                } else {
+                    //  toastr.warning('Error submitting the form', 'Please try again');
+                }
+            });
+
+        }
         $scope.acceptPaymentPage = function (data) {
 
         }
@@ -1569,7 +1569,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         // }
 
     })
-
 
     .controller('Blog-IndividualCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
         $scope.template = TemplateService.changecontent("blog-individual"); //Use same name of .html file
