@@ -1170,6 +1170,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     checkUser();
                 }
             });
+        }else{
+            checkUser();
         }
 
 
@@ -1265,7 +1267,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         }
 
-        checkUser();
+     
 
         $scope.acceptPaymentPage = function (data) {
 
