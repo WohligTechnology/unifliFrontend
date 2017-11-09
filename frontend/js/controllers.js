@@ -316,44 +316,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             price: '39498'
         }];
         $scope.addToCartProduct = function (data) {
-            var formdata = {};
-            formdata = $.jStorage.get('user')
-            _.forEach(formdata.cartProducts, function (n) {
-                if (n == $scope.productList[data - 1].id) {
-                    isExist = true;
-                } else {
-                    isExist = false;
-                }
-            })
-            if (!isExist) {
-                formdata.cartProducts.push($scope.productList[data - 1].id);
-                if (formdata.cart) {
-                    formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data - 1].price);
-                } else {
-                    formdata.cart = {};
-                    formdata.cart.totalAmount = Number($scope.productList[data - 1].price);
-                }
-                NavigationService.apiCallWithData("User/save", formdata, function (data) {
-                    if (data.value === true) {
-                        NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
-                            if (data.value === true) {
-                                // console.log("data saved successfully", data)
-                                $.jStorage.set("user", data.data);
-                                $scope.template.userProfile = data.data;
-                                var products = data.data.cartProducts;
-                                //  $state.go('mycart');
-                            }
-                        });
-                        $state.go('mycart', {
-                            product: 'product'
-                        });
+            if ($.jStorage.get('user')){
+                var formdata = {};
+                formdata = $.jStorage.get('user')
+                _.forEach(formdata.cartProducts, function (n) {
+                    if (n == $scope.productList[data - 1].id) {
+                        isExist = true;
                     } else {
-                        //  toastr.warning('Error submitting the form', 'Please try again');
+                        isExist = false;
                     }
-                });
-            } else {
-                toastr.error('Product already exist');
+                })
+                if (!isExist) {
+                    formdata.cartProducts.push($scope.productList[data - 1].id);
+                    if (formdata.cart) {
+                        formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data - 1].price);
+                    } else {
+                        formdata.cart = {};
+                        formdata.cart.totalAmount = Number($scope.productList[data - 1].price);
+                    }
+                    NavigationService.apiCallWithData("User/save", formdata, function (data) {
+                        if (data.value === true) {
+                            NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
+                                if (data.value === true) {
+                                    // console.log("data saved successfully", data)
+                                    $.jStorage.set("user", data.data);
+                                    $scope.template.userProfile = data.data;
+                                    var products = data.data.cartProducts;
+                                    //  $state.go('mycart');
+                                }
+                            });
+                            $state.go('mycart', {
+                                product: 'product'
+                            });
+                        } else {
+                            //  toastr.warning('Error submitting the form', 'Please try again');
+                        }
+                    });
+                } else {
+                    toastr.error('Product already exist');
+                }
+            }else{
+                $state.go("member");
             }
+           
         }
 
         $scope.tabchange = function (tab, a) {
