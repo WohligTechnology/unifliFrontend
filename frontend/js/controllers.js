@@ -1161,6 +1161,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         };
         var flag = "";
+        $scope.showDetail=true;
         if ($stateParams.userId) {
             $scope.userID = {
                 _id: $stateParams.userId
@@ -1239,13 +1240,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
              $scope.id = $stateParams.id;
         if ($stateParams.id) {
+            $scope.showDetail=false;
             $scope.amount = $scope.dfmData[$scope.id].amount;
             $scope.mission = $scope.dfmData[$scope.id].missions;
             $scope.image = $scope.dfmData[$scope.id].UploadPhoto;
             $scope.upload = $scope.dfmData[$scope.id].UploadSize;
             $scope.Mosaic1 = $scope.dfmData[$scope.id].Mosaic;
          } else {
-            forProduct = {};
+            $scope.showDetail=true;
+              forProduct = {};
             forProduct._id = $.jStorage.get("user")._id;
             NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
                 if (data1.value == true) {
