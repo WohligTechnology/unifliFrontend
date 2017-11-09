@@ -35,6 +35,10 @@ module.exports = [
     'bower_components/textAngular/dist/textAngular-rangy.min.js',
     'bower_components/textAngular/dist/textAngular-sanitize.min.js',
     'bower_components/textAngular/dist/textAngular.min.js',
+    "bower_components/mapbox.js/mapbox.js",
+    "node_modules/mapbox-gl-draw/dist/mapbox-gl-draw.js",
+    "node_modules/@turf/turf/turf.min.js",
+    "node_modules/leaflet-draw/dist/leaflet.draw.js",
 
     //App.js
     'backend/js/app.js',

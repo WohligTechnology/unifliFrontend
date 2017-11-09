@@ -24,9 +24,12 @@ module.exports = [
     "bower_components/moment/min/moment.min.js",
     "bower_components/angular-toastr/dist/angular-toastr.js",
     "bower_components/angular-toastr/dist/angular-toastr.tpls.js",
-
     "bower_components/mapbox.js/mapbox.js",
     "node_modules/mapbox-gl-draw/dist/mapbox-gl-draw.js",
+    "node_modules/@turf/turf/turf.min.js",
+    "node_modules/leaflet-draw/dist/leaflet.draw.js",
+    "node_modules/leaflet-geodesy/leaflet-geodesy.js",
+
 
     // /home/wohlig / Documents / htdocs / unifli - backend / frontend / js / plugins / datapicker
     //Work files

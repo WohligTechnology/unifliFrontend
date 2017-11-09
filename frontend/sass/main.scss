@@ -8,6 +8,11 @@ $output-bourbon-deprecation-warnings: false;
 @import "../../bower_components/swiper/dist/css/swiper.min";
 @import "../../bower_components/smart-app-banner/smart-app-banner";
 @import "../../bower_components/angular-toastr/dist/angular-toastr";
+@import "../../bower_components/angular-mapboxgl-directive/dist/angular-mapboxgl-directive.css";
+@import "../../node_modules/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+@import "../../node_modules/mapbox-gl/dist/mapbox-gl.css";
+@import "../../bower_components/mapbox.js/mapbox.css";
+@import "../../node_modules/leaflet-draw/dist/leaflet.draw.css";
 
 /* Bootstrap Variables Goes Here */
 
@@ -1846,6 +1851,83 @@ footer {
     position: relative;
     margin: 0;
     cursor: ew-resize;
+}
+
+.leaflet-control-zoom-out {
+    text-indent: 0;
+    font-size: 25px;
+}
+
+.leaflet-control-zoom-in,
+{
+    text-indent: 0;
+    font-size: 25px;
+}
+
+.leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+    background-position: -31px -2px
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+    background-position: -29px -1px
+}
+
+.leaflet-bar a {
+    text-align: center;
+}
+
+.leaflet-bar .leaflet-control-zoom-out {
+    background-position: 0 -26px;
+}
+
+.leaflet-retina .leaflet-draw-toolbar a {
+    background-image: url(../img/spritesheet-2x.png);
+    background-image: linear-gradient(transparent, transparent), url(../img/spritesheet.svg);
+}
+
+.leaflet-draw-toolbar a {
+    background-image: url(../img/spritesheet.png);
+    background-image: linear-gradient(transparent, transparent), url(../img/spritesheet.svg);
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+    background-position: -31px -3px;
+}
+
+.leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+    background-position: -257px -2px;
+    .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
+        background-position: -212px -1px;
+    }
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+    background-position: -228px -1px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
+    background-position: -211px -1px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
+    background-position: -240px -2px;
+}
+
+.leaflet-bar .leaflet-control-zoom-in {
+    opacity: 1;
+    padding: 3px 7px;
+    font-size: 20px;
+}
+
+.leaflet-bar .leaflet-control-zoom-out {
+    opacity: 1;
+    padding: 0 8px;
+    font-size: 30px;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+    text-indent: 0;
 }
 
 ///end of map///

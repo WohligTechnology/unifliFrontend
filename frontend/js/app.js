@@ -284,24 +284,20 @@ firstapp.filter('sumFilter', function () {
 });
 
 ///for map
-firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, $uibModal) {
+
+firstapp.directive('mapBox', function ($http, $filter, $rootScope, $uibModal) {
     return {
         restrict: 'C',
         link: function ($scope, element, attrs) {
-            var locations = {};
-            if ($scope.missionDetails && $scope.missionDetails.missionId) {
-                locations = $scope.missionDetails.geoLocation;
-            } else if ($scope.cadLineDetails) {
-                locations = $scope.cadLineDetails.geoLocation;
-            } else {
-                locations = {
-                    upperLeft: [32.77840210218494, -117.23545173119574],
-                    lowerLeft: [32.77740264966007, -117.23544909909386],
-                    upperRight: [32.77840829977591, -117.23213078512207],
-                    lowerRight: [32.77740884701485, -117.23212819014402],
-                    center: [-117.23378995150006, 32.77790548568292]
-                }
+
+            var locations = {
+                upperLeft: [-117.71831000278182, 33.6350189736756],
+                lowerLeft: [-117.71828359784291, 33.631838242266994],
+                upperRight: [-117.71508320105106, 33.6350376758184],
+                lowerRight: [-117.71505691470409, 33.63185694217141],
+                center: [-117.71668342895028, 33.6334379692133]
             }
+
 
             // var mapStyle = {
             //     "version": 8,
@@ -437,18 +433,11 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
             //     }]
             // };
             var imageUrl;
-            if ($scope.missionDetails && $scope.missionDetails.missionId) {
-                // console.log("$scope.missionDetails.name", $scope.missionDetails.name);
-                // imageUrl = 'http://35.201.210.67:80/' + $scope.missionDetails.missionId + '.png';
-                imageUrl = 'http://localhost:1337/' + $scope.missionDetails.name + '.webp';
-            } else if ($scope.cadLineDetails && $scope.cadLineDetails.orthoFile) {
-                imageUrl = 'http://35.201.210.67:80/' + $scope.cadLineDetails.orthoFile.file.split(".")[0] + '.png';
-                // imageUrl = 'http://localhost:1337/' + $scope.cadLineDetails.orthoFile[0].file.split(".")[0] + '.png';
-            } else if ($scope.cadLineDetails && $scope.cadLineDetails.mission) {
-                imageUrl = 'http://35.201.210.67:80/' + $scope.cadLineDetails.mission.missionId + '.png';
-                // imageUrl = 'http://localhost:1337/' + $scope.cadLineDetails.mission.name + '.png';
+            // console.log("$scope.missionDetails.name", $scope.missionDetails.name);
+            imageUrl = 'http://files.unifli.aero/M20171128google_tiles/{z}/{x}/{myY}.png';
 
-            }
+            // imageUrl = 'http://localhost:1337/google_tiles/{z}/{x}/{myY}.png';
+
 
             // This is the trickiest part - you'll need accurate coordinates for the
             // corners of the image. You can find and create appropriate values at
@@ -475,31 +464,33 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
                 })
                 .fitBounds(imageBounds)
             var attribution = L.control.attribution();
-            attribution.setPrefix('<a href="https://unifli.aero/">Unifli</a>');
+            attribution.setPrefix('<a href="https://cloud.unifli.aero/">Unifli</a>');
             // attribution.addAttribution('<a href="https://unifli.aero/">Unifli</a>');
             attribution.addTo(map);
             // See full documentation for the ImageOverlay type:
             // http://leafletjs.com/reference.html#imageoverlay
             // console.log("gccygeruygreufheurhfuerhuerhfurhrieowuepoupwoidpiwodwoeudiewudieuifueiuferfureruhsss", $scope.slider.value);
-            // var overlay = L.imageOverlay(imageUrl, imageBounds)
-            //     .addTo(map);
+            if ($scope.cadLineDetails && !_.isEmpty($scope.cadLineDetails.geoLocation) && !$scope.cadLineDetails.mission) {
+                var overlay = L.imageOverlay(imageUrl, imageBounds)
+                    .addTo(map);
+            }
             // overlay.setOpacity($scope.slider.value);
             // omnivore.kml('http://localhost:1337/newM_mosaic.kml').addTo(map);
-            var TopoLayer = L.tileLayer('http://localhost:1337/google_tiles/{z}/{x}/{myY}.png', {
-                maxZoom: 22,
-                minZoom: 16,
+            var TopoLayer = L.tileLayer(imageUrl, {
+                maxZoom: 16,
+                minZoom: 20,
                 myY: function (data) {
                     return (Math.pow(2, data.z) - data.y - 1);
                 }
             })
             map.addLayer(TopoLayer);
-            $rootScope.$on('greeting', function (event, arg) {
-                overlay.setOpacity(arg.value);
-            })
+            // $rootScope.$on('greeting', function (event, arg) {
+            //     overlay.setOpacity(arg.value);
+            // })
             var polygon;
             if ($scope.cadLineDetails && !_.isEmpty($scope.cadLineDetails.points)) {
                 polygon = L.polygon(latlngs, {
-                    color: 'red'
+                    color: 'white'
                 }).addTo(map);
                 map.fitBounds(polygon.getBounds());
             }
@@ -511,7 +502,20 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
                     featureGroup: featureGroup
                 },
                 draw: {
-                    polygon: true,
+                    polygon: {
+                        showArea: true,
+                        allowIntersection: true,
+                        shapeOptions: {
+                            stroke: true,
+                            metric: false,
+                            color: '#fff',
+                            weight: 4,
+                            opacity: 1,
+                            fill: true,
+                            fillColor: null, //same as color by default
+                            fillOpacity: 0.3
+                        }
+                    },
                     polyline: false,
                     rectangle: false,
                     circle: false,
@@ -529,6 +533,7 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
                     });
                 });
             }
+            var acres;
 
             function showPolygonArea(e) {
                 featureGroup.clearLayers();
@@ -551,16 +556,19 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
                     pointsList
                 ]);
 
-                var area = turf.area(polygon);
-
-                console.log("area--", area);
-                acres = area * 0.000247105381;
-                console.log("acres--", acres);
+                area = turf.area(polygon);
+                console.log("area--", area, LGeo.area(e.layer) * 0.0002471054);
+                acres = LGeo.area(e.layer) * 0.0002471054;
+                console.log("acres--", Number(acres).toFixed(2));
                 if ($scope.cadLineDetails) {
-                    $scope.cadLineDetails.acreage = acres;
+                    $scope.cadLineDetails.acreage = Number(acres).toFixed(2);
                     $scope.cadLineDetails.points = e.layer._latlngs;
+                    // $("#myModal").modal();
+                    $('#myModal').on('show.bs.modal', function () {
+                        console.log("inside modal")
+                        $("#acreage").val(Number(acres).toFixed(2));
+                    }).modal('show');
                 }
-                $("#myModal").modal();
                 // var mapmodal = $uibModal.open({
                 //     animation: $scope.animationsEnabled,
                 //     templateUrl: '/backend/views/modal/cadline-name.html',
@@ -602,29 +610,19 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
             //     e.layer.openPopup();
             //     alert("hello")
             // }
-            var calcButton;
-            if ($scope.missionDetails && $scope.missionDetails.missionId) {
-                calcButton = document.getElementById('missionName');
-            } else if ($scope.cadLineDetails) {
-                calcButton = document.getElementById('contours');
-            }
-            calcButton.onclick = function () {
-                var data = drawControl.getAll();
-
-                var polyCoord = turf.coordAll(data);
-
-                if (data.features.length > 0) {
-                    var area = turf.area(data);
-                    // restrict to area to 2 decimal points
-                    var rounded_area = Math.round(area * 100) / 100;
-                    $scope.cadLineDetails.acreage = rounded_area
-                    var answer = document.getElementById('calculated-area');
-                    answer.innerHTML = '<p><strong>' + rounded_area + '</strong></p><p>square meters</p>' + 'All co-ordinates' + polyCoord.length;
-                    console.log("polyCoord", polyCoord);
-                } else {
-                    alert("Use the draw tools to draw a polygon!");
-                }
-            };
+            // var calcButton;
+            // if ($scope.missionDetails && $scope.missionDetails.missionId) {
+            //     calcButton = document.getElementById('missionName');
+            // } else if ($scope.cadLineDetails) {
+            //     calcButton = document.getElementById('contours');
+            // }
+            // calcButton.onclick = function () {
+            //     if (acres > 0) {
+            //         $scope.cadLineDetails.acreage = acres
+            //     } else {
+            //         alert("Use the draw tools to draw a polygon!");
+            //     }
+            // };
 
             map.on('load', function () {
                 // ALL YOUR APPLICATION CODE
@@ -642,6 +640,7 @@ firstapp.directive('mapBox', function ($http, $filter, JsonService, $rootScope, 
         }
     };
 });
+
 
 //number format
 firstapp.directive('phoneInput', function ($filter, $browser) {

@@ -11,7 +11,10 @@
         <%= ((typeof title) == "undefined") ? "Node Framework" : title  %>
     </title>
     <link rel="shortcut icon" href="frontend/img/favicon.ico" />
-
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.css' type='text/css'
+    />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
     <!-- SEO -->
     <meta name="author" content="Node Framework">
     <meta name="description" content="<%= ((typeof description) == " undefined ") ? "Node Framework " : description  %>">
