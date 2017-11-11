@@ -13,7 +13,7 @@
     <meta name="googlebot" content="noindex">
     <link rel="shortcut icon" href="img/favicon.ico" />
 
-    <title ng-bind="'Burnt Umber| '+template.title"></title>
+    <title ng-bind="'Node Framework | '+template.title"></title>
 
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
     <!--[if IE]> <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script> <![endif]-->
@@ -24,11 +24,16 @@
 
 
     <link rel="stylesheet" type="text/css" href="css/import.css" />
-
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.css' type='text/css'
+    />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
     <script>
-        var adminurl = "<%= ((typeof adminurl) == "undefined") ? "" : adminurl  %>";
+        var adminurl = "<%= ((typeof adminurl) == "
+        undefined ") ? "
+        " : adminurl  %>";
         var isproduction = true;
-        var chintan = function(content) {
+        var chintan = function (content) {
             console.log("%c ---------------------------------------", 'background: #222; color: #bada55');
             console.log(content);
             console.log("%c ---------------------------------------", 'background: #222; color: #bada55');
