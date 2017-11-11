@@ -22,8 +22,8 @@ $brand-warning: #ffec39 !default;
 $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-// @import url('https://fonts.googleapis.com/css?family=Share+Tech');
-// @import url('https://fonts.googleapis.com/css?family=Abel');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech');
+@import url('https://fonts.googleapis.com/css?family=Abel');
 // $font-share-tech: 'Share Tech', 'Arial', sans-serif;
 @font-face {
     font-family: 'Glyphicons Halflings';

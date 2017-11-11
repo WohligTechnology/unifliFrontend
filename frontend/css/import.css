@@ -18,6 +18,8 @@
 @import url(../../node_modules/mapbox-gl/dist/mapbox-gl.css);
 @import url(../../bower_components/mapbox.js/mapbox.css);
 @import url(../../node_modules/leaflet-draw/dist/leaflet.draw.css);
+@import url("https://fonts.googleapis.com/css?family=Share+Tech");
+@import url("https://fonts.googleapis.com/css?family=Abel");
 @font-face {
   font-family: 'flexslider-icon';
   src: url("fonts/flexslider-icon.eot");
