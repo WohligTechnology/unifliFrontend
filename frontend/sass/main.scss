@@ -22,13 +22,23 @@ $brand-warning: #ffec39 !default;
 $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Share+Tech');
-@import url('https://fonts.googleapis.com/css?family=Abel');
+// @import url('https://fonts.googleapis.com/css?family=Share+Tech');
+// @import url('https://fonts.googleapis.com/css?family=Abel');
 // $font-share-tech: 'Share Tech', 'Arial', sans-serif;
 @font-face {
     font-family: 'Glyphicons Halflings';
     src: url("../fonts/glyphicons-halflings-regular.eot");
     src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+}
+
+@font-face {
+    font-family: 'Abel', sans-serif;
+    src: url("../fonts/Abel-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Share Tech', sans-serif;
+    src: url("../fonts/ShareTech-Regular.ttf");
 }
 
 body {
