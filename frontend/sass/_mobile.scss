@@ -573,11 +573,17 @@ h2.step.step-2-top:before{
 
 .padding-l { padding-left: 0;}
 
-.feature-min { padding: 20px; }
+.feature-min { padding: 20px; .padding{
+    padding:0;
+}
+.pads{
+    padding:0;
+}}
 
 .top-spacing-product{ 
     .no-pad{
-        padding: 0;
+        padding: 0 !important;
+        text-align: justify;
     }
 }
 
@@ -738,7 +744,7 @@ h2.step.step-2-top:before{
     text-align: center
 }
 .button {
-    width: 31%;
+    width: 35%;
 }
 .text-right {
    text-align: center;
