@@ -34,8 +34,7 @@ $brand-info: #000072 !default;
 @font-face {
     font-family: 'Abel-Regular';
     src: url("../fonts/Abel-Regular.eot");
-    src: url("../fonts/Abel-Regular.ttf")url('../fonts/Abel-Regular.woff2') format('woff2'), url('../fonts/Abel-Regular.woff') format('woff'), url('../fonts/Abel-Regular.eot?#iefix') format('embedded-opentype');
-    ;
+    src: url("../fonts/Abel-Regular.ttf"),url('../fonts/Abel-Regular.woff2') format('woff2'), url('../fonts/Abel-Regular.woff') format('woff'), url('../fonts/Abel-Regular.eot?#iefix') format('embedded-opentype');
 }
 
 @font-face {
