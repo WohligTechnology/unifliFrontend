@@ -10887,7 +10887,7 @@ footer {
 
 .whitey {
   color: #fff !important;
-  font-family: abel;
+  font-family: 'Abel-Regular';
   font-weight: 700; }
 
 .product-type {
@@ -11294,14 +11294,14 @@ footer {
 .newsletter2 {
   background-color: #5fb8ae;
   width: 68%;
-  font-family: abel;
+  font-family: 'Abel-Regular';
   height: 36px; }
 
 .newsletter {
   margin: 88px 0; }
   .newsletter label {
     display: block;
-    font-family: 'Abel', sans-serif;
+    font-family: 'Abel-Regular', sans-serif;
     font-weight: 400;
     color: #0B5345;
     font-size: 20px; }
@@ -11335,7 +11335,7 @@ footer {
 
 .thanku p {
   display: block;
-  font-family: 'Abel', sans-serif;
+  font-family: 'Abel-Regular', sans-serif;
   font-weight: 400;
   color: #0B5345;
   font-size: 20px;
@@ -11475,7 +11475,7 @@ footer {
 
 .address h4 {
   font-weight: 400 !important;
-  font-family: abel !important; }
+  font-family: 'Abel-Regular' !important; }
 
 .proceed-button {
   float: right;
