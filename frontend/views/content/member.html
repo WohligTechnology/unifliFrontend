@@ -8,8 +8,8 @@
 
                 <div class="member-form">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="member-col">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="member-col rem-bmargin">
                                 <div class="form-group">
                                     <input type="text" placeholder="Name" value="" class="member-input" name="name1" ng-model="formData.name" required>
                                     <span class="errormsg" ng-show="member.name1.$touched && member.name1.$invalid">The name is required.</span>
@@ -71,15 +71,10 @@
                                 </div>
                                 <!--<option value="1" ng-repeat="option in dropdownList" >{{option.plan}} </option>-->
                                 <!--<select  id="menulist" class="dropdown-member" name="users" required ng-model="formData.userSelect">-->
-                                <div class="form-group checkbox">
-                                    <input type="checkbox" value="" id="agree" ng-model="formData.agree" required/>
-                                    <label class="checkbox-inline" for="agree">I agree with all terms and conditions and privacy policy
-                                    </label>
-                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="member-col">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="member-col rem-tmargin">
                                 <div class="form-group">
                                     <input type="email" placeholder="Email" class="member-input" name="email1" required ng-model="formData.email">
                                     <span class="errormsg" ng-show="member.email1.$touched && member.email1.$invalid">The email is required.</span>
@@ -121,6 +116,13 @@
                                     <input type="text" placeholder="$500" value="" class="member-input" only-Digits ng-model="formData.plan.money">
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6 col-xs12">
+                                <div class="form-group checkbox member-col">
+                                        <input type="checkbox" value="" id="agree" ng-model="formData.agree" required/>
+                                        <label class="checkbox-inline" for="agree">I agree with all terms and conditions and privacy policy
+                                        </label>
+                                    </div>
                         </div>
                     </div>
                     <div>

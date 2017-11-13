@@ -237,7 +237,7 @@ h2.step.step-2-top:before{
     margin-top: 20px;
 }
 .ipad-top{
-    margin-top: -30px;
+    margin-top: -55px;
 }
 .service-drone {
      padding: 40px 0px; 
@@ -280,10 +280,24 @@ h2.step.step-2-top:before{
 
 
 @media (max-width: $screen-xs-max) {
-
-
+.rem-bmargin{
+    margin-bottom: 0px;
+}
+.rem-tmargin{
+    margin-top: 0px;
+}
+.rem-member-col{
+    margin-top: 10px;
+}
 .mt10 {
     margin-top: 28px;
+    font-size: 16px;
+}
+.uav-text{
+    h4{
+        text-align: center;
+
+    }
 }
     // about.html changes
     .p-120 {
@@ -382,14 +396,18 @@ h2.step.step-2-top:before{
             text-align: center;
         }
         p {
-            padding: 12px 0;
+            padding: 5px;
+        }
+        .icon{
+padding: 0;
+font-size: 20px;
         }
         span{
       color: #74ada9;
       font-size: 10px;
  }
  .privacy{
-     margin-left: 70px;
+     text-align: center;
  }
     }
     //footer
@@ -630,10 +648,15 @@ h2.step.step-top:before{
 h2.step.step-2-top:before{
     display: none;
 }
-
+.w-60{
+    width: 65%;
+}
 .w-50 {
     width: 65%;
     margin-top: 17px;
+}
+.space-right{
+    margin-right: 10px;
 }
 .mb-top{
         margin-top: 25px;
@@ -645,12 +668,12 @@ h2.step.step-2-top:before{
 
 .work-container {
     background: white;
-    padding: 18px 47px 0px 28px;
+    padding: 0;
     margin-top: 25px;
 }
 .worklogo {
     width: 100%;
-    padding: 7px 52px 0 70px;
+    padding: 0;
 }
 .support-heading2 {
     padding-top: 35%;
