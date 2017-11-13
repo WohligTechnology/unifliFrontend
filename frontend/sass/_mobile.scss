@@ -820,7 +820,12 @@ display: none;
 // .load2 {
 //     width: 12% !important;
 // }
-
+.blog-img-1 {
+   width: 300px;
+   img{
+       width: 100%;
+   }
+}
 .read {
     width: 33%;
 }
