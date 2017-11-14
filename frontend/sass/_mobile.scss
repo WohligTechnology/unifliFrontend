@@ -724,7 +724,11 @@ h2.step.step-2-top:before{
     // min-height: 0px !important;
     min-height: 0px !important;
 }
-
+.inquire-btn{
+    button{
+        text-align: center;
+    }
+}
 
 .fc-img {
     margin-top: -28px;
@@ -767,7 +771,7 @@ h2.step.step-2-top:before{
     text-align: center
 }
 .button {
-    width: 35%;
+    width: 45%;
 }
 .text-right {
    text-align: center;
@@ -782,12 +786,18 @@ h2.step.step-2-top:before{
     margin-top: 50%;
 }
 .top-spac{
-    margin-left: 84px;
+    text-align: center;
+    margin-left: 75px;
     padding-top: 33px;
     margin-top: 0px !important;
 }
+.nobold{
+    margin-left: 10px;
+    padding-top: 50px;
+    text-align: center;
+}
 .newsletter-mb{
-    margin-left: 82px;
+    margin-left: 50px;
     margin-top: 23px;
 }
 .newsletter button {

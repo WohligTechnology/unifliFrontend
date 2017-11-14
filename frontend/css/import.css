@@ -18,8 +18,6 @@
 @import url(../../node_modules/mapbox-gl/dist/mapbox-gl.css);
 @import url(../../bower_components/mapbox.js/mapbox.css);
 @import url(../../node_modules/leaflet-draw/dist/leaflet.draw.css);
-@import url("https://fonts.googleapis.com/css?family=Share+Tech");
-@import url("https://fonts.googleapis.com/css?family=Abel");
 @font-face {
   font-family: 'flexslider-icon';
   src: url("fonts/flexslider-icon.eot");
@@ -9290,15 +9288,17 @@ button.close {
   src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
 @font-face {
-  font-family: 'Abel', sans-serif;
-  src: url("../fonts/Abel-Regular.ttf"); }
+  font-family: 'Abel-Regular';
+  src: url("../fonts/Abel-Regular.eot");
+  src: url("../fonts/Abel-Regular.ttf"), url("../fonts/Abel-Regular.woff2") format("woff2"), url("../fonts/Abel-Regular.woff") format("woff"), url("../fonts/Abel-Regular.eot?#iefix") format("embedded-opentype"); }
 
 @font-face {
-  font-family: 'Share Tech', sans-serif;
-  src: url("../fonts/ShareTech-Regular.ttf"); }
+  font-family: 'ShareTech-Regular';
+  src: url("../fonts/ShareTech-Regular.eot");
+  src: url("../fonts/ShareTech-Regular.ttf"), url("../fonts/ShareTech-Regular.woff2") format("woff2"), url("../fonts/ShareTech-Regular.woff") format("woff"), url("../fonts/ShareTech-Regular.eot?#iefix") format("embedded-opentype"); }
 
 body {
-  font-family: 'Abel', sans-serif; }
+  font-family: 'Abel-Regular'; }
 
 h1,
 h2,
@@ -9306,7 +9306,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Share Tech', sans-serif;
+  font-family: 'ShareTech-Regular', sans-serif;
   color: #04423b; }
 
 h1 {
@@ -9327,7 +9327,7 @@ h4 {
 p,
 li,
 span {
-  font-family: 'Abel', sans-serif;
+  font-family: 'Abel-Regular';
   font-size: 16px;
   font-weight: 400;
   color: #04423b; }
@@ -9532,7 +9532,7 @@ a,
   display: block;
   font-size: 30px;
   color: #0B705C;
-  font-family: share tech; }
+  font-family: ShareTech-Regular; }
   .header-btn:hover {
     color: #fff; }
 
@@ -9776,14 +9776,14 @@ a,
   margin-top: 15px; }
 
 .sep-22 {
-  font-family: abel !important;
+  font-family: 'Abel-Regular';
   color: #5aaba4;
   margin: 0;
   font-weight: bold; }
 
 .august {
   color: #5aaba4;
-  font-family: share tech; }
+  font-family: ShareTech-Regular; }
 
 .h35 {
   min-height: 50px; }
@@ -9899,7 +9899,7 @@ a,
   background: #4b8381;
   padding: 0px 20px;
   margin: 0;
-  font-family: share tech;
+  font-family: ShareTech-Regular;
   display: inline-block; }
 
 .w-50 {
@@ -10044,7 +10044,7 @@ h2.step.step-2-top:before {
   font-weight: 700; }
 
 .btn-become {
-  font-family: share tech;
+  font-family: ShareTech-Regular;
   padding: 3px 58px;
   color: #04423b;
   font-size: 28px;
@@ -10110,7 +10110,7 @@ h2.step.step-2-top:before {
 .member-input {
   border: none;
   border-bottom: 2px solid rgba(5, 77, 73, 0.5);
-  font-family: share tech;
+  font-family: ShareTech-Regular;
   padding-top: 15px;
   width: 100%;
   padding-left: 6px; }
@@ -10210,7 +10210,7 @@ h2.step.step-2-top:before {
 .mycart-content .table > thead > tr > th {
   font-size: 28px;
   color: white;
-  font-family: share tech;
+  font-family: ShareTech-Regular;
   text-align: center;
   font-weight: 400;
   padding: 20px 0 !important;
@@ -10391,7 +10391,7 @@ h2.step.step-2-top:before {
 
 .drone-heading {
   margin: 0;
-  font-family: 'Share Tech', sans-serif; }
+  font-family: 'ShareTech-Regular', sans-serif; }
 
 .bg-support-dfm {
   background: url("../img/support.jpg");
@@ -10422,7 +10422,7 @@ h2.step.step-2-top:before {
   display: inline-block; }
 
 .li-family {
-  font-family: 'share tech', sans-serif !important; }
+  font-family: 'ShareTech-Regular', sans-serif !important; }
 
 .p-78 {
   padding: 0 78px; }
@@ -10500,7 +10500,7 @@ footer {
   footer a {
     color: #74ada9;
     font-size: 16px;
-    font-family: 'Abel', sans-serif;
+    font-family: 'Abel-Regular';
     text-decoration: none;
     font-weight: 400; }
   footer a:hover {
@@ -10535,7 +10535,7 @@ footer {
 
 .member-input2 {
   border: 2px solid rgba(5, 77, 73, 0.5);
-  font-family: share tech;
+  font-family: ShareTech-Regular;
   padding-top: 10px;
   width: 100%;
   padding-left: 6px; }
@@ -10893,7 +10893,7 @@ footer {
 
 .whitey {
   color: #fff !important;
-  font-family: abel;
+  font-family: 'Abel-Regular';
   font-weight: 700; }
 
 .product-type {
@@ -11300,14 +11300,14 @@ footer {
 .newsletter2 {
   background-color: #5fb8ae;
   width: 68%;
-  font-family: abel;
+  font-family: 'Abel-Regular';
   height: 36px; }
 
 .newsletter {
   margin: 88px 0; }
   .newsletter label {
     display: block;
-    font-family: 'Abel', sans-serif;
+    font-family: 'Abel-Regular', sans-serif;
     font-weight: 400;
     color: #0B5345;
     font-size: 20px; }
@@ -11323,7 +11323,7 @@ footer {
   .newsletter button {
     background-color: #5fb8ae;
     width: 20%;
-    font-family: abel;
+    font-family: 'Abel-Regular';
     padding: 8px !important; }
 
 .droning {
@@ -11341,7 +11341,7 @@ footer {
 
 .thanku p {
   display: block;
-  font-family: 'Abel', sans-serif;
+  font-family: 'Abel-Regular', sans-serif;
   font-weight: 400;
   color: #0B5345;
   font-size: 20px;
@@ -11481,7 +11481,7 @@ footer {
 
 .address h4 {
   font-weight: 400 !important;
-  font-family: abel !important; }
+  font-family: 'Abel-Regular' !important; }
 
 .proceed-button {
   float: right;
@@ -11613,7 +11613,7 @@ footer {
   .mb-top {
     margin-top: 20px; }
   .ipad-top {
-    margin-top: -30px; }
+    margin-top: -55px; }
   .service-drone {
     padding: 40px 0px; }
   .support-heading {
@@ -11638,8 +11638,17 @@ footer {
     margin-top: -10px; } }
 
 @media (max-width: 767px) {
+  .rem-bmargin {
+    margin-bottom: 0px; }
+  .rem-tmargin {
+    margin-top: 0px; }
+  .rem-member-col {
+    margin-top: 10px; }
   .mt10 {
-    margin-top: 28px; }
+    margin-top: 28px;
+    font-size: 16px; }
+  .uav-text h4 {
+    text-align: center; }
   .p-120 {
     padding: 0 !important; }
   .scott,
@@ -11700,12 +11709,15 @@ footer {
     float: none !important;
     text-align: center; }
   .footer p {
-    padding: 12px 0; }
+    padding: 5px; }
+  .footer .icon {
+    padding: 0;
+    font-size: 20px; }
   .footer span {
     color: #74ada9;
     font-size: 10px; }
   .footer .privacy {
-    margin-left: 70px; }
+    text-align: center; }
   .btn-header {
     margin: 0;
     margin-top: 20px; }
@@ -11826,9 +11838,13 @@ footer {
     display: none; }
   h2.step.step-2-top:before {
     display: none; }
+  .w-60 {
+    width: 65%; }
   .w-50 {
     width: 65%;
     margin-top: 17px; }
+  .space-right {
+    margin-right: 10px; }
   .mb-top {
     margin-top: 25px; }
   .step3-mar {
@@ -11836,11 +11852,11 @@ footer {
     padding-top: 85px; }
   .work-container {
     background: white;
-    padding: 18px 47px 0px 28px;
+    padding: 0;
     margin-top: 25px; }
   .worklogo {
     width: 100%;
-    padding: 7px 52px 0 70px; }
+    padding: 0; }
   .support-heading2 {
     padding-top: 35%; }
   .service-content {
@@ -11868,6 +11884,8 @@ footer {
     font-size: 46px !important; }
   .sec-4 {
     min-height: 0px !important; }
+  .inquire-btn button {
+    text-align: center; }
   .fc-img {
     margin-top: -28px; }
   .thumbs {
@@ -11894,7 +11912,7 @@ footer {
     padding-left: 20px;
     text-align: center; }
   .button {
-    width: 35%; }
+    width: 45%; }
   .text-right {
     text-align: center; }
   .text-left {
@@ -11903,11 +11921,16 @@ footer {
   .contact {
     margin-top: 50%; }
   .top-spac {
-    margin-left: 84px;
+    text-align: center;
+    margin-left: 75px;
     padding-top: 33px;
     margin-top: 0px !important; }
+  .nobold {
+    margin-left: 10px;
+    padding-top: 50px;
+    text-align: center; }
   .newsletter-mb {
-    margin-left: 82px;
+    margin-left: 50px;
     margin-top: 23px; }
   .newsletter button {
     width: 25%; }
