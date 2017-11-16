@@ -2,7 +2,27 @@
 @media (max-width: $screen-md-max) {}
 
 @media (max-width: $screen-sm-max) {
-         
+ 
+.feature-min{
+    padding: 20px 0;
+}      
+.pad-overall{
+    button{
+        width: 30%;
+    }
+}  
+.uav-text{
+    h4{
+        text-align: center;
+    }
+}
+.member-col{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.w-60{
+    width: 40%;
+}
         //  home start
 // .mtop-member2{
 //         padding-top: 54%;
@@ -18,8 +38,8 @@
      padding-top: 36% !important;
 
 }
-        .slide-down {
-    margin-top: 14% !important;
+.slide-down {
+    margin-top: 20% !important;
 }
 
 .line-after:after {
@@ -280,6 +300,7 @@ h2.step.step-2-top:before{
 
 
 @media (max-width: $screen-xs-max) {
+
 .rem-bmargin{
     margin-bottom: 0px;
 }
@@ -700,7 +721,7 @@ h2.step.step-2-top:before{
     width: 90px ;
 }
 .slide-down {
-    margin-top: 25% !important;
+    margin-top: 30% !important;
 }
 .p-minheight{
         min-height: 165px;
@@ -725,8 +746,9 @@ h2.step.step-2-top:before{
     min-height: 0px !important;
 }
 .inquire-btn{
+    text-align: center;
     button{
-        text-align: center;
+        width: 75%;
     }
 }
 
@@ -755,6 +777,12 @@ h2.step.step-2-top:before{
 .newsletter{
     margin: 0 0px;
 }
+.top-spacing{
+    padding-top: 35px;
+    .read{
+        width: 60%;
+    }
+}
 .top-spacings {
     // padding-top: 32px;
     padding-top: 0px;
@@ -778,8 +806,7 @@ h2.step.step-2-top:before{
 }
 .text-left{
 
-        margin-right: 137px;
-    text-align: center;
+        margin-right: 30px;
 }
 
 .contact {
@@ -838,7 +865,7 @@ display: none;
     margin-top: 0px;
 }
 .space-top{
-        padding-top: 148px !important;
+        padding-top: 100px !important;
     // margin-top: -25px !important;
 }
 .support-img img {

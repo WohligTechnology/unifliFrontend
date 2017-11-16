@@ -11488,6 +11488,17 @@ footer {
   margin-right: 15px; }
 
 @media (max-width: 991px) {
+  .feature-min {
+    padding: 20px 0; }
+  .pad-overall button {
+    width: 30%; }
+  .uav-text h4 {
+    text-align: center; }
+  .member-col {
+    margin-top: 0;
+    margin-bottom: 0; }
+  .w-60 {
+    width: 40%; }
   .support-heading {
     padding-top: 33%; }
   .support-heading2 {
@@ -11495,7 +11506,7 @@ footer {
   .mtop-member2 {
     padding-top: 36% !important; }
   .slide-down {
-    margin-top: 14% !important; }
+    margin-top: 20% !important; }
   .line-after:after {
     content: "";
     width: 28%;
@@ -11871,7 +11882,7 @@ footer {
   .makeActive-service .active p:before {
     width: 90px; }
   .slide-down {
-    margin-top: 25% !important; }
+    margin-top: 30% !important; }
   .p-minheight {
     min-height: 165px; }
   .bg-support-dfm {
@@ -11884,8 +11895,10 @@ footer {
     font-size: 46px !important; }
   .sec-4 {
     min-height: 0px !important; }
-  .inquire-btn button {
+  .inquire-btn {
     text-align: center; }
+    .inquire-btn button {
+      width: 75%; }
   .fc-img {
     margin-top: -28px; }
   .thumbs {
@@ -11901,6 +11914,10 @@ footer {
     margin-top: -60px; }
   .newsletter {
     margin: 0 0px; }
+  .top-spacing {
+    padding-top: 35px; }
+    .top-spacing .read {
+      width: 60%; }
   .top-spacings {
     padding-top: 0px;
     margin-top: -25px; }
@@ -11916,8 +11933,7 @@ footer {
   .text-right {
     text-align: center; }
   .text-left {
-    margin-right: 137px;
-    text-align: center; }
+    margin-right: 30px; }
   .contact {
     margin-top: 50%; }
   .top-spac {
@@ -11956,7 +11972,7 @@ footer {
   .top-padd {
     margin-top: 0px; }
   .space-top {
-    padding-top: 148px !important; }
+    padding-top: 100px !important; }
   .support-img img {
     margin: 50px auto; }
   .fc-img h2:before {
