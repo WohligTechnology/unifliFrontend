@@ -1964,6 +1964,12 @@ footer {
     text-indent: 0;
 }
 
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit {
+    background-position: -197px -1px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
+    background-position: -226px -2px;
+}
 ///end of map///
 @import "fancybox-override";
 @import "ruchi";

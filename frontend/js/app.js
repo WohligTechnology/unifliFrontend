@@ -440,7 +440,7 @@ firstapp.directive('mapBox', function ($http, $filter,  $rootScope, $uibModal) {
                     acres = LGeo.area(e.layer) * 0.0002471054;
                     console.log("acres--", Number(acres).toFixed(2));
                   
-                    answer.innerHTML = '<p><strong>' +  Number(acres).toFixed(2)+ '</strong></p><p>square meters</p>';
+                    answer.innerHTML = '<p><strong>' +  Number(acres).toFixed(2)+ '</strong> square meters</p>';
                 } else {
                     answer.innerHTML = '';
                     if (e.type !== 'draw.delete') alert("Use the draw tools to draw a polygon!");
