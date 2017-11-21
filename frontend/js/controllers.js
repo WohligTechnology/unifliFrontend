@@ -1631,7 +1631,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.blogShow = false;
                     $scope.blogDetail = {
                         "image": "img/new/58.jpg",
-                        "title": "THIS ONE STOP SHOP IS THE SOLUTION<br> TO ALL YOUR DRONE SURVEYING PROBLEMS!",
+                        "title": "THIS ONE STOP SHOP IS THE SOLUTION TO ALL YOUR DRONE SURVEYING PROBLEMS!",
 
                         "desc1": "The World of land surveying has changed, and how!",
                         "desc2": "Thanks to newer and more efficient technologies like drones and data capturing, it's much easier land and collate, analyze and curate data in highly effective ways like never before.",
@@ -1646,7 +1646,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.blogShow = true;
                     $scope.blogDetail = [{
                             "image": "img/new/copy.jpg",
-                            "title": "HOW PART 107 IS PAYING THE WAY<br>FOR COMMERCIAL DRONE OPERTORS",
+                            "title": "HOW PART 107 IS PAYING THE WAY FOR COMMERCIAL DRONE OPERTORS",
                             "title2": "For Starters, What’s Part 107?",
                             "title3": "What Does Part 107 Cover?",
                             // "date":"September 22,",
@@ -1659,7 +1659,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             "desc6": "It reduces the restrictions on commercial drone pilots, making it easy for enthusiasts and beginners to get started with becoming expert drone operators.",
                             "desc7": "Let’s get down to the specifics of what Part 107 covers.",
                             "desc8": "It’s easier to be an operator now",
-                            "desc9": "Operators and drone pilots need to be at least 16 years of age, and should be proficient in English. They need to obtain a Remote Pilot Airman Certificate<br> (with sUAS rating) to validate that they’re mentally and physically capable of operating the drone. "
+                            "desc9": "Operators and drone pilots need to be at least 16 years of age, and should be proficient in English. They need to obtain a Remote Pilot Airman Certificate (with sUAS rating) to validate that they’re mentally and physically capable of operating the drone. "
 
                         }, {
                             "image": "img/new/10.jpg",
@@ -1670,12 +1670,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             "desc3": "Any unmanned aerial vehicle or drone must be registered with the FAA, with aircraft markings in place. FAA has removed the need for an airworthiness certificate, making it easier and simpler for pilots and operators to register their UAVs.",
                             "desc4": "The sUAS needs a waiver if it weights more than 55 lbs.",
                             "desc5": "There are clearly defined operational guidelines under Part 107, making it easier for pilots to understand their limitations and avoid damage to their equipment or injury.",
-                            "desc6": "- All operators need to maintain their sUAS and UAVs within their visual line of sight- Aircraft should be operated only during daylight hours<br>- UAVs and sUAS should not be operated over people not involved in the exercise<br>- Operations should be held within a maximum allowed altitude of 400 feet<br>- Air speed should not exceed a maximum of 100mph<br>- All aircraft must yield right of way to other manned or unmanned vehicles<br>- Any activities in Class A airspace is strictly forbidden<br>- With prior approval from ATC, operations in Class B, C, D, E airspaces will be allowed<br>- Visual observers aren’t mandatorily required",
+                            "desc6": "- All operators need to maintain their sUAS and UAVs within their visual line of sight- Aircraft should be operated only during daylight hours - UAVs and sUAS should not be operated over people not involved in the exercise- Operations should be held within a maximum allowed altitude of 400 feet- Air speed should not exceed a maximum of 100mph- All aircraft must yield right of way to other manned or unmanned vehicles- Any activities in Class A airspace is strictly forbidden- With prior approval from ATC, operations in Class B, C, D, E airspaces will be allowed- Visual observers aren’t mandatorily required",
                             "desc7": "This officially paves the way for exciting applications across multiple industries, increasing the scope of drone usages in the coming future. ",
                         }, {
                             "image": "img/new/img.jpg",
                             "title6": "Here's the good part.",
-                            "desc1": "- Operators need not file a NOTAM(Notice to Aiemen)befire commencing work<br>- Liability insurance isn't mandatory for carrying out operations<br>- The extensive license process has been replaced with a simple FAA aeronautical test<br>- The regulations make crisis management and industrial inspection easier<br>- Part 107 allows drones to carry loads that don't cross 55 ibs overall (BIG NEWS!)<br>- The regulations make drone accessible to a bigger audience, for educational purpose   ",
+                            "desc1": "- Operators need not file a NOTAM(Notice to Aiemen)befire commencing work- Liability insurance isn't mandatory for carrying out operations- The extensive license process has been replaced with a simple FAA aeronautical test- The regulations make crisis management and industrial inspection easier- Part 107 allows drones to carry loads that don't cross 55 ibs overall (BIG NEWS!)- The regulations make drone accessible to a bigger audience, for educational purpose   ",
                             "desc2": "This is the first step towards a new technological revolution, one that holds limitless scope for applications accorss different verticals and industries.",
                             "desc3": "Really, if you've always wanted to be a professional drone operator, now's the time.",
                             "desc4": "Here’s a link that comprehensively covers the specifics of what you need to know. "

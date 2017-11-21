@@ -2,7 +2,27 @@
 @media (max-width: $screen-md-max) {}
 
 @media (max-width: $screen-sm-max) {
-         
+ 
+.feature-min{
+    padding: 20px 0;
+}      
+.pad-overall{
+    button{
+        width: 30%;
+    }
+}  
+.uav-text{
+    h4{
+        text-align: center;
+    }
+}
+.member-col{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.w-60{
+    width: 40%;
+}
         //  home start
 // .mtop-member2{
 //         padding-top: 54%;
@@ -18,8 +38,8 @@
      padding-top: 36% !important;
 
 }
-        .slide-down {
-    margin-top: 14% !important;
+.slide-down {
+    margin-top: 20% !important;
 }
 
 .line-after:after {
@@ -237,7 +257,7 @@ h2.step.step-2-top:before{
     margin-top: 20px;
 }
 .ipad-top{
-    margin-top: -30px;
+    margin-top: -55px;
 }
 .service-drone {
      padding: 40px 0px; 
@@ -281,9 +301,24 @@ h2.step.step-2-top:before{
 
 @media (max-width: $screen-xs-max) {
 
-
+.rem-bmargin{
+    margin-bottom: 0px;
+}
+.rem-tmargin{
+    margin-top: 0px;
+}
+.rem-member-col{
+    margin-top: 10px;
+}
 .mt10 {
     margin-top: 28px;
+    font-size: 16px;
+}
+.uav-text{
+    h4{
+        text-align: center;
+
+    }
 }
     // about.html changes
     .p-120 {
@@ -382,14 +417,18 @@ h2.step.step-2-top:before{
             text-align: center;
         }
         p {
-            padding: 12px 0;
+            padding: 5px;
+        }
+        .icon{
+padding: 0;
+font-size: 20px;
         }
         span{
       color: #74ada9;
       font-size: 10px;
  }
  .privacy{
-     margin-left: 70px;
+     text-align: center;
  }
     }
     //footer
@@ -630,10 +669,15 @@ h2.step.step-top:before{
 h2.step.step-2-top:before{
     display: none;
 }
-
+.w-60{
+    width: 65%;
+}
 .w-50 {
     width: 65%;
     margin-top: 17px;
+}
+.space-right{
+    margin-right: 10px;
 }
 .mb-top{
         margin-top: 25px;
@@ -645,12 +689,12 @@ h2.step.step-2-top:before{
 
 .work-container {
     background: white;
-    padding: 18px 47px 0px 28px;
+    padding: 0;
     margin-top: 25px;
 }
 .worklogo {
     width: 100%;
-    padding: 7px 52px 0 70px;
+    padding: 0;
 }
 .support-heading2 {
     padding-top: 35%;
@@ -677,7 +721,7 @@ h2.step.step-2-top:before{
     width: 90px ;
 }
 .slide-down {
-    margin-top: 25% !important;
+    margin-top: 30% !important;
 }
 .p-minheight{
         min-height: 165px;
@@ -701,7 +745,12 @@ h2.step.step-2-top:before{
     // min-height: 0px !important;
     min-height: 0px !important;
 }
-
+.inquire-btn{
+    text-align: center;
+    button{
+        width: 75%;
+    }
+}
 
 .fc-img {
     margin-top: -28px;
@@ -728,6 +777,12 @@ h2.step.step-2-top:before{
 .newsletter{
     margin: 0 0px;
 }
+.top-spacing{
+    padding-top: 35px;
+    .read{
+        width: 60%;
+    }
+}
 .top-spacings {
     // padding-top: 32px;
     padding-top: 0px;
@@ -744,27 +799,32 @@ h2.step.step-2-top:before{
     text-align: center
 }
 .button {
-    width: 35%;
+    width: 45%;
 }
 .text-right {
    text-align: center;
 }
 .text-left{
 
-        margin-right: 137px;
-    text-align: center;
+        margin-right: 30px;
 }
 
 .contact {
     margin-top: 50%;
 }
 .top-spac{
-    margin-left: 84px;
+    text-align: center;
+    margin-left: 75px;
     padding-top: 33px;
     margin-top: 0px !important;
 }
+.nobold{
+    margin-left: 10px;
+    padding-top: 50px;
+    text-align: center;
+}
 .newsletter-mb{
-    margin-left: 82px;
+    margin-left: 50px;
     margin-top: 23px;
 }
 .newsletter button {
@@ -805,7 +865,7 @@ display: none;
     margin-top: 0px;
 }
 .space-top{
-        padding-top: 148px !important;
+        padding-top: 100px !important;
     // margin-top: -25px !important;
 }
 .support-img img {
@@ -820,7 +880,12 @@ display: none;
 // .load2 {
 //     width: 12% !important;
 // }
-
+.blog-img-1 {
+   width: 300px;
+   img{
+       width: 100%;
+   }
+}
 .read {
     width: 33%;
 }
