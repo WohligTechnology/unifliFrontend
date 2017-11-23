@@ -246,8 +246,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.submitForm = function () {
             if ($.jStorage.get('user')) {
                 userId = $.jStorage.get('user')._id;
-                window.location = "http://localhost:1337/#/login1/" + userId;
-                // window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                // window.location = "http://localhost:1337/#/login1/" + userId;
+                window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
             }
         }
     })
