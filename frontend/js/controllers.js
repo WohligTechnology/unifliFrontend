@@ -243,8 +243,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.formSubmitted = false;
 
-        $scope.submitForm = function (data) {
-            $scope.formSubmitted = true;
+        $scope.submitForm = function () {
+            if ($.jStorage.get('user')) {
+                userId = $.jStorage.get('user')._id;
+                window.location = "http://localhost:1337/#/login1/" + userId;
+                // window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+            }
         }
     })
     .controller('SorryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
