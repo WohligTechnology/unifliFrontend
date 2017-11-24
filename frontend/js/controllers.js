@@ -281,8 +281,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
 
-
-    .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr) {
+   .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr) {
         $scope.template = TemplateService.changecontent("product"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Product"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -320,16 +319,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             price: '39498'
         }];
         $scope.addToCartProduct = function (data) {
-            if ($.jStorage.get('user')) {
+            console.log("addToCartProduct",data)
+            if ($.jStorage.get('user')){
                 var formdata = {};
                 formdata = $.jStorage.get('user')
-                _.forEach(formdata.cartProducts, function (n) {
-                    if (n == $scope.productList[data - 1].id) {
-                        isExist = true;
-                    } else {
-                        isExist = false;
-                    }
-                })
+                // _.forEach(formdata.cartProducts, function (n) {
+                // console.log("formdata.cartProducts",n)
+                //  console.log("$scope.productList[data - 1].id",$scope.productList[data - 1].id)
+                //     if (n == $scope.productList[data - 1].id) {
+                //         console.log("inside if")
+                //         isExist = true;
+                //     } else {
+                //         console.log("inside else")
+                        
+                //         isExist = false;
+                //     }
+                // })
+                isExist=false;
+                console.log("formdata.cartProducts.length",formdata.cartProducts.length)
+                for(i=0;i<=2 && isExist==false;i++){
+                    if($scope.productList[data - 1].id==formdata.cartProducts[i]){
+                        console.log("inside if")
+                        isExist=true
+                        }else{
+                        console.log("inside else")
+                        
+                            isExist=false
+                         }
+
+                }
                 if (!isExist) {
                     formdata.cartProducts.push($scope.productList[data - 1].id);
                     if (formdata.cart) {
@@ -359,10 +377,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 } else {
                     toastr.error('Product already exist');
                 }
-            } else {
+            }else{
                 $state.go("member");
             }
-
+           
         }
 
         $scope.tabchange = function (tab, a) {
@@ -388,6 +406,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             }
         };
     })
+
 
     .controller('AboutCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("about"); //Use same name of .html file
