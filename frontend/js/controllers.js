@@ -281,7 +281,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
 
-   .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr) {
+    .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr) {
         $scope.template = TemplateService.changecontent("product"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Product"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -319,8 +319,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             price: '39498'
         }];
         $scope.addToCartProduct = function (data) {
-            console.log("addToCartProduct",data)
-            if ($.jStorage.get('user')){
+            console.log("addToCartProduct", data)
+            if ($.jStorage.get('user')) {
                 var formdata = {};
                 formdata = $.jStorage.get('user')
                 // _.forEach(formdata.cartProducts, function (n) {
@@ -331,21 +331,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 //         isExist = true;
                 //     } else {
                 //         console.log("inside else")
-                        
+
                 //         isExist = false;
                 //     }
                 // })
-                isExist=false;
-                console.log("formdata.cartProducts.length",formdata.cartProducts.length)
-                for(i=0;i<=2 && isExist==false;i++){
-                    if($scope.productList[data - 1].id==formdata.cartProducts[i]){
+                isExist = false;
+                console.log("formdata.cartProducts.length", formdata.cartProducts.length)
+                for (i = 0; i <= 2 && isExist == false; i++) {
+                    if ($scope.productList[data - 1].id == formdata.cartProducts[i]) {
                         console.log("inside if")
-                        isExist=true
-                        }else{
+                        isExist = true
+                    } else {
                         console.log("inside else")
-                        
-                            isExist=false
-                         }
+
+                        isExist = false
+                    }
 
                 }
                 if (!isExist) {
@@ -377,10 +377,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 } else {
                     toastr.error('Product already exist');
                 }
-            }else{
+            } else {
                 $state.go("member");
             }
-           
+
         }
 
         $scope.tabchange = function (tab, a) {
@@ -1309,7 +1309,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.saveData = function (data) {
-            if (data == undefined || data.name == "" && data.state == "") {
+            if (data.deliveryAddress == undefined || data.deliveryAddress.name == "" && data.deliveryAddress.state == "") {
                 toastr.warning("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
@@ -1323,16 +1323,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // });
                 console.log("inside savedata is", data);
                 $scope.deliveryAddress = {
-                    city: data.city,
-                    country: data.country,
-                    state: data.state,
-                    zip: data.zip
+                    city: data.deliveryAddress.city,
+                    country: data.deliveryAddress.country,
+                    state: data.deliveryAddress.state,
+                    zip: data.deliveryAddress.zip
                 }
-                data.shippingAddress = $scope.deliveryAddress
+                $scope.billingAddress = {
+                        city: data.address.city,
+                        zip: data.address.zip,
+                        state: data.address.state,
+                        country: data.address.country
+                    },
+                    data.shippingAddress = $scope.deliveryAddress
+                data.billingAddress = $scope.deliveryAddress
+                console.log("final data is", data)
                 formdata = {};
                 formdata.user = $.jStorage.get("user")._id;
                 data.user = formdata.user
-
+                // delete data.address;
+                // delete data.deliveryAddress;
+                console.log("final data is***************************", data)
                 if ($stateParams.id) { //for package
                     $scope.id = $stateParams.id;
                     $scope.amount = $scope.dfmData[$scope.id].amount;
