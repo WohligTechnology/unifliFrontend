@@ -1322,17 +1322,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
                 // });
                 console.log("inside savedata is", data);
-                $scope.deliveryAddress = {
+               $scope.deliveryAddress = {
                     city: data.deliveryAddress.city,
                     country: data.deliveryAddress.country,
                     state: data.deliveryAddress.state,
-                    zip: data.deliveryAddress.zip
+                    zip: data.deliveryAddress.zip,
+                    address:data.deliveryAddress.apartment
                 }
                 $scope.billingAddress = {
                         city: data.address.city,
                         zip: data.address.zip,
                         state: data.address.state,
-                        country: data.address.country
+                        country: data.address.country,
+                        address:data.address.apartment
                     },
                     data.shippingAddress = $scope.deliveryAddress
                 data.billingAddress = $scope.deliveryAddress
