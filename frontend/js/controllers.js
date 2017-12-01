@@ -1321,7 +1321,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 //     // windowClass: "login-modal"
 
                 // });
-                      $scope.deliveryAddress = {
+                $scope.deliveryAddress = {
                     city: data.deliveryAddress.city,
                     country: data.deliveryAddress.country,
                     state: data.deliveryAddress.state,
@@ -1331,7 +1331,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     lname: data.deliveryAddress.lname,
                     comapny: data.deliveryAddress.oraganization,
                     phonenumber: data.deliveryAddress.phonenumber,
-                    streetAddress:data.deliveryAddress.address
+                    streetAddress: data.deliveryAddress.address
                 }
                 $scope.billingAddress = {
                         city: data.address.city,
@@ -1340,10 +1340,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         country: data.address.country,
                         address: data.address.apartment,
                         fname: data.address.name,
-                    lname: data.address.lname,
-                    comapny: data.address.oraganization,
-                    phonenumber: data.address.phonenumber,
-                     streetAddress:data.address.address1
+                        lname: data.address.lname,
+                        comapny: data.address.oraganization,
+                        phonenumber: data.address.phonenumber,
+                        streetAddress: data.address.address1
                     },
                     data.shippingAddress = $scope.deliveryAddress
                 data.billingAddress = $scope.billingAddress
@@ -1366,6 +1366,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         if (dfm.data._id) {
                             data.dfmSubscription = dfm.data._id;
                             var dfmId = dfm.data._id;
+                            data.totalAmount = $scope.amount;
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 $scope.Id = data1.data._id;
                                 invoiceNumber = data1.data.invoiceNo;
@@ -1386,6 +1387,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     forProduct._id = $.jStorage.get("user")._id;
                     NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
                         data.products = data1.data.cartProducts;
+                        data.totalAmount = data1.data.cart.totalAmount;
                         if (data1.data.cartProducts) {
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 if (data1.value == true) {
