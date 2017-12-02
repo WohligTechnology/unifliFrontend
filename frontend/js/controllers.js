@@ -255,7 +255,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
                     $.jStorage.set("user", data.data);
-                    checkUser1();
                 }
             });
                 // window.location = "http://localhost:1337/#/login1/" + userId;
