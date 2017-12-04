@@ -247,20 +247,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if ($.jStorage.get('user')) {
                 userId = $.jStorage.get('user')._id;
                 $scope.userID = {
-                _id:  $.jStorage.get('user')._id
-            };
-            console.log("userId", $scope.userID)
-            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
-                if (data.value == true) {
-                    $scope.user = data;
-                    console.log("jstorage data is", $scope.user)
-                    $.jStorage.set("user", data.data);
-                       window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
-                }
-              
-            });
+                    _id: $.jStorage.get('user')._id
+                };
+                console.log("userId", $scope.userID)
+                NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                    if (data.value == true) {
+                        $scope.user = data;
+                        console.log("jstorage data is", $scope.user)
+                        $.jStorage.set("user", data.data);
+                        window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                    }
+
+                });
                 // window.location = "http://localhost:1337/#/login1/" + userId;
-               
+
             }
         }
     })
@@ -336,40 +336,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if ($.jStorage.get('user')) {
                 var formdata = {};
                 formdata = $.jStorage.get('user')
-                // _.forEach(formdata.cartProducts, function (n) {
-                // console.log("formdata.cartProducts",n)
-                //  console.log("$scope.productList[data - 1].id",$scope.productList[data - 1].id)
-                //     if (n == $scope.productList[data - 1].id) {
-                //         console.log("inside if")
-                //         isExist = true;
-                //     } else {
-                //         console.log("inside else")
-
-                //         isExist = false;
-                //     }
-                // })
                 isExist = false;
-                console.log("formdata.cartProducts.length", formdata.cartProducts.length)
-                for (i = 0; i <= 2 && isExist == false; i++) {
-                    if ($scope.productList[data - 1].id == formdata.cartProducts[i]) {
-                        console.log("inside if")
-                        isExist = true
-                    } else {
-                        console.log("inside else")
-
-                        isExist = false
+                if (formdata.cartProducts.length != 0) {
+                    console.log("formdata.cartProducts.length", formdata.cartProducts)
+                    for (i = 0; i < formdata.cartProducts.length && isExist == false; i++) {
+                        if ($scope.productList[data - 1].id == formdata.cartProducts[i].product) {
+                            console.log("inside if")
+                            isExist = true
+                        } else {
+                            console.log("inside else")
+                            isExist = false
+                        }
                     }
+                } else {
+                    isExist = false
 
                 }
+
+
                 if (!isExist) {
-                    formdata.cartProducts.push($scope.productList[data - 1].id);
+                    var arrData = {};
+                    arrData.product = $scope.productList[data - 1].id;
+                    arrData.qty = 1;
+                    formdata.cartProducts.push(arrData);
                     if (formdata.cart) {
                         formdata.cart.totalAmount = Number(formdata.cart.totalAmount) + Number($scope.productList[data - 1].price);
                     } else {
                         formdata.cart = {};
                         formdata.cart.totalAmount = Number($scope.productList[data - 1].price);
                     }
-                    NavigationService.apiCallWithData("User/save", formdata, function (data) {
+                    console.log("formdata", formdata);
+
+                    NavigationService.apiCallWithData("User/save", _.cloneDeep(formdata), function (data) {
                         if (data.value === true) {
                             NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
                                 if (data.value === true) {
@@ -388,6 +386,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         }
                     });
                 } else {
+                    console.log("inside isExist else part")
+
                     toastr.error('Product already exist');
                 }
             } else {
@@ -750,26 +750,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         var formdata = {};
         $scope.myCart = {}
         formdata._id = $.jStorage.get('user')._id;
+        $scope.totalAMoutIs = 0;
         NavigationService.apiCallWithData("User/getcart", formdata, function (data) {
             if (data.value === true) {
                 // console.log("data saved successfully", data)
                 $scope.myCart = data.data;
-                //  $state.go('mycart');
+                 $scope.totalAMoutIs = 0;
+                console.log(" $scope.myCart", $scope.myCart);
+                _.forEach($scope.myCart.cartProducts, function (n) {
+                    console.log("n", n)
+                       $scope.totalAMoutIs += (n.product.price * n.qty);
+                        console.log("$scope.totalAMoutIs", $scope.totalAMoutIs)
+                
+                });
             }
         });
+        $scope.total = 0
+           console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
         $scope.addQuantity = function (data) {
-            $scope.myCart.cartProducts[data].quantity++;
-            // console.log("myCart.cartProducts", $scope.myCart.cartProducts[data]);
+             console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
+            
+            $scope.myCart.cartProducts[data].qty++;
+           var priceis=$scope.myCart.cartProducts[data].product.price;
+          var qtyy=$scope.myCart.cartProducts[data].qty
+            console.log("myCart.cartProducts",  priceis);
+            console.log("$scope.myCart.cartProducts[data].qty",qtyy)
+              $scope.totalAMoutIs=$scope.totalAMoutIs+(priceis)
+             console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
+      
+
+
         }
         $scope.reduceQuantity = function (data) {
-            if ($scope.myCart.cartProducts[data].quantity > 1) {
-                $scope.myCart.cartProducts[data].quantity--;
+            console.log("data reduc qty",data)
+            if ($scope.myCart.cartProducts[data].qty > 1) {
+                $scope.myCart.cartProducts[data].qty--;
+                console.log(" $scope.myCart.cartProducts[data]", $scope.myCart.cartProducts[data])
+                           var priceis=$scope.myCart.cartProducts[data].product.price;
+          var qtyy=$scope.myCart.cartProducts[data].qty
+            console.log("myCart.cartProducts",  priceis);
+            console.log("$scope.myCart.cartProducts[data].qty",qtyy)
+              $scope.totalAMoutIs=$scope.totalAMoutIs-(priceis)
+             console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
             }
             // console.log("myCart.cartProducts", $scope.myCart.cartProducts[data])
         }
 
-        $scope.checkout = function (formdata) {
-            formdata.cart.totalAmount = $filter('sumFilter')(formdata.cartProducts)
+        $scope.checkout = function (formdata,data) {
+            console.log("data", formdata,data);
+            formdata.cart.totalAmount = data
+            formdata.cartProducts = $scope.myCart.cartProducts;
             NavigationService.apiCallWithData("User/save", formdata, function (data) {
                 if (data.value === true) {
                     NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
@@ -788,14 +818,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.removeCartProduct = function (data) {
+            console.log("inside removeCartProduct", data)
             var cartDetails = {};
             cartDetails = $.jStorage.get("user");
             var removedProduct = _.remove(cartDetails.cartProducts, function (n) {
-                return n == data;
+                console.log("nnnnnn", n.product)
+                return n._id == data;
             });
+            console.log("removedProduct", removedProduct)
             var cardDetailsData = {};
             cardDetailsData.cartProducts = cartDetails.cartProducts;
             cardDetailsData._id = $.jStorage.get("user")._id;
+            console.log("cardDetailsData", cardDetailsData)
             NavigationService.apiCallWithData("User/save", cardDetailsData, function (data) {
                 if (data.value === true) {
                     NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
@@ -1399,8 +1433,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     forProduct = {};
                     forProduct._id = $.jStorage.get("user")._id;
                     NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
+                        console.log("insdide shippingctrl",data1)
                         data.products = data1.data.cartProducts;
                         data.totalAmount = data1.data.cart.totalAmount;
+                        console.log("after insdide shippingctrl",data)
                         if (data1.data.cartProducts) {
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 if (data1.value == true) {

@@ -19,21 +19,21 @@
           <tbody>
             <tr class="mycart-row1" ng-repeat="cart in myCart.cartProducts">
               <td>{{$index+1}}</td>
-              <td ng-show="packOrProduct=='product'">{{cart.name}}</td>
+              <td ng-show="packOrProduct=='product'">{{cart.product.name}}</td>
               <td ng-show="packOrProduct=='package'">{{cart.package}}</td>
               <td class="qty-detail">
                 <i class="fa fa-minus-square" ng-click="reduceQuantity($index)" aria-hidden="true"></i>
-                <input class="form-control" type="text" ng-model="cart.quantity" ng-init="cart.quantity=1">
+                <input class="form-control" type="text" ng-model="cart.qty">
                 <i class="fa fa-plus-square" ng-click="addQuantity($index)" aria-hidden="true"></i>
               </td>
-              <td>${{cart.price}} </td>
-              <td>${{cart.price*cart.quantity}} <span class="delete-span"><i class="fa fa-trash" aria-hidden="true" ng-click="removeCartProduct(cart._id)"></i></span></td>
+              <td>${{cart.product.price}} </td>
+              <td>${{cart.product.price*cart.qty}} <span class="delete-span"><i class="fa fa-trash" aria-hidden="true" ng-click="removeCartProduct(cart._id)"></i></span></td>
             </tr>
           </tbody>
           <tfoot>
             <tr class="mycart-row1">
               <td class="total" colspan="4">Total Amount:</td>
-              <td class="text-center total">${{myCart.cartProducts | sumFilter}}</td>
+              <td class="text-center total">${{totalAMoutIs}}</td>
             </tr>
           </tfoot>
         </table>
@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-6">
           <div>
-            <button type="submit" class="btn btn-main btn-mycart float-r" ng-click="checkout(myCart)">Checkout</button>
+            <button type="submit" class="btn btn-main btn-mycart float-r" ng-click="checkout(myCart,totalAMoutIs)">Checkout</button>
           </div>
           <div>
             <!--<button type="submit" class="btn btn-main btn-back btn-mycart float-r">Back</button>-->
