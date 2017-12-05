@@ -733,7 +733,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.formSubmitted = true;
         }
     })
-    .controller('MycartCtrl', function ($scope, TemplateService, $filter, $state, NavigationService, $timeout, $stateParams) {
+    .controller('MycartCtrl', function ($scope, TemplateService, $filter, $state, NavigationService, $timeout, toastr, $stateParams) {
         $scope.template = TemplateService.changecontent("mycart"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Mycart"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -797,24 +797,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.checkout = function (formdata, data) {
-            console.log("data", formdata, data);
-            formdata.cart.totalAmount = data
-            formdata.cartProducts = $scope.myCart.cartProducts;
-            NavigationService.apiCallWithData("User/save", formdata, function (data) {
-                if (data.value === true) {
-                    NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
-                        if (data.value === true) {
-                            // console.log("data saved successfully", data)
-                            $.jStorage.set("user", data.data);
-                            $scope.template.userProfile = data.data;
-                            //  $state.go('mycart');
-                        }
-                    });
-                    $state.go('checkout');
-                } else {
-                    //  toastr.warning('Error submitting the form', 'Please try again');
-                }
-            });
+
+            console.log("data", data);
+            if (data == 0) {
+                toastr.error("No product available");
+
+            } else {
+                console.log("inside else part")
+                formdata.cart.totalAmount = data
+                formdata.cartProducts = $scope.myCart.cartProducts;
+                NavigationService.apiCallWithData("User/save", formdata, function (data) {
+                    if (data.value === true) {
+                        NavigationService.apiCallWithData("User/getOne", formdata, function (data) {
+                            if (data.value === true) {
+                                // console.log("data saved successfully", data)
+                                $.jStorage.set("user", data.data);
+                                $scope.template.userProfile = data.data;
+                                //  $state.go('mycart');
+                            }
+                        });
+                        $state.go('checkout');
+                    } else {
+                        //  toastr.warning('Error submitting the form', 'Please try again');
+                    }
+                });
+            }
+
         }
 
         $scope.removeCartProduct = function (data) {
@@ -1345,7 +1353,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.formData.address.phonenumber = data.data.mobile;
                     $scope.formData.address.oraganization = data.data.organization;
                     $scope.formData.address.country = data.data.country;
-                      $scope.formData.address.zip=data.data.zip;
+                    $scope.formData.address.zip = data.data.zip;
                 } else {
                     //  toastr.warning('Error submitting the form', 'Please try again');
                 }
@@ -1357,8 +1365,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.saveData = function (data, paymentType) {
-            if (data.deliveryAddress == undefined || data.deliveryAddress.name == "" && data.deliveryAddress.state == "") {
-                toastr.warning("Enter Shipping Details");
+            console.log("inside saveData",data)
+            if (data.deliveryAddress == undefined || data.deliveryAddress.name == "" && data.deliveryAddress.state == "" ) {
+                toastr.error("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
                 // $scope.cadModal = $uibModal.open({
@@ -1442,7 +1451,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 if (data1.value == true) {
                                     invoiceNumber = data1.data.invoiceNo;
-
                                     window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber + "&paymentType=" + paymentType;
 
                                 }
