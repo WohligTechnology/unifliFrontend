@@ -203,7 +203,9 @@ background-size: cover;">
             </div>
             <div class="text-center ">
               <button class="btn btn-default btn-gray btn-size" ng-click="goBack()">Back</button>
-              <button type="button " class="btn btn-primary btn-size " ng-click="saveData(formData);">Save & Continue</button>
+              <button type="button " class="btn btn-primary btn-size " ng-click="saveData(formData, 'card');">Save & Continue</button>
+              <img class="paypal-button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" ng-click="saveData(formData, 'paypal');"
+                alt="PayPal Logo">
               <!--ng-click="saveData(formData.deliveryAddress)" -->
             </div>
 

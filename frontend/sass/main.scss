@@ -34,7 +34,7 @@ $brand-info: #000072 !default;
 @font-face {
     font-family: 'Abel-Regular';
     src: url("../fonts/Abel-Regular.eot");
-    src: url("../fonts/Abel-Regular.ttf"),url('../fonts/Abel-Regular.woff2') format('woff2'), url('../fonts/Abel-Regular.woff') format('woff'), url('../fonts/Abel-Regular.eot?#iefix') format('embedded-opentype');
+    src: url("../fonts/Abel-Regular.ttf"), url('../fonts/Abel-Regular.woff2') format('woff2'), url('../fonts/Abel-Regular.woff') format('woff'), url('../fonts/Abel-Regular.eot?#iefix') format('embedded-opentype');
 }
 
 @font-face {
@@ -612,6 +612,7 @@ a,
         padding: 30px 0px;
     }
 }
+
 .blog-img-2 {
     margin-top: 15px;
     img {
@@ -1967,9 +1968,16 @@ footer {
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit {
     background-position: -197px -1px;
 }
+
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
     background-position: -226px -2px;
 }
+
+.paypal-button {
+    border: 1px solid #ccc;
+    padding: 3px 10px;
+}
+
 ///end of map///
 @import "fancybox-override";
 @import "ruchi";

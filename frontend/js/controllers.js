@@ -755,49 +755,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             if (data.value === true) {
                 // console.log("data saved successfully", data)
                 $scope.myCart = data.data;
-                 $scope.totalAMoutIs = 0;
+                $scope.totalAMoutIs = 0;
                 console.log(" $scope.myCart", $scope.myCart);
                 _.forEach($scope.myCart.cartProducts, function (n) {
                     console.log("n", n)
-                       $scope.totalAMoutIs += (n.product.price * n.qty);
-                        console.log("$scope.totalAMoutIs", $scope.totalAMoutIs)
-                
+                    $scope.totalAMoutIs += (n.product.price * n.qty);
+                    console.log("$scope.totalAMoutIs", $scope.totalAMoutIs)
+
                 });
             }
         });
         $scope.total = 0
-           console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
+        console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
         $scope.addQuantity = function (data) {
-             console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
-            
+            console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
+
             $scope.myCart.cartProducts[data].qty++;
-           var priceis=$scope.myCart.cartProducts[data].product.price;
-          var qtyy=$scope.myCart.cartProducts[data].qty
-            console.log("myCart.cartProducts",  priceis);
-            console.log("$scope.myCart.cartProducts[data].qty",qtyy)
-              $scope.totalAMoutIs=$scope.totalAMoutIs+(priceis)
-             console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
-      
+            var priceis = $scope.myCart.cartProducts[data].product.price;
+            var qtyy = $scope.myCart.cartProducts[data].qty
+            console.log("myCart.cartProducts", priceis);
+            console.log("$scope.myCart.cartProducts[data].qty", qtyy)
+            $scope.totalAMoutIs = $scope.totalAMoutIs + (priceis)
+            console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
+
 
 
         }
         $scope.reduceQuantity = function (data) {
-            console.log("data reduc qty",data)
+            console.log("data reduc qty", data)
             if ($scope.myCart.cartProducts[data].qty > 1) {
                 $scope.myCart.cartProducts[data].qty--;
                 console.log(" $scope.myCart.cartProducts[data]", $scope.myCart.cartProducts[data])
-                           var priceis=$scope.myCart.cartProducts[data].product.price;
-          var qtyy=$scope.myCart.cartProducts[data].qty
-            console.log("myCart.cartProducts",  priceis);
-            console.log("$scope.myCart.cartProducts[data].qty",qtyy)
-              $scope.totalAMoutIs=$scope.totalAMoutIs-(priceis)
-             console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
+                var priceis = $scope.myCart.cartProducts[data].product.price;
+                var qtyy = $scope.myCart.cartProducts[data].qty
+                console.log("myCart.cartProducts", priceis);
+                console.log("$scope.myCart.cartProducts[data].qty", qtyy)
+                $scope.totalAMoutIs = $scope.totalAMoutIs - (priceis)
+                console.log(" $scope.totalAMoutIs", $scope.totalAMoutIs)
             }
             // console.log("myCart.cartProducts", $scope.myCart.cartProducts[data])
         }
 
-        $scope.checkout = function (formdata,data) {
-            console.log("data", formdata,data);
+        $scope.checkout = function (formdata, data) {
+            console.log("data", formdata, data);
             formdata.cart.totalAmount = data
             formdata.cartProducts = $scope.myCart.cartProducts;
             NavigationService.apiCallWithData("User/save", formdata, function (data) {
@@ -1356,7 +1356,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         }
 
-        $scope.saveData = function (data) {
+        $scope.saveData = function (data, paymentType) {
             if (data.deliveryAddress == undefined || data.deliveryAddress.name == "" && data.deliveryAddress.state == "") {
                 toastr.warning("Enter Shipping Details");
             } else {
@@ -1425,7 +1425,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                                     // NavigationService.apiCallWithData("User/save", formdata, function (dfmData) {});//to be written in backend
                                 }
 
-                                window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
+                                window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber + "&paymentType=" + paymentType;
 
                             });
                         }
@@ -1434,16 +1434,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     forProduct = {};
                     forProduct._id = $.jStorage.get("user")._id;
                     NavigationService.apiCallWithData("User/getOne", forProduct, function (data1) {
-                        console.log("insdide shippingctrl",data1)
+                        console.log("insdide shippingctrl", data1)
                         data.products = data1.data.cartProducts;
                         data.totalAmount = data1.data.cart.totalAmount;
-                        console.log("after insdide shippingctrl",data)
+                        console.log("after insdide shippingctrl", data)
                         if (data1.data.cartProducts) {
                             NavigationService.apiCallWithData("ProductOrders/createInvoice", data, function (data1) {
                                 if (data1.value == true) {
                                     invoiceNumber = data1.data.invoiceNo;
 
-                                    window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber;
+                                    window.location.href = adminurl + "ProductOrders/acceptPaymentPage?amount=" + $scope.amount + "&invoiceNumber=" + invoiceNumber + "&paymentType=" + paymentType;
 
                                 }
                             });
