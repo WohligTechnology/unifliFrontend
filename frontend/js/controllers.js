@@ -1345,6 +1345,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.formData.address.phonenumber = data.data.mobile;
                     $scope.formData.address.oraganization = data.data.organization;
                     $scope.formData.address.country = data.data.country;
+                      $scope.formData.address.zip=data.data.zip;
                 } else {
                     //  toastr.warning('Error submitting the form', 'Please try again');
                 }
