@@ -158,7 +158,7 @@ background-size: cover;">
                   <input type="text" class="form-control" ng-model="formData.deliveryAddress.address" placeholder="Street Address c/o">
                 </div>
                 <div class="form-group">
-                  <label>Apartment/suite</label>
+                  <label>Apartment/suite*</label>
                   <input type="text" class="form-control" ng-model="formData.deliveryAddress.apartment" placeholder=" Apt, suit, (optional) ">
                   <label>Please note that we cannot ship to a PO Box</label>
                 </div>
@@ -180,13 +180,13 @@ background-size: cover;">
                 <div class="row ">
                   <div class="col-md-6 ">
                     <div class="form-group ">
-                      <label for="country ">Country</label>
+                      <label for="country ">Country*</label>
                       <input type="text " class="form-control " ng-model="formData.deliveryAddress.country">
                     </div>
                   </div>
                   <div class="col-md-6 ">
                     <div class="form-group ">
-                      <label for="state ">State</label>
+                      <label for="state ">State*</label>
                       <input type="tel " class="form-control " ng-model="formData.deliveryAddress.state">
                     </div>
                   </div>
@@ -196,7 +196,7 @@ background-size: cover;">
 
                 <div class="form-group">
                   <label>Phone Number* </label>
-                  <input type="text" name="phonenumber" class="form-control" ng-model="formData.deliveryAddress.phonenumber">
+                  <input type="text" only-Digits name="phonenumber" class="form-control" ng-model="formData.deliveryAddress.phonenumber">
                 </div>
               </div>
             </div>

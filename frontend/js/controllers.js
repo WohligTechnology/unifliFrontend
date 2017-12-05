@@ -1366,7 +1366,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.saveData = function (data, paymentType) {
             console.log("inside saveData",data)
-            if (data.deliveryAddress == undefined || data.deliveryAddress.name == "" && data.deliveryAddress.state == "" ) {
+                if (data.deliveryAddress == undefined || !data.deliveryAddress.name  || !data.deliveryAddress.lname ||!data.deliveryAddress.address || !data.deliveryAddress.apartment || !data.deliveryAddress.city
+ || !data.deliveryAddress.country || !data.deliveryAddress.oraganization || !data.deliveryAddress.phonenumber || !data.deliveryAddress.state || !data.deliveryAddress.zip ) {
                 toastr.error("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
