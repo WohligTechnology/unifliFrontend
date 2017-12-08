@@ -9,6 +9,18 @@
                             <h1 class="fith damionr text-capitalize">Thank You </h1>
                             <p class="text-center">Congratulations! Your payment has been processed.
                             </p>
+                           <h4> Payment Summary</h4>
+                           <div> 
+                                                <span ng-if="invoiceData.dfmSubscription"><b>DFM Subscription: </b><span class="dfm-sub">{{ invoiceData.dfmSubscription.name}}</span></span>
+                                                <div class="payment-summary" ng-repeat="pro in invoiceData.products" ng-if="invoiceData.products[0]">
+                                                <span ng-if="invoiceData.products[0]"><b>Product:</b></span>
+                                             <span class="space-right"> {{pro.product.name}}</span>   <span  ng-if="invoiceData.products[0]"> <span> <b>Qty:</b></span>
+                                              <span ng-if="invoiceData.products[0]" > {{pro.qty}}</span></span>
+                                                </div>
+                                          
+                          <div> <span class="inline-block thank-text"> <b>Trascation Number:</b></span><span class="inline-block thank-text">{{invoiceData.transactionId}}</span></div>
+                            <div><span class="inline-block trascation "> <b>Trascation Status:</b></span><span class="inline-block paid">{{invoiceData.status}}</span></div>
+                          <div>  <h4>${{invoiceData.totalAmount}} Paid</h4> <b>on </b>{{invoiceData.transactionDate |date }}</div>
                             <button class="btn-thank" ng-click="submitForm()">Submit</button>
                         </div>
                     </div>

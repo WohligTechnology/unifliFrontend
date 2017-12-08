@@ -132,7 +132,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'ShippingCtrl'
         })
         .state('thankyou', {
-            url: "/thankyou",
+            url: "/thankyou/:invoiceNum",
             templateUrl: templateURL,
             controller: 'ThankyouCtrl'
         })

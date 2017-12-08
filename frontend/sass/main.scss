@@ -1977,7 +1977,30 @@ footer {
     border: 1px solid #ccc;
     padding: 3px 10px;
 }
+.thank-text{
+padding: 0px 10px;
+}
+.dfm-sub{
+    padding: 0px 17px;
+}
+.trascation{
 
+}
+.paid{
+    padding: 0px 38px;
+}
+.padd-lr{
+    padding: 0px 7px;
+}
+.ppp{
+    padding: 0px 0px 0px 51px;
+}
+.payment-summary{
+    margin-bottom: 10px;
+    .space-right{
+        margin-right: 5px;
+    }
+}
 ///end of map///
 @import "fancybox-override";
 @import "ruchi";

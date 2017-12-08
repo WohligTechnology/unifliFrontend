@@ -235,13 +235,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
-    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
         $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thankyou"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
         $scope.formSubmitted = false;
+        $scope.data = {
+            invoiceNo: $stateParams.invoiceNum
+        }
+
+
+        NavigationService.apiCallWithData("ProductOrders/getOrderOfInvoice", $scope.data, function (data) {
+            
+            $scope.invoiceData = data.data
+            // $scope.invoiceDataProduct = data.data.products
+        
+            // if ( $scope.invoiceDataProduct[0]) {
+            //     console.log("inside for each")
+            //     var myVal = '';
+            //     _.forEach ($scope.invoiceDataProduct, function (pro) {
+            //         console.log("pro", pro)
+            //         myVal = pro.product.name + ',' + myVal;
+            //         $scope.foo = myVal.substring(0, myVal.length - 1);
+            //         console.log("foo valueis ", $scope.foo)
+            //     })
+            //     $scope.name = $scope.foo;
+            // }
+           
+
+        });
+
+
 
         $scope.submitForm = function () {
             if ($.jStorage.get('user')) {
@@ -1365,9 +1391,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }
 
         $scope.saveData = function (data, paymentType) {
-            console.log("inside saveData",data)
-                if (data.deliveryAddress == undefined || !data.deliveryAddress.name  || !data.deliveryAddress.lname ||!data.deliveryAddress.address || !data.deliveryAddress.apartment || !data.deliveryAddress.city
- || !data.deliveryAddress.country || !data.deliveryAddress.oraganization || !data.deliveryAddress.phonenumber || !data.deliveryAddress.state || !data.deliveryAddress.zip ) {
+            console.log("inside saveData", data)
+            if (data.deliveryAddress == undefined || !data.deliveryAddress.name || !data.deliveryAddress.lname || !data.deliveryAddress.address || !data.deliveryAddress.apartment || !data.deliveryAddress.city ||
+                !data.deliveryAddress.country || !data.deliveryAddress.oraganization || !data.deliveryAddress.phonenumber || !data.deliveryAddress.state || !data.deliveryAddress.zip) {
                 toastr.error("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
