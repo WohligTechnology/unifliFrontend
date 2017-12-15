@@ -51,25 +51,18 @@ background-size: cover;">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="company">Company*</label>
+                    <label for="company">Organization*</label>
                     <input type="text" class="form-control" name="com" ng-model="formData.address.oraganization" placeholder="Company name" required>
                     <span class="errormsg" ng-show="formName.com.$touched && formName.com.$invalid">The Company name is required.</span>
 
                   </div>
                   <div class="form-group" ng-class="{'form-invalid': formName.address1.$invalid && formName.address.$touched}">
-                    <label>Street Address* </label>
+                    <label> Address* </label>
                     <input type="text" name="address1" class="form-control" ng-model="formData.address.address1" placeholder="Street Address c/o"
                       required>
-                    <span class="errormsg" ng-show="formName.address1.$touched && formName.address1.$invalid">The Street Address* name is required.</span>
+                    <span class="errormsg" ng-show="formName.address1.$touched && formName.address1.$invalid">The  Address* name is required.</span>
                   </div>
-                  <div class="form-group">
-                    <label>Apartment/suite*</label>
-                    <input type="text" class="form-control" name="apt" ng-model="formData.address.apartment" placeholder="Apt, suit, (optional)"
-                      required>
-                    <label>Please note that we cannot ship to a PO Box</label>
-                    <span class="errormsg" ng-show="formName.apt.$touched && formName.apt.$invalid">The Apartment name is required.</span>
-
-                  </div>
+                
                   <div class="row">
                     <div class="col-md-6">
                       <label for="city ">City*</label>
@@ -91,14 +84,7 @@ background-size: cover;">
 
                   </div>
                   <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label for="country ">Country*</label>
-                        <input type="text " class="form-control " name="country" ng-model="formData.address.country" required>
-                        <span class="errormsg" ng-show="formName.country.$touched && formName.country.$invalid">The Country name is required.</span>
-
-                      </div>
-                    </div>
+                    
                     <div class="col-md-6">
                       <div class="form-group ">
                         <label for="state ">State*</label>
@@ -150,18 +136,14 @@ background-size: cover;">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="company">Company</label>
+                  <label for="company">Organization*</label>
                   <input type="text" class="form-control" ng-model="formData.deliveryAddress.oraganization" placeholder="Company name">
                 </div>
                 <div class="form-group">
-                  <label for="address">Street Address*</label>
+                  <label for="address"> Address*</label>
                   <input type="text" class="form-control" ng-model="formData.deliveryAddress.address" placeholder="Street Address c/o">
                 </div>
-                <div class="form-group">
-                  <label>Apartment/suite*</label>
-                  <input type="text" class="form-control" ng-model="formData.deliveryAddress.apartment" placeholder=" Apt, suit, (optional) ">
-                  <label>Please note that we cannot ship to a PO Box</label>
-                </div>
+                
                 <div class="row ">
                   <div class="col-md-6 ">
                     <div class="form-group ">
@@ -178,12 +160,7 @@ background-size: cover;">
 
                 </div>
                 <div class="row ">
-                  <div class="col-md-6 ">
-                    <div class="form-group ">
-                      <label for="country ">Country*</label>
-                      <input type="text " class="form-control " ng-model="formData.deliveryAddress.country">
-                    </div>
-                  </div>
+                
                   <div class="col-md-6 ">
                     <div class="form-group ">
                       <label for="state ">State*</label>

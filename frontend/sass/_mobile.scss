@@ -300,7 +300,30 @@ h2.step.step-2-top:before{
 
 
 @media (max-width: $screen-xs-max) {
-
+    .total-amount {
+    margin-right: 9px;
+    }
+.pad24 {
+    padding: 0px 17px;
+}
+.dfm-sub {
+    padding: 17px 0px 0px 11px;
+}
+.dfm-p {
+    padding-right: 49px;
+}
+.dfm-total-amount {
+    margin-right: 41px;
+}
+.thank-modal h1 {
+    margin-top: 170px;
+}
+// .thank-text {
+//     padding: 0px 4px;
+// }
+// .pad24 {
+//     padding: 0px 8px;
+// }
 .rem-bmargin{
     margin-bottom: 0px;
 }

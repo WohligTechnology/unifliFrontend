@@ -1815,7 +1815,8 @@ footer {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
+    height: auto;
     h1 {
         margin-top: 250px;
         text-align: center;
@@ -1825,12 +1826,14 @@ footer {
 .btn-thank {
     font-weight: bold;
     background: #04423b;
-    font-size: 25px;
-    width: 140px;
+    font-size: 17px;
+    // width: 140px;
     border: none;
     color: white;
-    margin: 25px auto;
+    margin: 15px auto;
     display: block;
+    padding: 10px 20px;
+    letter-spacing: 1px;
 }
 
 #toast-container .toast {
@@ -1979,9 +1982,28 @@ footer {
 }
 .thank-text{
 padding: 0px 10px;
+margin: 0px;
+}
+.dfm-p{
+   padding-right: 55px;
+   padding-top: 11px;
+}
+.total-amount{
+    margin-right: 26px;
+    text-align: right;
+    span{
+        padding: 0px 10px;
+    }
+}
+.dfm-total-amount{
+    margin-right: 53px;
+    
+    span{
+        padding: 0px 10px;
+    }
 }
 .dfm-sub{
-    padding: 0px 17px;
+   padding: 17px 0px 0px 12px
 }
 .trascation{
 
@@ -2000,6 +2022,18 @@ padding: 0px 10px;
     .space-right{
         margin-right: 5px;
     }
+}
+.thank-table{
+   .table > tbody > tr >  td {
+  
+    border-top: none !important;
+    }
+    .table > tbody > tr > th,{
+         border-top: none !important;
+    }
+}
+.pad24{
+    padding: 0px 24px;
 }
 ///end of map///
 @import "fancybox-override";

@@ -235,7 +235,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
-    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams,  $state) {
         $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thankyou"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -266,11 +266,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
            
 
         });
-
-
-
-        $scope.submitForm = function () {
-            if ($.jStorage.get('user')) {
+         if ($.jStorage.get('user')) {
                 userId = $.jStorage.get('user')._id;
                 $scope.userID = {
                     _id: $.jStorage.get('user')._id
@@ -281,14 +277,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         $scope.user = data;
                         console.log("jstorage data is", $scope.user)
                         $.jStorage.set("user", data.data);
-                        window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
                     }
 
                 });
+           }else{
+           $state.go("home");
+           }
+        
+
+
+
+        $scope.submitForm = function () {
+            if ($.jStorage.get('user')) {
+                userId = $.jStorage.get('user')._id;
+                // $scope.userID = {
+                //     _id: $.jStorage.get('user')._id
+                // };
+                 window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                // console.log("userId", $scope.userID)
+                // NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                //     if (data.value == true) {
+                //         $scope.user = data;
+                //         console.log("jstorage data is", $scope.user)
+                //         $.jStorage.set("user", data.data);
+                //         window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                //     }
+
+                // });
                 // window.location = "http://localhost:1337/#/login1/" + userId;
 
+            }else{
+                 $state.go("home");
             }
         }
+          
+       
     })
     .controller('SorryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("sorry"); //Use same name of .html file
@@ -1378,7 +1401,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     $scope.formData.address.state = data.data.state;
                     $scope.formData.address.phonenumber = data.data.mobile;
                     $scope.formData.address.oraganization = data.data.organization;
-                    $scope.formData.address.country = data.data.country;
                     $scope.formData.address.zip = data.data.zip;
                 } else {
                     //  toastr.warning('Error submitting the form', 'Please try again');
@@ -1392,8 +1414,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
         $scope.saveData = function (data, paymentType) {
             console.log("inside saveData", data)
-            if (data.deliveryAddress == undefined || !data.deliveryAddress.name || !data.deliveryAddress.lname || !data.deliveryAddress.address || !data.deliveryAddress.apartment || !data.deliveryAddress.city ||
-                !data.deliveryAddress.country || !data.deliveryAddress.oraganization || !data.deliveryAddress.phonenumber || !data.deliveryAddress.state || !data.deliveryAddress.zip) {
+            if (data.deliveryAddress == undefined || !data.deliveryAddress.name || !data.deliveryAddress.lname || !data.deliveryAddress.address || !data.deliveryAddress.city || !data.deliveryAddress.oraganization || !data.deliveryAddress.phonenumber || !data.deliveryAddress.state || !data.deliveryAddress.zip) {
                 toastr.error("Enter Shipping Details");
             } else {
                 console.log("inside else  condition")
@@ -1407,10 +1428,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // });
                 $scope.deliveryAddress = {
                     city: data.deliveryAddress.city,
-                    country: data.deliveryAddress.country,
                     state: data.deliveryAddress.state,
                     zip: data.deliveryAddress.zip,
-                    address: data.deliveryAddress.apartment,
                     fname: data.deliveryAddress.name,
                     lname: data.deliveryAddress.lname,
                     comapny: data.deliveryAddress.oraganization,
@@ -1421,8 +1440,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         city: data.address.city,
                         zip: data.address.zip,
                         state: data.address.state,
-                        country: data.address.country,
-                        address: data.address.apartment,
                         fname: data.address.name,
                         lname: data.address.lname,
                         comapny: data.address.oraganization,
@@ -1499,10 +1516,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.formData.deliveryAddress.lname = $scope.formData.address.lname;
                 $scope.formData.deliveryAddress.oraganization = $scope.formData.address.oraganization;
                 $scope.formData.deliveryAddress.address = $scope.formData.address.address1;
-                $scope.formData.deliveryAddress.apartment = $scope.formData.address.apartment;
                 $scope.formData.deliveryAddress.city = $scope.formData.address.city;
                 $scope.formData.deliveryAddress.state = $scope.formData.address.state;
-                $scope.formData.deliveryAddress.country = $scope.formData.address.country;
                 $scope.formData.deliveryAddress.phonenumber = $scope.formData.address.phonenumber;
                 $scope.formData.deliveryAddress.zip = $scope.formData.address.zip;
 
@@ -1514,35 +1529,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.formData.deliveryAddress.lname = "";
                 $scope.formData.deliveryAddress.oraganization = "";
                 $scope.formData.deliveryAddress.address1 = "";
-                $scope.formData.deliveryAddress.apartment = "";
                 $scope.formData.deliveryAddress.city = "";
                 $scope.formData.deliveryAddress.state = "";
-                $scope.formData.deliveryAddress.country = "";
                 $scope.formData.deliveryAddress.phonenumber = "";
                 $scope.formData.deliveryAddress.zip = "";
             }
         };
-        if ($.jStorage.get("user")) {
-            formdata = {};
-            formdata._id = $.jStorage.get("user")._id;
-            NavigationService.apiCallWithData("User/getOne", $.jStorage.get("user"), function (data) {
-                if (data.value === true) {
-                    $scope.userData = data.data;
-                    $scope.formData.address = {};
-                    $scope.formData.address.name = data.data.name;
-                    $scope.formData.address.city = data.data.city;
-                    $scope.formData.address.address1 = data.data.address;
-                    $scope.formData.address.state = data.data.state;
-                    $scope.formData.address.phonenumber = data.data.mobile;
-                    $scope.formData.address.oraganization = data.data.oraganization;
-                    $scope.formData.address.country = data.data.country;
-                    $scope.formData.address.zip = data.data.zip;
+        // if ($.jStorage.get("user")) {
+        //     formdata = {};
+        //     formdata._id = $.jStorage.get("user")._id;
+        //     NavigationService.apiCallWithData("User/getOne", $.jStorage.get("user"), function (data) {
+        //         if (data.value === true) {
+        //             $scope.userData = data.data;
+        //             $scope.formData.address = {};
+        //             $scope.formData.address.name = data.data.name;
+        //             $scope.formData.address.city = data.data.city;
+        //             $scope.formData.address.address1 = data.data.address;
+        //             $scope.formData.address.state = data.data.state;
+        //             $scope.formData.address.phonenumber = data.data.mobile;
+        //             $scope.formData.address.oraganization =data.data.organization;
+        //             $scope.formData.address.country = data.data.country;
+        //             $scope.formData.address.zip = data.data.zip;
 
-                } else {
-                    //  toastr.warning('Error submitting the form', 'Please try again');
-                }
-            });
-        }
+        //         } else {
+        //             //  toastr.warning('Error submitting the form', 'Please try again');
+        //         }
+        //     });
+        // }
 
         $scope.autoLocation = function () {
                 var input = document.getElementById('locationCity');

@@ -5,24 +5,76 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                        <div class="thanks-title text-center">
+                        <div class="thanks-title ">
                             <h1 class="fith damionr text-capitalize">Thank You </h1>
                             <p class="text-center">Congratulations! Your payment has been processed.
                             </p>
-                           <h4> Payment Summary</h4>
-                           <div> 
-                                                <span ng-if="invoiceData.dfmSubscription"><b>DFM Subscription: </b><span class="dfm-sub">{{ invoiceData.dfmSubscription.name}}</span></span>
-                                                <div class="payment-summary" ng-repeat="pro in invoiceData.products" ng-if="invoiceData.products[0]">
-                                                <span ng-if="invoiceData.products[0]"><b>Product:</b></span>
-                                             <span class="space-right"> {{pro.product.name}}</span>   <span  ng-if="invoiceData.products[0]"> <span> <b>Qty:</b></span>
-                                              <span ng-if="invoiceData.products[0]" > {{pro.qty}}</span></span>
-                                                </div>
-                                          
-                          <div> <span class="inline-block thank-text"> <b>Trascation Number:</b></span><span class="inline-block thank-text">{{invoiceData.transactionId}}</span></div>
-                            <div><span class="inline-block trascation "> <b>Trascation Status:</b></span><span class="inline-block paid">{{invoiceData.status}}</span></div>
-                          <div>  <h4>${{invoiceData.totalAmount}} Paid</h4> <b>on </b>{{invoiceData.transactionDate |date }}</div>
-                            <button class="btn-thank" ng-click="submitForm()">Submit</button>
+                            <h4 class="text-center"> Payment Summary</h4>
+                            <div class="text-center">
+                                <p class=" thank-text"> <b>Trascation ID:</b> <span class=" thank-text">{{invoiceData.transactionId}}</span></p>
+                                    <p class="dfm-p" ng-if="invoiceData.dfmSubscription"><span><b>DFM Subscription: </b></span><span class="dfm-sub">{{ invoiceData.dfmSubscription.name}}</span></p>
+                                      <p class="dfm-total-amount" ng-if="invoiceData.dfmSubscription"><b>Total Amount:</b> <span>{{invoiceData.totalAmount}}</span></p>
+
+                                <p><b>Status:</b> <span class="pad24">{{invoiceData.status}}</span></p>
+                                
+                            </div>
+                            <div class="thank-table text-center">
+                                <table class="table text-center" ng-if="invoiceData.products[0]">
+                                      <thead>
+                                    <tr>
+                                        <th class="text-center">Product:</th>
+                                        <th class="text-center">Product Quantity:</th>
+                                        <th class="text-center">Amount:</th>
+
+                                    </tr>
+                                      </thead>
+                                      <tbody>
+                                    <tr ng-repeat="pro in invoiceData.products">
+                                        <td>{{pro.product.name}}</td>
+                                         <td>{{pro.qty}}</td>
+                                          <td>{{pro.product.price}}</td>
+                                       
+                                    </tr>
+                                    
+                                    </tbody>
+                                    <!--<tr>
+                                
+                                 <td colspan="2"><b>TotalAmount</b></td>
+                                 <td>200</td>
+                               
+                             </tr>-->
+                                </table>
+                                <p class="total-amount"  ng-if="invoiceData.products[0]"><b>Total Amount:</b> <span>{{invoiceData.totalAmount}}</span></p>
+                                <div>
+                                    <p>To download a Receipt or get a status on your purchase, please click below and go to
+                                        your dashboard.</p>
+                                    <button class="btn-thank" ng-click="submitForm()">DASHBOARD AUTO LOGIN LINK</button></div>
+                            </div>
+
+                            
+                            <!--<div>
+                                <span ng-if="invoiceData.dfmSubscription"><b>DFM Subscription: </b><span class="dfm-sub">{{ invoiceData.dfmSubscription.name}}</span></span>
+                                <div class="payment-summary" ng-repeat="pro in invoiceData.products" ng-if="invoiceData.products[0]">
+                                    <span ng-if="invoiceData.products[0]"><b>Product:</b></span>
+                                    <span class="space-right"> {{pro.product.name}}</span> <span ng-if="invoiceData.products[0]"> <span> <b>Qty:</b></span>
+                                    <span ng-if="invoiceData.products[0]"> {{pro.qty}}</span></span>
+                                </div>
+
+
+                                <div><span class="inline-block trascation "> <b>Trascation Status:</b></span><span class="inline-block paid">{{invoiceData.status}}</span></div>
+                                <div>
+                                    <h4>${{invoiceData.totalAmount}} Paid</h4> <b>on </b>{{invoiceData.transactionDate |date
+                                    }}</div>
+
+                            </div>-->
+
                         </div>
+                        <div>
+
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
