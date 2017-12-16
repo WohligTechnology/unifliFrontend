@@ -32,7 +32,7 @@
                                     <tr ng-repeat="pro in invoiceData.products">
                                         <td>{{pro.product.name}}</td>
                                          <td>{{pro.qty}}</td>
-                                          <td>{{pro.product.price}}</td>
+                                          <td>{{pro.product.price*pro.qty}}</td>
                                        
                                     </tr>
                                     
