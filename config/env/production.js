@@ -26,7 +26,7 @@ module.exports = {
    ***************************************************************************/
 
   port: 82,
-  realHost: "http://52.172.209.106",
+  realHost: "http://52.172.209.106:82",
   emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com"]
 
   /***************************************************************************
