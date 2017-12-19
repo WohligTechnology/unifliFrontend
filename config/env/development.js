@@ -20,7 +20,7 @@ module.exports = {
     // models: {
     //   connection: 'someMongodbServer'
     // }
-    port: 8080,
-    realHost: "http://cloud.unifli.aero",
+    port: 82,
+    realHost: "http://52.172.209.106:82",
     emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "harsh@wohlig.com"]
 };
