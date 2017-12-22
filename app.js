@@ -23,15 +23,15 @@
 process.chdir(__dirname);
 global.mongoose = require('mongoose');
 global["Grid"] = require('gridfs-stream');
-global["database"] = "database";
+global["database"] = "unifli";
 
 mongoose.Promise = global.Promise;
 
-global.mongourl = "<Enter MongoDb URl>";
+global.mongourl = "mongodb://localhost:27017/"+database;
 mongoose.connect(mongourl, {
     useMongoClient: true
 }, function (err, db) {
-    global.gfs = Grid(db, mongoose.mongo);
+    //global.gfs = Grid(db, mongoose.mongo);
 });
 
 // Ensure a "sails" can be located:
