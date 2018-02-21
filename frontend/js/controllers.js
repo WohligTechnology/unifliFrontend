@@ -1196,6 +1196,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             if (dfm.value == true) {
                                 $scope.user.currentSubscription = $scope.dfmId;
                                 NavigationService.apiCallWithData("User/save", $scope.user, function (data) {
+                                    $scope.formData={}
                                     $uibModal.open({
                                         animation: true,
                                         templateUrl: 'views/content/Modal/thankyou.html',
