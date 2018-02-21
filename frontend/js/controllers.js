@@ -235,7 +235,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
-    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams,  $state) {
+    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $state) {
         $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Thankyou"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -248,10 +248,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         NavigationService.apiCallWithData("ProductOrders/getOrderOfInvoice", $scope.data, function (data) {
-            
+
             $scope.invoiceData = data.data
             // $scope.invoiceDataProduct = data.data.products
-        
+
             // if ( $scope.invoiceDataProduct[0]) {
             //     console.log("inside for each")
             //     var myVal = '';
@@ -263,27 +263,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //     })
             //     $scope.name = $scope.foo;
             // }
-           
+
 
         });
-         if ($.jStorage.get('user')) {
-                userId = $.jStorage.get('user')._id;
-                $scope.userID = {
-                    _id: $.jStorage.get('user')._id
-                };
-                console.log("userId", $scope.userID)
-                NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
-                    if (data.value == true) {
-                        $scope.user = data;
-                        console.log("jstorage data is", $scope.user)
-                        $.jStorage.set("user", data.data);
-                    }
+        if ($.jStorage.get('user')) {
+            userId = $.jStorage.get('user')._id;
+            $scope.userID = {
+                _id: $.jStorage.get('user')._id
+            };
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                if (data.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                }
 
-                });
-           }else{
-           $state.go("home");
-           }
-        
+            });
+        } else {
+            $state.go("home");
+        }
+
 
 
 
@@ -293,7 +293,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // $scope.userID = {
                 //     _id: $.jStorage.get('user')._id
                 // };
-                 window.location = "https://cloud.unifli.aero/#!/login1/" + userId;
+                window.location = "https://cloud.unifli.aero/#!/login1/" + userId;
                 // console.log("userId", $scope.userID)
                 // NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
                 //     if (data.value == true) {
@@ -306,12 +306,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // });
                 // window.location = "http://localhost:1337/#/login1/" + userId;
 
-            }else{
-                 $state.go("home");
+            } else {
+                $state.go("home");
             }
         }
-          
-       
+
+
     })
     .controller('SorryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("sorry"); //Use same name of .html file
@@ -1135,7 +1135,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('ContactUsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout) {
+    .controller('ContactUsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.changecontent("contactus"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("ContactUs"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1145,6 +1145,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.saveContact = function (formData) {
             NavigationService.apiCallWithData("ContactUs/sendEnquiry", formData, function (data) {
                 if (data.value === true) {
+                    
                     // console.log("data saved successfully", data)
                     $state.go('home');
                 } else {
@@ -1153,7 +1154,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
         }
 
+        $scope.opencontact = function () {
+            $scope.contactModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/content/Modal/contact-modal.html',
+                scope: $scope,
+                size: 'md'
+                // windowClass: "login-modal"
 
+            });
+        }
     })
     .controller('MemberCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, $stateParams, $uibModal, toastr) {
         $scope.template = TemplateService.changecontent("member"); //Use same name of .html file
@@ -1196,7 +1206,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             if (dfm.value == true) {
                                 $scope.user.currentSubscription = $scope.dfmId;
                                 NavigationService.apiCallWithData("User/save", $scope.user, function (data) {
-                                    $scope.formData={}
+                                    $scope.formData = {}
                                     $uibModal.open({
                                         animation: true,
                                         templateUrl: 'views/content/Modal/thankyou.html',
