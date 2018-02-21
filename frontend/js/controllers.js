@@ -96,7 +96,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         console.log("after login data is", data)
                         var userId = data.data._id;
                         // window.location = "http://localhost:1337/#/login1/" + userId;
-                        window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                        window.location = "https://cloud.unifli.aero/#!/login1/" + userId;
 
                         $.jStorage.set("user", data.data);
                         $scope.template.userProfile = data.data;
@@ -293,7 +293,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // $scope.userID = {
                 //     _id: $.jStorage.get('user')._id
                 // };
-                 window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                 window.location = "https://cloud.unifli.aero/#!/login1/" + userId;
                 // console.log("userId", $scope.userID)
                 // NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
                 //     if (data.value == true) {
