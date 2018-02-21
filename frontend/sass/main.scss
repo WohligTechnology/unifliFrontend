@@ -1802,7 +1802,13 @@ footer {
 .text-info {
     color: white;
 }
-
+.color-whitey{
+    color: white !important; 
+    &:active,&:hover,&:focus{
+         color: white !important; 
+    
+    }
+}
 .partially button span {
     background-color: orange;
     border-radius: 32px;
