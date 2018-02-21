@@ -1147,7 +1147,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 if (data.value === true) {
                     
                     // console.log("data saved successfully", data)
-                    $state.go('home');
+                    // $state.go('home');
                 } else {
                     //  toastr.warning('Error submitting the form', 'Please try again');
                 }
