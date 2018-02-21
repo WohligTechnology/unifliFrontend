@@ -10678,17 +10678,28 @@ footer {
 .text-info {
   color: white; }
 
+.color-whitey {
+  color: white !important; }
+  .color-whitey:active, .color-whitey:hover, .color-whitey:focus {
+    color: white !important; }
+
 .partially button span {
   background-color: orange;
   border-radius: 32px;
   color: black; }
+
+.btn-launch {
+  border: 2px solid #04423b; }
+
+.width-btn {
+  width: 150px; }
 
 .thank-modal {
   background: url(../img/mycart.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 100vh; }
+  height: auto; }
   .thank-modal h1 {
     margin-top: 250px;
     text-align: center; }
@@ -10696,12 +10707,13 @@ footer {
 .btn-thank {
   font-weight: bold;
   background: #04423b;
-  font-size: 25px;
-  width: 140px;
+  font-size: 17px;
   border: none;
   color: white;
-  margin: 25px auto;
-  display: block; }
+  margin: 15px auto;
+  display: block;
+  padding: 10px 20px;
+  letter-spacing: 1px; }
 
 #toast-container .toast {
   margin: 100px 0 0 0 !important; }
@@ -10808,6 +10820,61 @@ footer {
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
   text-indent: 0; }
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit {
+  background-position: -197px -1px; }
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
+  background-position: -226px -2px; }
+
+.paypal-button {
+  border: 1px solid #ccc;
+  padding: 3px 10px; }
+
+.thank-text {
+  padding: 0px 10px;
+  margin: 0px; }
+
+.dfm-p {
+  padding-right: 55px;
+  padding-top: 11px; }
+
+.total-amount {
+  margin-right: 26px;
+  text-align: right; }
+  .total-amount span {
+    padding: 0px 10px; }
+
+.dfm-total-amount {
+  margin-right: 53px; }
+  .dfm-total-amount span {
+    padding: 0px 10px; }
+
+.dfm-sub {
+  padding: 17px 0px 0px 12px; }
+
+.paid {
+  padding: 0px 38px; }
+
+.padd-lr {
+  padding: 0px 7px; }
+
+.ppp {
+  padding: 0px 0px 0px 51px; }
+
+.payment-summary {
+  margin-bottom: 10px; }
+  .payment-summary .space-right {
+    margin-right: 5px; }
+
+.thank-table .table > tbody > tr > td {
+  border-top: none !important; }
+
+.thank-table .table > tbody > tr > th {
+  border-top: none !important; }
+
+.pad24 {
+  padding: 0px 24px; }
 
 #fancybox-loading,
 .fancybox-close,
@@ -11649,6 +11716,18 @@ footer {
     margin-top: -10px; } }
 
 @media (max-width: 767px) {
+  .total-amount {
+    margin-right: 9px; }
+  .pad24 {
+    padding: 0px 17px; }
+  .dfm-sub {
+    padding: 17px 0px 0px 11px; }
+  .dfm-p {
+    padding-right: 49px; }
+  .dfm-total-amount {
+    margin-right: 41px; }
+  .thank-modal h1 {
+    margin-top: 170px; }
   .rem-bmargin {
     margin-bottom: 0px; }
   .rem-tmargin {
