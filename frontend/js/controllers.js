@@ -42,12 +42,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 })
 
-.controller('headerCtrl', function ($scope, toastr, $uibModal, $state, $window, TemplateService, NavigationService) {
+.controller('headerCtrl', function ($scope, toastr, $uibModal, $state, $window, TemplateService, NavigationService,$stateParams) {
         $scope.template = TemplateService;
         $scope.profile = {};
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
         });
+                       if ($stateParams.userId) {
+            $scope.userID = {
+                _id: $stateParams.userId
+            };
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                if (data.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                    $scope.template.userProfile = data.data;
+                      $scope.showcart = false;
+                    // checkUser();
+                }
+            });
+        } else {
+            // checkUser();
+
+        }
         $scope.showMenu = false;
         $scope.getMenu = function () {
             if ($scope.showMenu == false) {
