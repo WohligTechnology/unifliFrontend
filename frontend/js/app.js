@@ -58,6 +58,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: templateURL,
             controller: 'ProductCtrl'
         })
+           .state('product1', {
+            url: "/product1/:userId",
+            templateUrl: templateURL,
+            controller: 'ProductCtrl'
+        })
         .state('support-dfm', {
             url: "/support-dfm",
             templateUrl: templateURL,
