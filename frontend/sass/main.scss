@@ -1802,13 +1802,24 @@ footer {
 .text-info {
     color: white;
 }
-
+.color-whitey{
+    color: white !important; 
+    &:active,&:hover,&:focus{
+         color: white !important; 
+    
+    }
+}
 .partially button span {
     background-color: orange;
     border-radius: 32px;
     color: black;
 }
-
+.btn-launch{
+        border: 2px solid #04423b;
+}
+.width-btn{
+    width: 150px;
+}
 //timeline
 .thank-modal {
     background: url(../img/mycart.jpg);

@@ -4,7 +4,7 @@
             <h1 class="m-0">contact us</h1>
         </div>
         <div class="signup-container">
-            <form ng-submit="saveContact(formData)" name="form1">
+            <form name="form1">
 
                 <div class="member-form">
                     <div class="row">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-main">SUBMIT</button>
+                        <button type="submit" class="btn btn-main" ng-click="opencontact();saveContact(formData)" ng-disabled="form1.$invalid">SUBMIT</button>
                     </div>
                 </div>
 
