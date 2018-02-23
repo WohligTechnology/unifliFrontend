@@ -362,7 +362,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
 
-    .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr, $uibModal) {
+    .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr, $uibModal,$stateParams ) {
         $scope.template = TemplateService.changecontent("product"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Product"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -375,11 +375,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.checkMyCart = false;
         var isExist = false;
         if ($stateParams.userId) {
+            console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$inside if cond")
             $scope.userID = {
                 _id: $stateParams.userId
             };
             console.log("userId", $scope.userID)
             NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                console.log("****************",data)
                 if (data.value == true) {
                     $scope.user = data;
                     console.log("jstorage data is", $scope.user)
