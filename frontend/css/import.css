@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
- * jQuery FlexSlider v2.6.4
+ * jQuery FlexSlider v2.7.0
  * http://www.woothemes.com/flexslider/
  *
  * Copyright 2012 WooThemes
@@ -9375,7 +9375,7 @@ p {
   color: white;
   margin: 0 auto;
   display: block; }
-  .btn-main:hover {
+  .btn-main:hover, .btn-main:active, .btn-main:focus {
     color: white !important;
     background: #04423b; }
 
@@ -10875,6 +10875,16 @@ footer {
 
 .pad24 {
   padding: 0px 24px; }
+
+.close-modal {
+  position: absolute;
+  top: 6px;
+  right: 11px;
+  cursor: pointer; }
+
+.close-modal .fa {
+  font-size: 20px;
+  color: #ccc; }
 
 #fancybox-loading,
 .fancybox-close,

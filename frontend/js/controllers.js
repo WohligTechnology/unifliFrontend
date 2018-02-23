@@ -459,12 +459,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 toastr.error('Product already exist');
             }
         } else {
-            $scope.buyModal = $uibModal.open({
-                animation: true,
-                templateUrl: 'views/content/Modal/buy-product.html',
-                scope: $scope,
-                windowClass: "login-modal"
-            });
+           $state.go("member");
         }
 
     }
@@ -1138,12 +1133,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
 
         } else {
-            $scope.buyModal = $uibModal.open({
-                animation: true,
-                templateUrl: 'views/content/Modal/buy-product.html',
-                scope: $scope,
-                windowClass: "login-modal"
-            });
+            $state.go("member")
         }
 
     };
@@ -1156,12 +1146,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             });
 
         } else {
-            $scope.buyModal = $uibModal.open({
-                animation: true,
-                templateUrl: 'views/content/Modal/buy-product.html',
-                scope: $scope,
-                windowClass: "login-modal"
-            });
+          $state.go("member");
         }
 
     };
@@ -1172,24 +1157,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 'id': $scope.dfmData[2].id
             });
         } else {
-            $scope.buyModal = $uibModal.open({
-                animation: true,
-                templateUrl: 'views/content/Modal/buy-product.html',
-                scope: $scope,
-                windowClass: "login-modal"
-            });
+          $state.go("member");
         }
     };
 
-    $scope.login = function () {
-        $scope.loginModal = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/content/Modal/login.html',
-            scope: $scope,
-            windowClass: "login-modal"
+    // $scope.login = function () {
+    //     $scope.loginModal = $uibModal.open({
+    //         animation: true,
+    //         templateUrl: 'views/content/Modal/login.html',
+    //         scope: $scope,
+    //         windowClass: "login-modal"
 
-        });
-    };
+    //     });
+    // };
 })
 
 .controller('ContactUsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal) {
