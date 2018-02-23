@@ -141,7 +141,7 @@ p {
     color: white;
     margin: 0 auto;
     display: block;
-    &:hover {
+    &:hover,&:active,&:focus {
         color: white !important;
         background: $brand-primary
     }
@@ -2034,6 +2034,16 @@ margin: 0px;
 }
 .pad24{
     padding: 0px 24px;
+}
+.close-modal {
+    position: absolute;
+    top: 6px;
+    right: 11px;
+    cursor: pointer;
+}
+.close-modal .fa {
+    font-size: 20px;
+    color: #ccc;
 }
 ///end of map///
 @import "fancybox-override";
