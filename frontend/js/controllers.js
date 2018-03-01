@@ -235,9 +235,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
-    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams,  $state) {
-        $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
-        $scope.menutitle = NavigationService.makeactive("Thankyou"); //This is the Title of the Website
+    .controller('ThankyouCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $state) {
         TemplateService.title = $scope.menutitle;
         $scope.navigation = NavigationService.getnav();
 
@@ -248,10 +246,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
         NavigationService.apiCallWithData("ProductOrders/getOrderOfInvoice", $scope.data, function (data) {
-            
+
             $scope.invoiceData = data.data
+            $scope.template = TemplateService.changecontent("thankyou"); //Use same name of .html file
+            $scope.menutitle = NavigationService.makeactive("Thankyou"); //This is the Title of the Website
+         
             // $scope.invoiceDataProduct = data.data.products
-        
+
             // if ( $scope.invoiceDataProduct[0]) {
             //     console.log("inside for each")
             //     var myVal = '';
@@ -263,27 +264,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             //     })
             //     $scope.name = $scope.foo;
             // }
-           
+
 
         });
-         if ($.jStorage.get('user')) {
-                userId = $.jStorage.get('user')._id;
-                $scope.userID = {
-                    _id: $.jStorage.get('user')._id
-                };
-                console.log("userId", $scope.userID)
-                NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
-                    if (data.value == true) {
-                        $scope.user = data;
-                        console.log("jstorage data is", $scope.user)
-                        $.jStorage.set("user", data.data);
-                    }
+        if ($.jStorage.get('user')) {
+            userId = $.jStorage.get('user')._id;
+            $scope.userID = {
+                _id: $.jStorage.get('user')._id
+            };
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                if (data.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                }
 
-                });
-           }else{
-           $state.go("home");
-           }
-        
+            });
+        } else {
+            $state.go("home");
+        }
+
 
 
 
@@ -293,7 +294,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // $scope.userID = {
                 //     _id: $.jStorage.get('user')._id
                 // };
-                 window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
                 // console.log("userId", $scope.userID)
                 // NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
                 //     if (data.value == true) {
@@ -306,12 +307,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // });
                 // window.location = "http://localhost:1337/#/login1/" + userId;
 
-            }else{
-                 $state.go("home");
+            } else {
+                $state.go("home");
             }
         }
-          
-       
+
+
     })
     .controller('SorryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
         $scope.template = TemplateService.changecontent("sorry"); //Use same name of .html file
@@ -1155,6 +1156,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     })
+
     .controller('MemberCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, $stateParams, $uibModal, toastr) {
         $scope.template = TemplateService.changecontent("member"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Member"); //This is the Title of the Website
@@ -1383,9 +1385,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     }
                 });
             }
-
-
-
 
 
             formdata = {};
