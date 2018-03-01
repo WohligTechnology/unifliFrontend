@@ -42,12 +42,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     })
 
-    .controller('headerCtrl', function ($scope, toastr, $uibModal, $state, $window, TemplateService, NavigationService) {
+    .controller('headerCtrl', function ($scope, toastr, $uibModal, $state, $window, TemplateService, NavigationService, $stateParams) {
         $scope.template = TemplateService;
         $scope.profile = {};
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $(window).scrollTop(0);
         });
+        if ($stateParams.userId) {
+            $scope.userID = {
+                _id: $stateParams.userId
+            };
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                if (data.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                    $scope.template.userProfile = data.data;
+                    $scope.showcart = false;
+                    // checkUser();
+                }
+            });
+        } else {
+            // checkUser();
+
+        }
         $scope.showMenu = false;
         $scope.getMenu = function () {
             if ($scope.showMenu == false) {
@@ -96,7 +115,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                         console.log("after login data is", data)
                         var userId = data.data._id;
                         // window.location = "http://localhost:1337/#/login1/" + userId;
-                        window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                        window.location = "https://cloud.unifli.aero/#!/login1/" + userId;
 
                         $.jStorage.set("user", data.data);
                         $scope.template.userProfile = data.data;
@@ -294,7 +313,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 // $scope.userID = {
                 //     _id: $.jStorage.get('user')._id
                 // };
-                window.location = "http://cloud.unifli.aero/#!/login1/" + userId;
+                window.location = "https://cloud.unifli.aero/#!/login1/" + userId;
                 // console.log("userId", $scope.userID)
                 // NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
                 //     if (data.value == true) {
@@ -344,7 +363,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     })
 
 
-    .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr) {
+    .controller('ProductCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, toastr, $uibModal,$stateParams ) {
         $scope.template = TemplateService.changecontent("product"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("Product"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -356,7 +375,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.classc = '';
         $scope.checkMyCart = false;
         var isExist = false;
+        if ($stateParams.userId) {
+            console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$inside if cond")
+            $scope.userID = {
+                _id: $stateParams.userId
+            };
+            console.log("userId", $scope.userID)
+            NavigationService.apiCallWithData("User/getOne", $scope.userID, function (data) {
+                console.log("****************",data)
+                if (data.value == true) {
+                    $scope.user = data;
+                    console.log("jstorage data is", $scope.user)
+                    $.jStorage.set("user", data.data);
+                    $scope.template.userProfile = data.data;
+                    $scope.showcart = false;
+                    // checkUser();
+                }
+            });
+        } else {
+            // checkUser();
 
+        }
         NavigationService.callApi("Products/search", function (data) {
             if (data.value === true) {
                 $scope.productData = data.data.results;
@@ -467,6 +506,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 $scope.classb = '';
                 $scope.classa = '';
             }
+        };
+        $scope.login = function () {
+            $scope.loginModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/content/Modal/login.html',
+                scope: $scope,
+                windowClass: "login-modal"
+
+            });
         };
     })
 
@@ -1119,7 +1167,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                 });
 
             } else {
-                $state.go("member")
+                $state.go("member");
             }
 
         };
@@ -1130,13 +1178,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                     'id': $scope.dfmData[2].id
                 });
             } else {
-                $state.go("member")
+                $state.go("member");
             }
         };
 
+        // $scope.login = function () {
+        //     $scope.loginModal = $uibModal.open({
+        //         animation: true,
+        //         templateUrl: 'views/content/Modal/login.html',
+        //         scope: $scope,
+        //         windowClass: "login-modal"
+
+        //     });
+        // };
     })
 
-    .controller('ContactUsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout) {
+    .controller('ContactUsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal) {
         $scope.template = TemplateService.changecontent("contactus"); //Use same name of .html file
         $scope.menutitle = NavigationService.makeactive("ContactUs"); //This is the Title of the Website
         TemplateService.title = $scope.menutitle;
@@ -1146,15 +1203,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.saveContact = function (formData) {
             NavigationService.apiCallWithData("ContactUs/sendEnquiry", formData, function (data) {
                 if (data.value === true) {
+
                     // console.log("data saved successfully", data)
-                    $state.go('home');
+                    // $state.go('home');
                 } else {
                     //  toastr.warning('Error submitting the form', 'Please try again');
                 }
             });
         }
 
+        $scope.opencontact = function () {
+            $scope.contactModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/content/Modal/contact-modal.html',
+                scope: $scope,
+                size: 'md'
+                // windowClass: "login-modal"
 
+            });
+        }
     })
 
     .controller('MemberCtrl', function ($scope, TemplateService, $state, NavigationService, $timeout, $stateParams, $uibModal, toastr) {
@@ -1198,6 +1265,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
                             if (dfm.value == true) {
                                 $scope.user.currentSubscription = $scope.dfmId;
                                 NavigationService.apiCallWithData("User/save", $scope.user, function (data) {
+                                    $scope.formData = {}
                                     $uibModal.open({
                                         animation: true,
                                         templateUrl: 'views/content/Modal/thankyou.html',

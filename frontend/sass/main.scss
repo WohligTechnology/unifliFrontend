@@ -141,7 +141,7 @@ p {
     color: white;
     margin: 0 auto;
     display: block;
-    &:hover {
+    &:hover,&:active,&:focus {
         color: white !important;
         background: $brand-primary
     }
@@ -1802,13 +1802,24 @@ footer {
 .text-info {
     color: white;
 }
-
+.color-whitey{
+    color: white !important; 
+    &:active,&:hover,&:focus{
+         color: white !important; 
+    
+    }
+}
 .partially button span {
     background-color: orange;
     border-radius: 32px;
     color: black;
 }
-
+.btn-launch{
+        border: 2px solid #04423b;
+}
+.width-btn{
+    width: 150px;
+}
 //timeline
 .thank-modal {
     background: url(../img/mycart.jpg);
@@ -2034,6 +2045,16 @@ margin: 0px;
 }
 .pad24{
     padding: 0px 24px;
+}
+.close-modal {
+    position: absolute;
+    top: 6px;
+    right: 11px;
+    cursor: pointer;
+}
+.close-modal .fa {
+    font-size: 20px;
+    color: #ccc;
 }
 ///end of map///
 @import "fancybox-override";

@@ -24,10 +24,12 @@
 
 
     <link rel="stylesheet" type="text/css" href="css/import.css" />
-
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.css' type='text/css'
+    />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
     <script>
-        var adminurl = "http://52.172.209.106:82/api/";
-        // var adminurl = "http://localhost:1337/api/"
+        var adminurl = "https://cloud.unifli.aero/api/";
         var isproduction = true;
         var chintan = function (content) {
             console.log("%c ---------------------------------------", 'background: #222; color: #bada55');
@@ -35,63 +37,69 @@
             console.log("%c ---------------------------------------", 'background: #222; color: #bada55');
         };
     </script>
-
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-    <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
-
-    <script src="bower_components/flexslider/jquery.flexslider-min.js"></script>
-
-    <script src="bower_components/fancyBox/source/jquery.fancybox.js"></script>
-
-    <script src="bower_components/swiper/dist/js/swiper.js"></script>
-
-    <script src="bower_components/smart-app-banner/smart-app-banner.js"></script>
-
-    <script src="bower_components/jStorage/jstorage.js"></script>
-
-    <script src="bower_components/angular/angular.min.js"></script>
-
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-    <script src="bower_components/angular-flexslider/angular-flexslider.js"></script>
-
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-
-    <script src="bower_components/lodash/lodash.js"></script>
-
-    <script src="bower_components/angulartics/dist/angulartics.min.js"></script>
-
-    <script src="bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js"></script>
-
-    <script src="bower_components/angular-swiper/dist/angular-swiper.js"></script>
-
-    <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
-
-    <script src="bower_components/moment/min/moment.min.js"></script>
-
-    <script src="bower_components/angular-toastr/dist/angular-toastr.js"></script>
-
-    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
-
-    <script src="bower_components/mapbox.js/mapbox.js"></script>
-
-    <script src="node_modules/mapbox-gl-draw/dist/mapbox-gl-draw.js"></script>
-
-    <script src="frontend/js/app.js"></script>
-
-    <script src="frontend/js/language.js"></script>
-
-    <script src="frontend/js/controllers.js"></script>
-
-    <script src="frontend/js/templateservice.js"></script>
-
-    <script src="frontend/js/navigation.js"></script>
-
+    
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        
+        <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+        
+        <script src="bower_components/flexslider/jquery.flexslider-min.js"></script>
+        
+        <script src="bower_components/fancyBox/source/jquery.fancybox.js"></script>
+        
+        <script src="bower_components/swiper/dist/js/swiper.js"></script>
+        
+        <script src="bower_components/smart-app-banner/smart-app-banner.js"></script>
+        
+        <script src="bower_components/jStorage/jstorage.js"></script>
+        
+        <script src="bower_components/angular/angular.min.js"></script>
+        
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        
+        <script src="bower_components/angular-flexslider/angular-flexslider.js"></script>
+        
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        
+        <script src="bower_components/lodash/lodash.js"></script>
+        
+        <script src="bower_components/angulartics/dist/angulartics.min.js"></script>
+        
+        <script src="bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js"></script>
+        
+        <script src="bower_components/angular-swiper/dist/angular-swiper.js"></script>
+        
+        <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+        
+        <script src="bower_components/moment/min/moment.min.js"></script>
+        
+        <script src="bower_components/angular-toastr/dist/angular-toastr.js"></script>
+        
+        <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+        
+        <script src="bower_components/mapbox.js/mapbox.js"></script>
+        
+        <script src="node_modules/mapbox-gl-draw/dist/mapbox-gl-draw.js"></script>
+        
+        <script src="node_modules/@turf/turf/turf.min.js"></script>
+        
+        <script src="node_modules/leaflet-draw/dist/leaflet.draw.js"></script>
+        
+        <script src="node_modules/leaflet-geodesy/leaflet-geodesy.js"></script>
+        
+        <script src="frontend/js/app.js"></script>
+        
+        <script src="frontend/js/language.js"></script>
+        
+        <script src="frontend/js/controllers.js"></script>
+        
+        <script src="frontend/js/templateservice.js"></script>
+        
+        <script src="frontend/js/navigation.js"></script>
+        
 </body>
 
 </html>
