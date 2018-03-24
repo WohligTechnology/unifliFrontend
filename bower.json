@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "1.5.8",
     "angular-animate": "^1.5.8",
     "angular-backtop": "*",
     "ace-builds": "https://github.com/ajaxorg/ace-builds.git#~1.2.2",
@@ -70,5 +71,8 @@
     "angular-flot": "^0.0.17",
     "Flot": "flot#^0.8.3",
     "angularjs-slider": "^6.4.0"
+  },
+ "resolutions": {
+   "angular": "1.5.8"
   }
 }
